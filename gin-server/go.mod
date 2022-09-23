@@ -5,7 +5,6 @@ go 1.19
 replace github.com/equinix-labs/metal-go/gin-server/go => ./go
 
 require (
-	github.com/equinix-labs/metal-go v0.2.0
 	github.com/gin-gonic/gin v1.8.1
 )
 
@@ -33,4 +32,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/equinix-labs/metal-go => ../../metal-go
+replace github.com/equinix-labs/metal-go => github.com/haozheng95/eqx-gin-server
