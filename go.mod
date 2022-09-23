@@ -1,4 +1,4 @@
-module github.com/equinix-labs/metal-go
+module github.com/haozheng95/eqx-gin-server
 
 go 1.19
 
