@@ -12,8 +12,8 @@ package startapi
 
 import (
 	"fmt"
-	metal "github.com/equinix-labs/metal-go/metal/v1"
 	"github.com/gin-gonic/gin"
+	metal "github.com/haozheng95/eqx-gin-server/metal/v1"
 	"net/http"
 	"time"
 )
