@@ -17,7 +17,7 @@ import (
 
 // FindVrfIpReservations200Response struct for FindVrfIpReservations200Response
 type FindVrfIpReservations200Response struct {
-	IpAddresses []FindVrfIpReservations200ResponseIpAddressesInner `json:"ip_addresses,omitempty"`
+	IpAddresses []FindIPAddressById200ResponseOneOf1 `json:"ip_addresses,omitempty"`
 }
 
 // NewFindVrfIpReservations200Response instantiates a new FindVrfIpReservations200Response object
@@ -38,9 +38,9 @@ func NewFindVrfIpReservations200ResponseWithDefaults() *FindVrfIpReservations200
 }
 
 // GetIpAddresses returns the IpAddresses field value if set, zero value otherwise.
-func (o *FindVrfIpReservations200Response) GetIpAddresses() []FindVrfIpReservations200ResponseIpAddressesInner {
+func (o *FindVrfIpReservations200Response) GetIpAddresses() []FindIPAddressById200ResponseOneOf1 {
 	if o == nil || o.IpAddresses == nil {
-		var ret []FindVrfIpReservations200ResponseIpAddressesInner
+		var ret []FindIPAddressById200ResponseOneOf1
 		return ret
 	}
 	return o.IpAddresses
@@ -48,7 +48,7 @@ func (o *FindVrfIpReservations200Response) GetIpAddresses() []FindVrfIpReservati
 
 // GetIpAddressesOk returns a tuple with the IpAddresses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FindVrfIpReservations200Response) GetIpAddressesOk() ([]FindVrfIpReservations200ResponseIpAddressesInner, bool) {
+func (o *FindVrfIpReservations200Response) GetIpAddressesOk() ([]FindIPAddressById200ResponseOneOf1, bool) {
 	if o == nil || o.IpAddresses == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *FindVrfIpReservations200Response) HasIpAddresses() bool {
 	return false
 }
 
-// SetIpAddresses gets a reference to the given []FindVrfIpReservations200ResponseIpAddressesInner and assigns it to the IpAddresses field.
-func (o *FindVrfIpReservations200Response) SetIpAddresses(v []FindVrfIpReservations200ResponseIpAddressesInner) {
+// SetIpAddresses gets a reference to the given []FindIPAddressById200ResponseOneOf1 and assigns it to the IpAddresses field.
+func (o *FindVrfIpReservations200Response) SetIpAddresses(v []FindIPAddressById200ResponseOneOf1) {
 	o.IpAddresses = v
 }
 

@@ -17,24 +17,24 @@ import (
 
 // InterconnectionCreateInput struct for InterconnectionCreateInput
 type InterconnectionCreateInput struct {
-	Tags         []string `json:"tags,omitempty"`
-	ContactEmail *string  `json:"contact_email,omitempty"`
-	Description  *string  `json:"description,omitempty"`
-	// A Metro ID or code.
+	ContactEmail *string `json:"contact_email,omitempty"`
+	Description  *string `json:"description,omitempty"`
+	// A Metro ID or code. For interconnections with Dedicated Ports, this will be the location of the issued Dedicated Ports. When creating Fabric VCs (Metal Billed), this is where interconnection will be originating from, as we pre-authorize the use of one of our shared ports as the origin of the interconnection using A-Side service tokens. We only allow local connections for Fabric VCs (Metal Billed), so the destination location must be the same as the origin. For Fabric VCs (Fabric Billed), or shared connections, this will be the destination of the interconnection. We allow remote connections for Fabric VCs (Fabric Billed), so the origin of the interconnection can be a different metro set here. For access to Fabric VCs, which are not generally available, please contact our Support Team for more details.
 	Metro string `json:"metro"`
-	// The mode of the connection (only relevant to dedicated connections). Shared connections won't have this field. Can be either 'standard' or 'tunnel'.   The default mode of a dedicated connection is 'standard'. The mode can only be changed when there are no associated virtual circuits on the connection.   In tunnel mode, an 802.1q tunnel is added to a port to send/receive double tagged packets from server instances.
+	// The mode of the interconnection (only relevant to Dedicated Ports). Fabric VCs won't have this field. Can be either 'standard' or 'tunnel'.   The default mode of an interconnection on a Dedicated Port is 'standard'. The mode can only be changed when there are no associated virtual circuits on the interconnection.   In tunnel mode, an 802.1q tunnel is added to a port to send/receive double tagged packets from server instances.
 	Mode    *string `json:"mode,omitempty"`
 	Name    string  `json:"name"`
 	Project *string `json:"project,omitempty"`
 	// Either 'primary' or 'redundant'.
 	Redundancy string `json:"redundancy"`
-	// Can only be set to 'a_side' to create a shared connection with an A-side Fabric service token. This parameter is included in the specification as a developer preview and is generally unavailable. Please contact our Support team for more details.
+	// Either 'a_side' or 'z_side'. Setting this field to 'a_side' will create an interconnection with Fabric VCs (Metal Billed). Setting this field to 'z_side' will create an interconnection with Fabric VCs (Fabric Billed). This is required when the 'type' is 'shared', but this is not applicable when the 'type' is 'dedicated'. This parameter is included in the specification as a developer preview and is generally unavailable. Please contact our Support team for more details.
 	ServiceTokenType *string `json:"service_token_type,omitempty"`
-	// A connection speed, in bps, mbps, or gbps. Ex: '100000000' or '100 mbps'.
-	Speed *string `json:"speed,omitempty"`
-	// Either 'shared' or 'dedicated'.
+	// A interconnection speed, in bps, mbps, or gbps. For Dedicated Ports, this can be 10Gbps or 100Gbps. For Fabric VCs, this represents the maximum speed of the interconnection. For Fabric VCs (Metal Billed), this can only be one of the following:  ''50mbps'', ''200mbps'', ''500mbps'', ''1gbps'', ''2gbps'', ''5gbps'' or ''10gbps'', and is required for creation. For Fabric VCs (Fabric Billed), this field will always default to ''10gbps'' even if it is not provided. For example, ''500000000'', ''50m'', or' ''500mbps'' will all work as valid inputs.
+	Speed *int32   `json:"speed,omitempty"`
+	Tags  []string `json:"tags,omitempty"`
+	// Either 'shared' or 'dedicated'. The 'shared' type represents shared interconnections, or also known as Fabric VCs. The 'dedicated' type represents dedicated interconnections, or also known as Dedicated Ports.
 	Type string `json:"type"`
-	// A list of one or two metro-based VLANs that will be set on the primary and/or secondary (if redundant) virtual circuits respectively when creating a shared connection. VLANs can also be set after the connection is created, but are required to activate the connection. This parameter is included in the specification as a developer preview and is generally unavailable. Please contact our Support team for more details.
+	// A list of one or two metro-based VLANs that will be set on the virtual circuits of primary and/or secondary (if redundant) interconnections respectively when creating Fabric VCs. VLANs can also be set after the interconnection is created, but are required to fully activate the interconnection. This parameter is included in the specification as a developer preview and is generally unavailable. Please contact our Support team for more details.
 	Vlans []int32 `json:"vlans,omitempty"`
 }
 
@@ -57,38 +57,6 @@ func NewInterconnectionCreateInput(metro string, name string, redundancy string,
 func NewInterconnectionCreateInputWithDefaults() *InterconnectionCreateInput {
 	this := InterconnectionCreateInput{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *InterconnectionCreateInput) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InterconnectionCreateInput) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *InterconnectionCreateInput) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *InterconnectionCreateInput) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetContactEmail returns the ContactEmail field value if set, zero value otherwise.
@@ -324,9 +292,9 @@ func (o *InterconnectionCreateInput) SetServiceTokenType(v string) {
 }
 
 // GetSpeed returns the Speed field value if set, zero value otherwise.
-func (o *InterconnectionCreateInput) GetSpeed() string {
+func (o *InterconnectionCreateInput) GetSpeed() int32 {
 	if o == nil || o.Speed == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.Speed
@@ -334,7 +302,7 @@ func (o *InterconnectionCreateInput) GetSpeed() string {
 
 // GetSpeedOk returns a tuple with the Speed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InterconnectionCreateInput) GetSpeedOk() (*string, bool) {
+func (o *InterconnectionCreateInput) GetSpeedOk() (*int32, bool) {
 	if o == nil || o.Speed == nil {
 		return nil, false
 	}
@@ -350,9 +318,41 @@ func (o *InterconnectionCreateInput) HasSpeed() bool {
 	return false
 }
 
-// SetSpeed gets a reference to the given string and assigns it to the Speed field.
-func (o *InterconnectionCreateInput) SetSpeed(v string) {
+// SetSpeed gets a reference to the given int32 and assigns it to the Speed field.
+func (o *InterconnectionCreateInput) SetSpeed(v int32) {
 	o.Speed = &v
+}
+
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *InterconnectionCreateInput) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InterconnectionCreateInput) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *InterconnectionCreateInput) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *InterconnectionCreateInput) SetTags(v []string) {
+	o.Tags = v
 }
 
 // GetType returns the Type field value
@@ -413,9 +413,6 @@ func (o *InterconnectionCreateInput) SetVlans(v []int32) {
 
 func (o InterconnectionCreateInput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.ContactEmail != nil {
 		toSerialize["contact_email"] = o.ContactEmail
 	}
@@ -442,6 +439,9 @@ func (o InterconnectionCreateInput) MarshalJSON() ([]byte, error) {
 	}
 	if o.Speed != nil {
 		toSerialize["speed"] = o.Speed
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	if true {
 		toSerialize["type"] = o.Type

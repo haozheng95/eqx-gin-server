@@ -18,16 +18,16 @@ import (
 
 // MetalGateway struct for MetalGateway
 type MetalGateway struct {
-	CreatedAt     *time.Time                            `json:"created_at,omitempty"`
-	CreatedBy     *FindBatchById200ResponseDevicesInner `json:"created_by,omitempty"`
-	Href          *string                               `json:"href,omitempty"`
-	Id            *string                               `json:"id,omitempty"`
-	IpReservation *FindBatchById200ResponseDevicesInner `json:"ip_reservation,omitempty"`
-	Project       *FindBatchById200ResponseDevicesInner `json:"project,omitempty"`
+	CreatedAt     *time.Time                                                                                  `json:"created_at,omitempty"`
+	CreatedBy     *FindBatchById200ResponseDevicesInner                                                       `json:"created_by,omitempty"`
+	Href          *string                                                                                     `json:"href,omitempty"`
+	Id            *string                                                                                     `json:"id,omitempty"`
+	IpReservation *FindIPAddressById200ResponseOneOf                                                          `json:"ip_reservation,omitempty"`
+	Project       *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject `json:"project,omitempty"`
 	// The current state of the Metal Gateway. 'Ready' indicates the gateway record has been configured, but is currently not active on the network. 'Active' indicates the gateway has been configured on the network. 'Deleting' is a temporary state used to indicate that the gateway is in the process of being un-configured from the network, after which the gateway record will be deleted.
-	State          *string                               `json:"state,omitempty"`
-	UpdatedAt      *time.Time                            `json:"updated_at,omitempty"`
-	VirtualNetwork *FindBatchById200ResponseDevicesInner `json:"virtual_network,omitempty"`
+	State          *string                                                         `json:"state,omitempty"`
+	UpdatedAt      *time.Time                                                      `json:"updated_at,omitempty"`
+	VirtualNetwork *FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork `json:"virtual_network,omitempty"`
 }
 
 // NewMetalGateway instantiates a new MetalGateway object
@@ -176,9 +176,9 @@ func (o *MetalGateway) SetId(v string) {
 }
 
 // GetIpReservation returns the IpReservation field value if set, zero value otherwise.
-func (o *MetalGateway) GetIpReservation() FindBatchById200ResponseDevicesInner {
+func (o *MetalGateway) GetIpReservation() FindIPAddressById200ResponseOneOf {
 	if o == nil || o.IpReservation == nil {
-		var ret FindBatchById200ResponseDevicesInner
+		var ret FindIPAddressById200ResponseOneOf
 		return ret
 	}
 	return *o.IpReservation
@@ -186,7 +186,7 @@ func (o *MetalGateway) GetIpReservation() FindBatchById200ResponseDevicesInner {
 
 // GetIpReservationOk returns a tuple with the IpReservation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MetalGateway) GetIpReservationOk() (*FindBatchById200ResponseDevicesInner, bool) {
+func (o *MetalGateway) GetIpReservationOk() (*FindIPAddressById200ResponseOneOf, bool) {
 	if o == nil || o.IpReservation == nil {
 		return nil, false
 	}
@@ -202,15 +202,15 @@ func (o *MetalGateway) HasIpReservation() bool {
 	return false
 }
 
-// SetIpReservation gets a reference to the given FindBatchById200ResponseDevicesInner and assigns it to the IpReservation field.
-func (o *MetalGateway) SetIpReservation(v FindBatchById200ResponseDevicesInner) {
+// SetIpReservation gets a reference to the given FindIPAddressById200ResponseOneOf and assigns it to the IpReservation field.
+func (o *MetalGateway) SetIpReservation(v FindIPAddressById200ResponseOneOf) {
 	o.IpReservation = &v
 }
 
 // GetProject returns the Project field value if set, zero value otherwise.
-func (o *MetalGateway) GetProject() FindBatchById200ResponseDevicesInner {
+func (o *MetalGateway) GetProject() GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject {
 	if o == nil || o.Project == nil {
-		var ret FindBatchById200ResponseDevicesInner
+		var ret GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
 		return ret
 	}
 	return *o.Project
@@ -218,7 +218,7 @@ func (o *MetalGateway) GetProject() FindBatchById200ResponseDevicesInner {
 
 // GetProjectOk returns a tuple with the Project field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MetalGateway) GetProjectOk() (*FindBatchById200ResponseDevicesInner, bool) {
+func (o *MetalGateway) GetProjectOk() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, bool) {
 	if o == nil || o.Project == nil {
 		return nil, false
 	}
@@ -234,8 +234,8 @@ func (o *MetalGateway) HasProject() bool {
 	return false
 }
 
-// SetProject gets a reference to the given FindBatchById200ResponseDevicesInner and assigns it to the Project field.
-func (o *MetalGateway) SetProject(v FindBatchById200ResponseDevicesInner) {
+// SetProject gets a reference to the given GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject and assigns it to the Project field.
+func (o *MetalGateway) SetProject(v GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject) {
 	o.Project = &v
 }
 
@@ -304,9 +304,9 @@ func (o *MetalGateway) SetUpdatedAt(v time.Time) {
 }
 
 // GetVirtualNetwork returns the VirtualNetwork field value if set, zero value otherwise.
-func (o *MetalGateway) GetVirtualNetwork() FindBatchById200ResponseDevicesInner {
+func (o *MetalGateway) GetVirtualNetwork() FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork {
 	if o == nil || o.VirtualNetwork == nil {
-		var ret FindBatchById200ResponseDevicesInner
+		var ret FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork
 		return ret
 	}
 	return *o.VirtualNetwork
@@ -314,7 +314,7 @@ func (o *MetalGateway) GetVirtualNetwork() FindBatchById200ResponseDevicesInner 
 
 // GetVirtualNetworkOk returns a tuple with the VirtualNetwork field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MetalGateway) GetVirtualNetworkOk() (*FindBatchById200ResponseDevicesInner, bool) {
+func (o *MetalGateway) GetVirtualNetworkOk() (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork, bool) {
 	if o == nil || o.VirtualNetwork == nil {
 		return nil, false
 	}
@@ -330,8 +330,8 @@ func (o *MetalGateway) HasVirtualNetwork() bool {
 	return false
 }
 
-// SetVirtualNetwork gets a reference to the given FindBatchById200ResponseDevicesInner and assigns it to the VirtualNetwork field.
-func (o *MetalGateway) SetVirtualNetwork(v FindBatchById200ResponseDevicesInner) {
+// SetVirtualNetwork gets a reference to the given FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork and assigns it to the VirtualNetwork field.
+func (o *MetalGateway) SetVirtualNetwork(v FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork) {
 	o.VirtualNetwork = &v
 }
 

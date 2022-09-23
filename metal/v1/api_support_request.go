@@ -23,14 +23,14 @@ import (
 type SupportRequestApiService service
 
 type ApiRequestSuppertRequest struct {
-	ctx        context.Context
-	ApiService *SupportRequestApiService
-	body       *RequestSuppertRequest
+	ctx                   context.Context
+	ApiService            *SupportRequestApiService
+	requestSuppertRequest *RequestSuppertRequest
 }
 
 // Support Request to create
-func (r ApiRequestSuppertRequest) Body(body RequestSuppertRequest) ApiRequestSuppertRequest {
-	r.body = &body
+func (r ApiRequestSuppertRequest) RequestSuppertRequest(requestSuppertRequest RequestSuppertRequest) ApiRequestSuppertRequest {
+	r.requestSuppertRequest = &requestSuppertRequest
 	return r
 }
 
@@ -43,8 +43,8 @@ RequestSuppert Create a support ticket
 
 Support Ticket.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiRequestSuppertRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiRequestSuppertRequest
 */
 func (a *SupportRequestApiService) RequestSuppert(ctx context.Context) ApiRequestSuppertRequest {
 	return ApiRequestSuppertRequest{
@@ -71,8 +71,8 @@ func (a *SupportRequestApiService) RequestSuppertExecute(r ApiRequestSuppertRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return nil, reportError("body is required and must be specified")
+	if r.requestSuppertRequest == nil {
+		return nil, reportError("requestSuppertRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -93,7 +93,7 @@ func (a *SupportRequestApiService) RequestSuppertExecute(r ApiRequestSuppertRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.requestSuppertRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

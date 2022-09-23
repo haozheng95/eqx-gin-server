@@ -59,6 +59,14 @@ gen:
 		-o /local/${PACKAGE_PREFIX}/${PACKAGE_MAJOR} \
 		-i /local/${SPEC_PATCHED_FILE}
 
+gen-server:
+	${SWAGGER} generate -g go-gin-server \
+		--git-user-id ${GIT_ORG} \
+		--git-repo-id ${GIT_REPO} \
+		-o /local/gin-server \
+		-i /local/${SPEC_PATCHED_FILE} \
+		--additional-properties=packageName=startapi
+
 validate:
 	${SWAGGER} validate \
 		--recommend \

@@ -21,7 +21,7 @@ type PortVlanAssignmentBatch struct {
 	CreatedAt       *time.Time                                                                 `json:"created_at,omitempty"`
 	ErrorMessages   []string                                                                   `json:"error_messages,omitempty"`
 	Id              *string                                                                    `json:"id,omitempty"`
-	Port            *FindDeviceById200ResponseNetworkPortsAllOf                                `json:"port,omitempty"`
+	Port            *FindDeviceById200ResponseNetworkPortsInner                                `json:"port,omitempty"`
 	Quantity        *int32                                                                     `json:"quantity,omitempty"`
 	State           *string                                                                    `json:"state,omitempty"`
 	UpdatedAt       *time.Time                                                                 `json:"updated_at,omitempty"`
@@ -142,9 +142,9 @@ func (o *PortVlanAssignmentBatch) SetId(v string) {
 }
 
 // GetPort returns the Port field value if set, zero value otherwise.
-func (o *PortVlanAssignmentBatch) GetPort() FindDeviceById200ResponseNetworkPortsAllOf {
+func (o *PortVlanAssignmentBatch) GetPort() FindDeviceById200ResponseNetworkPortsInner {
 	if o == nil || o.Port == nil {
-		var ret FindDeviceById200ResponseNetworkPortsAllOf
+		var ret FindDeviceById200ResponseNetworkPortsInner
 		return ret
 	}
 	return *o.Port
@@ -152,7 +152,7 @@ func (o *PortVlanAssignmentBatch) GetPort() FindDeviceById200ResponseNetworkPort
 
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PortVlanAssignmentBatch) GetPortOk() (*FindDeviceById200ResponseNetworkPortsAllOf, bool) {
+func (o *PortVlanAssignmentBatch) GetPortOk() (*FindDeviceById200ResponseNetworkPortsInner, bool) {
 	if o == nil || o.Port == nil {
 		return nil, false
 	}
@@ -168,8 +168,8 @@ func (o *PortVlanAssignmentBatch) HasPort() bool {
 	return false
 }
 
-// SetPort gets a reference to the given FindDeviceById200ResponseNetworkPortsAllOf and assigns it to the Port field.
-func (o *PortVlanAssignmentBatch) SetPort(v FindDeviceById200ResponseNetworkPortsAllOf) {
+// SetPort gets a reference to the given FindDeviceById200ResponseNetworkPortsInner and assigns it to the Port field.
+func (o *PortVlanAssignmentBatch) SetPort(v FindDeviceById200ResponseNetworkPortsInner) {
 	o.Port = &v
 }
 

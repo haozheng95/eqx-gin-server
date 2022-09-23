@@ -17,13 +17,13 @@ import (
 
 // VrfIpReservationCreateInput struct for VrfIpReservationCreateInput
 type VrfIpReservationCreateInput struct {
-	Tags []string `json:"tags,omitempty"`
 	// The size of the VRF IP Reservation's subnet
 	Cidr       int32                  `json:"cidr"`
 	Customdata map[string]interface{} `json:"customdata,omitempty"`
 	Details    *string                `json:"details,omitempty"`
 	// The starting address for this VRF IP Reservation's subnet
-	Network string `json:"network"`
+	Network string   `json:"network"`
+	Tags    []string `json:"tags,omitempty"`
 	// Must be set to 'vrf'
 	Type string `json:"type"`
 	// The ID of the VRF in which this VRF IP Reservation is created. The VRF must have an existing IP Range that contains the requested subnet. This field may be aliased as just 'vrf'.
@@ -49,38 +49,6 @@ func NewVrfIpReservationCreateInput(cidr int32, network string, type_ string, vr
 func NewVrfIpReservationCreateInputWithDefaults() *VrfIpReservationCreateInput {
 	this := VrfIpReservationCreateInput{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *VrfIpReservationCreateInput) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VrfIpReservationCreateInput) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *VrfIpReservationCreateInput) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *VrfIpReservationCreateInput) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetCidr returns the Cidr field value
@@ -195,6 +163,38 @@ func (o *VrfIpReservationCreateInput) SetNetwork(v string) {
 	o.Network = v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *VrfIpReservationCreateInput) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VrfIpReservationCreateInput) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *VrfIpReservationCreateInput) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *VrfIpReservationCreateInput) SetTags(v []string) {
+	o.Tags = v
+}
+
 // GetType returns the Type field value
 func (o *VrfIpReservationCreateInput) GetType() string {
 	if o == nil {
@@ -245,9 +245,6 @@ func (o *VrfIpReservationCreateInput) SetVrfId(v string) {
 
 func (o VrfIpReservationCreateInput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if true {
 		toSerialize["cidr"] = o.Cidr
 	}
@@ -259,6 +256,9 @@ func (o VrfIpReservationCreateInput) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["network"] = o.Network
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	if true {
 		toSerialize["type"] = o.Type

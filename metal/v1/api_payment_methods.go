@@ -38,9 +38,9 @@ DeletePaymentMethod Delete the payment method
 
 Deletes the payment method.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Payment Method UUID
- @return ApiDeletePaymentMethodRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Payment Method UUID
+	@return ApiDeletePaymentMethodRequest
 */
 func (a *PaymentMethodsApiService) DeletePaymentMethod(ctx context.Context, id string) ApiDeletePaymentMethodRequest {
 	return ApiDeletePaymentMethodRequest{
@@ -177,9 +177,9 @@ FindPaymentMethodById Retrieve a payment method
 
 Returns a payment method
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Payment Method UUID
- @return ApiFindPaymentMethodByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Payment Method UUID
+	@return ApiFindPaymentMethodByIdRequest
 */
 func (a *PaymentMethodsApiService) FindPaymentMethodById(ctx context.Context, id string) ApiFindPaymentMethodByIdRequest {
 	return ApiFindPaymentMethodByIdRequest{
@@ -190,7 +190,8 @@ func (a *PaymentMethodsApiService) FindPaymentMethodById(ctx context.Context, id
 }
 
 // Execute executes the request
-//  @return FindOrganizationPaymentMethods200ResponsePaymentMethodsInner
+//
+//	@return FindOrganizationPaymentMethods200ResponsePaymentMethodsInner
 func (a *PaymentMethodsApiService) FindPaymentMethodByIdExecute(r ApiFindPaymentMethodByIdRequest) (*FindOrganizationPaymentMethods200ResponsePaymentMethodsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -305,15 +306,15 @@ func (a *PaymentMethodsApiService) FindPaymentMethodByIdExecute(r ApiFindPayment
 }
 
 type ApiUpdatePaymentMethodRequest struct {
-	ctx        context.Context
-	ApiService *PaymentMethodsApiService
-	id         string
-	body       *UpdatePaymentMethodRequest
+	ctx                        context.Context
+	ApiService                 *PaymentMethodsApiService
+	id                         string
+	updatePaymentMethodRequest *UpdatePaymentMethodRequest
 }
 
 // Payment Method to update
-func (r ApiUpdatePaymentMethodRequest) Body(body UpdatePaymentMethodRequest) ApiUpdatePaymentMethodRequest {
-	r.body = &body
+func (r ApiUpdatePaymentMethodRequest) UpdatePaymentMethodRequest(updatePaymentMethodRequest UpdatePaymentMethodRequest) ApiUpdatePaymentMethodRequest {
+	r.updatePaymentMethodRequest = &updatePaymentMethodRequest
 	return r
 }
 
@@ -326,9 +327,9 @@ UpdatePaymentMethod Update the payment method
 
 Updates the payment method.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Payment Method UUID
- @return ApiUpdatePaymentMethodRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Payment Method UUID
+	@return ApiUpdatePaymentMethodRequest
 */
 func (a *PaymentMethodsApiService) UpdatePaymentMethod(ctx context.Context, id string) ApiUpdatePaymentMethodRequest {
 	return ApiUpdatePaymentMethodRequest{
@@ -339,7 +340,8 @@ func (a *PaymentMethodsApiService) UpdatePaymentMethod(ctx context.Context, id s
 }
 
 // Execute executes the request
-//  @return FindOrganizationPaymentMethods200ResponsePaymentMethodsInner
+//
+//	@return FindOrganizationPaymentMethods200ResponsePaymentMethodsInner
 func (a *PaymentMethodsApiService) UpdatePaymentMethodExecute(r ApiUpdatePaymentMethodRequest) (*FindOrganizationPaymentMethods200ResponsePaymentMethodsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -359,8 +361,8 @@ func (a *PaymentMethodsApiService) UpdatePaymentMethodExecute(r ApiUpdatePayment
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.updatePaymentMethodRequest == nil {
+		return localVarReturnValue, nil, reportError("updatePaymentMethodRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -381,7 +383,7 @@ func (a *PaymentMethodsApiService) UpdatePaymentMethodExecute(r ApiUpdatePayment
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.updatePaymentMethodRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

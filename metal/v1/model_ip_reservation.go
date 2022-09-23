@@ -18,26 +18,26 @@ import (
 
 // IPReservation struct for IPReservation
 type IPReservation struct {
-	Tags          []string                                                        `json:"tags,omitempty"`
-	Addon         *bool                                                           `json:"addon,omitempty"`
-	AddressFamily *int32                                                          `json:"address_family,omitempty"`
-	Assignments   []FindDeviceById200ResponseIpAddressesInner                     `json:"assignments,omitempty"`
-	Bill          *bool                                                           `json:"bill,omitempty"`
-	Cidr          *int32                                                          `json:"cidr,omitempty"`
-	CreatedAt     *time.Time                                                      `json:"created_at,omitempty"`
-	Enabled       *bool                                                           `json:"enabled,omitempty"`
-	Facility      *IPReservationFacility                                          `json:"facility,omitempty"`
-	GlobalIp      *bool                                                           `json:"global_ip,omitempty"`
-	Href          *string                                                         `json:"href,omitempty"`
-	Id            *string                                                         `json:"id,omitempty"`
-	Manageable    *bool                                                           `json:"manageable,omitempty"`
-	Management    *bool                                                           `json:"management,omitempty"`
-	MetalGateway  *FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway `json:"metal_gateway,omitempty"`
-	Metro         *IPReservationMetro                                             `json:"metro,omitempty"`
-	Netmask       *string                                                         `json:"netmask,omitempty"`
-	Network       *string                                                         `json:"network,omitempty"`
-	Public        *bool                                                           `json:"public,omitempty"`
-	State         *string                                                         `json:"state,omitempty"`
+	Addon         *bool                                                                             `json:"addon,omitempty"`
+	AddressFamily *int32                                                                            `json:"address_family,omitempty"`
+	Assignments   []FindDeviceById200ResponseIpAddressesInner                                       `json:"assignments,omitempty"`
+	Bill          *bool                                                                             `json:"bill,omitempty"`
+	Cidr          *int32                                                                            `json:"cidr,omitempty"`
+	CreatedAt     *time.Time                                                                        `json:"created_at,omitempty"`
+	Enabled       *bool                                                                             `json:"enabled,omitempty"`
+	Facility      *FindIPAddressById200ResponseOneOfFacility                                        `json:"facility,omitempty"`
+	GlobalIp      *bool                                                                             `json:"global_ip,omitempty"`
+	Href          *string                                                                           `json:"href,omitempty"`
+	Id            *string                                                                           `json:"id,omitempty"`
+	Manageable    *bool                                                                             `json:"manageable,omitempty"`
+	Management    *bool                                                                             `json:"management,omitempty"`
+	MetalGateway  *FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner `json:"metal_gateway,omitempty"`
+	Metro         *FindIPAddressById200ResponseOneOfMetro                                           `json:"metro,omitempty"`
+	Netmask       *string                                                                           `json:"netmask,omitempty"`
+	Network       *string                                                                           `json:"network,omitempty"`
+	Public        *bool                                                                             `json:"public,omitempty"`
+	State         *string                                                                           `json:"state,omitempty"`
+	Tags          []string                                                                          `json:"tags,omitempty"`
 }
 
 // NewIPReservation instantiates a new IPReservation object
@@ -55,38 +55,6 @@ func NewIPReservation() *IPReservation {
 func NewIPReservationWithDefaults() *IPReservation {
 	this := IPReservation{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *IPReservation) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IPReservation) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *IPReservation) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *IPReservation) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetAddon returns the Addon field value if set, zero value otherwise.
@@ -314,9 +282,9 @@ func (o *IPReservation) SetEnabled(v bool) {
 }
 
 // GetFacility returns the Facility field value if set, zero value otherwise.
-func (o *IPReservation) GetFacility() IPReservationFacility {
+func (o *IPReservation) GetFacility() FindIPAddressById200ResponseOneOfFacility {
 	if o == nil || o.Facility == nil {
-		var ret IPReservationFacility
+		var ret FindIPAddressById200ResponseOneOfFacility
 		return ret
 	}
 	return *o.Facility
@@ -324,7 +292,7 @@ func (o *IPReservation) GetFacility() IPReservationFacility {
 
 // GetFacilityOk returns a tuple with the Facility field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPReservation) GetFacilityOk() (*IPReservationFacility, bool) {
+func (o *IPReservation) GetFacilityOk() (*FindIPAddressById200ResponseOneOfFacility, bool) {
 	if o == nil || o.Facility == nil {
 		return nil, false
 	}
@@ -340,8 +308,8 @@ func (o *IPReservation) HasFacility() bool {
 	return false
 }
 
-// SetFacility gets a reference to the given IPReservationFacility and assigns it to the Facility field.
-func (o *IPReservation) SetFacility(v IPReservationFacility) {
+// SetFacility gets a reference to the given FindIPAddressById200ResponseOneOfFacility and assigns it to the Facility field.
+func (o *IPReservation) SetFacility(v FindIPAddressById200ResponseOneOfFacility) {
 	o.Facility = &v
 }
 
@@ -506,9 +474,9 @@ func (o *IPReservation) SetManagement(v bool) {
 }
 
 // GetMetalGateway returns the MetalGateway field value if set, zero value otherwise.
-func (o *IPReservation) GetMetalGateway() FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway {
+func (o *IPReservation) GetMetalGateway() FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner {
 	if o == nil || o.MetalGateway == nil {
-		var ret FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway
+		var ret FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner
 		return ret
 	}
 	return *o.MetalGateway
@@ -516,7 +484,7 @@ func (o *IPReservation) GetMetalGateway() FindVirtualNetworks200ResponseVirtualN
 
 // GetMetalGatewayOk returns a tuple with the MetalGateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPReservation) GetMetalGatewayOk() (*FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway, bool) {
+func (o *IPReservation) GetMetalGatewayOk() (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner, bool) {
 	if o == nil || o.MetalGateway == nil {
 		return nil, false
 	}
@@ -532,15 +500,15 @@ func (o *IPReservation) HasMetalGateway() bool {
 	return false
 }
 
-// SetMetalGateway gets a reference to the given FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway and assigns it to the MetalGateway field.
-func (o *IPReservation) SetMetalGateway(v FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway) {
+// SetMetalGateway gets a reference to the given FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner and assigns it to the MetalGateway field.
+func (o *IPReservation) SetMetalGateway(v FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner) {
 	o.MetalGateway = &v
 }
 
 // GetMetro returns the Metro field value if set, zero value otherwise.
-func (o *IPReservation) GetMetro() IPReservationMetro {
+func (o *IPReservation) GetMetro() FindIPAddressById200ResponseOneOfMetro {
 	if o == nil || o.Metro == nil {
-		var ret IPReservationMetro
+		var ret FindIPAddressById200ResponseOneOfMetro
 		return ret
 	}
 	return *o.Metro
@@ -548,7 +516,7 @@ func (o *IPReservation) GetMetro() IPReservationMetro {
 
 // GetMetroOk returns a tuple with the Metro field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IPReservation) GetMetroOk() (*IPReservationMetro, bool) {
+func (o *IPReservation) GetMetroOk() (*FindIPAddressById200ResponseOneOfMetro, bool) {
 	if o == nil || o.Metro == nil {
 		return nil, false
 	}
@@ -564,8 +532,8 @@ func (o *IPReservation) HasMetro() bool {
 	return false
 }
 
-// SetMetro gets a reference to the given IPReservationMetro and assigns it to the Metro field.
-func (o *IPReservation) SetMetro(v IPReservationMetro) {
+// SetMetro gets a reference to the given FindIPAddressById200ResponseOneOfMetro and assigns it to the Metro field.
+func (o *IPReservation) SetMetro(v FindIPAddressById200ResponseOneOfMetro) {
 	o.Metro = &v
 }
 
@@ -697,11 +665,40 @@ func (o *IPReservation) SetState(v string) {
 	o.State = &v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *IPReservation) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IPReservation) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *IPReservation) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *IPReservation) SetTags(v []string) {
+	o.Tags = v
+}
+
 func (o IPReservation) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.Addon != nil {
 		toSerialize["addon"] = o.Addon
 	}
@@ -758,6 +755,9 @@ func (o IPReservation) MarshalJSON() ([]byte, error) {
 	}
 	if o.State != nil {
 		toSerialize["state"] = o.State
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	return json.Marshal(toSerialize)
 }

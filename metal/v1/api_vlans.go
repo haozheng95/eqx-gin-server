@@ -24,19 +24,19 @@ import (
 type VLANsApiService service
 
 type ApiCreateVirtualNetworkRequest struct {
-	ctx        context.Context
-	ApiService *VLANsApiService
-	id         string
-	body       *CreateVirtualNetworkRequest
+	ctx                         context.Context
+	ApiService                  *VLANsApiService
+	id                          string
+	createVirtualNetworkRequest *CreateVirtualNetworkRequest
 }
 
 // Virtual Network to create
-func (r ApiCreateVirtualNetworkRequest) Body(body CreateVirtualNetworkRequest) ApiCreateVirtualNetworkRequest {
-	r.body = &body
+func (r ApiCreateVirtualNetworkRequest) CreateVirtualNetworkRequest(createVirtualNetworkRequest CreateVirtualNetworkRequest) ApiCreateVirtualNetworkRequest {
+	r.createVirtualNetworkRequest = &createVirtualNetworkRequest
 	return r
 }
 
-func (r ApiCreateVirtualNetworkRequest) Execute() (*FindVirtualNetworks200ResponseVirtualNetworksInner, *http.Response, error) {
+func (r ApiCreateVirtualNetworkRequest) Execute() (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork, *http.Response, error) {
 	return r.ApiService.CreateVirtualNetworkExecute(r)
 }
 
@@ -45,9 +45,9 @@ CreateVirtualNetwork Create a virtual network
 
 Creates an virtual network.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiCreateVirtualNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiCreateVirtualNetworkRequest
 */
 func (a *VLANsApiService) CreateVirtualNetwork(ctx context.Context, id string) ApiCreateVirtualNetworkRequest {
 	return ApiCreateVirtualNetworkRequest{
@@ -58,13 +58,14 @@ func (a *VLANsApiService) CreateVirtualNetwork(ctx context.Context, id string) A
 }
 
 // Execute executes the request
-//  @return FindVirtualNetworks200ResponseVirtualNetworksInner
-func (a *VLANsApiService) CreateVirtualNetworkExecute(r ApiCreateVirtualNetworkRequest) (*FindVirtualNetworks200ResponseVirtualNetworksInner, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork
+func (a *VLANsApiService) CreateVirtualNetworkExecute(r ApiCreateVirtualNetworkRequest) (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindVirtualNetworks200ResponseVirtualNetworksInner
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VLANsApiService.CreateVirtualNetwork")
@@ -78,8 +79,8 @@ func (a *VLANsApiService) CreateVirtualNetworkExecute(r ApiCreateVirtualNetworkR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createVirtualNetworkRequest == nil {
+		return localVarReturnValue, nil, reportError("createVirtualNetworkRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -100,7 +101,7 @@ func (a *VLANsApiService) CreateVirtualNetworkExecute(r ApiCreateVirtualNetworkR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createVirtualNetworkRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -197,7 +198,7 @@ type ApiDeleteVirtualNetworkRequest struct {
 	id         string
 }
 
-func (r ApiDeleteVirtualNetworkRequest) Execute() (*FindVirtualNetworks200ResponseVirtualNetworksInner, *http.Response, error) {
+func (r ApiDeleteVirtualNetworkRequest) Execute() (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork, *http.Response, error) {
 	return r.ApiService.DeleteVirtualNetworkExecute(r)
 }
 
@@ -206,9 +207,9 @@ DeleteVirtualNetwork Delete a virtual network
 
 Deletes a virtual network.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Virtual Network UUID
- @return ApiDeleteVirtualNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Virtual Network UUID
+	@return ApiDeleteVirtualNetworkRequest
 */
 func (a *VLANsApiService) DeleteVirtualNetwork(ctx context.Context, id string) ApiDeleteVirtualNetworkRequest {
 	return ApiDeleteVirtualNetworkRequest{
@@ -219,13 +220,14 @@ func (a *VLANsApiService) DeleteVirtualNetwork(ctx context.Context, id string) A
 }
 
 // Execute executes the request
-//  @return FindVirtualNetworks200ResponseVirtualNetworksInner
-func (a *VLANsApiService) DeleteVirtualNetworkExecute(r ApiDeleteVirtualNetworkRequest) (*FindVirtualNetworks200ResponseVirtualNetworksInner, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork
+func (a *VLANsApiService) DeleteVirtualNetworkExecute(r ApiDeleteVirtualNetworkRequest) (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindVirtualNetworks200ResponseVirtualNetworksInner
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VLANsApiService.DeleteVirtualNetwork")
@@ -390,9 +392,9 @@ FindVirtualNetworks Retrieve all virtual networks
 
 Provides a list of virtual networks for a single project.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiFindVirtualNetworksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiFindVirtualNetworksRequest
 */
 func (a *VLANsApiService) FindVirtualNetworks(ctx context.Context, id string) ApiFindVirtualNetworksRequest {
 	return ApiFindVirtualNetworksRequest{
@@ -403,7 +405,8 @@ func (a *VLANsApiService) FindVirtualNetworks(ctx context.Context, id string) Ap
 }
 
 // Execute executes the request
-//  @return FindVirtualNetworks200Response
+//
+//	@return FindVirtualNetworks200Response
 func (a *VLANsApiService) FindVirtualNetworksExecute(r ApiFindVirtualNetworksRequest) (*FindVirtualNetworks200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -539,7 +542,7 @@ type ApiGetVirtualNetworkRequest struct {
 	id         string
 }
 
-func (r ApiGetVirtualNetworkRequest) Execute() (*FindVirtualNetworks200ResponseVirtualNetworksInner, *http.Response, error) {
+func (r ApiGetVirtualNetworkRequest) Execute() (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork, *http.Response, error) {
 	return r.ApiService.GetVirtualNetworkExecute(r)
 }
 
@@ -548,9 +551,9 @@ GetVirtualNetwork Get a virtual network
 
 Get a virtual network.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Virtual Network UUID
- @return ApiGetVirtualNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Virtual Network UUID
+	@return ApiGetVirtualNetworkRequest
 */
 func (a *VLANsApiService) GetVirtualNetwork(ctx context.Context, id string) ApiGetVirtualNetworkRequest {
 	return ApiGetVirtualNetworkRequest{
@@ -561,13 +564,14 @@ func (a *VLANsApiService) GetVirtualNetwork(ctx context.Context, id string) ApiG
 }
 
 // Execute executes the request
-//  @return FindVirtualNetworks200ResponseVirtualNetworksInner
-func (a *VLANsApiService) GetVirtualNetworkExecute(r ApiGetVirtualNetworkRequest) (*FindVirtualNetworks200ResponseVirtualNetworksInner, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork
+func (a *VLANsApiService) GetVirtualNetworkExecute(r ApiGetVirtualNetworkRequest) (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindVirtualNetworks200ResponseVirtualNetworksInner
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VLANsApiService.GetVirtualNetwork")

@@ -24,15 +24,15 @@ import (
 type DevicesApiService service
 
 type ApiCreateBgpSessionRequest struct {
-	ctx        context.Context
-	ApiService *DevicesApiService
-	id         string
-	body       *CreateBgpSessionRequest
+	ctx                     context.Context
+	ApiService              *DevicesApiService
+	id                      string
+	createBgpSessionRequest *CreateBgpSessionRequest
 }
 
 // BGP session to create
-func (r ApiCreateBgpSessionRequest) Body(body CreateBgpSessionRequest) ApiCreateBgpSessionRequest {
-	r.body = &body
+func (r ApiCreateBgpSessionRequest) CreateBgpSessionRequest(createBgpSessionRequest CreateBgpSessionRequest) ApiCreateBgpSessionRequest {
+	r.createBgpSessionRequest = &createBgpSessionRequest
 	return r
 }
 
@@ -45,9 +45,9 @@ CreateBgpSession Create a BGP session
 
 Creates a BGP session.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiCreateBgpSessionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiCreateBgpSessionRequest
 */
 func (a *DevicesApiService) CreateBgpSession(ctx context.Context, id string) ApiCreateBgpSessionRequest {
 	return ApiCreateBgpSessionRequest{
@@ -58,7 +58,8 @@ func (a *DevicesApiService) CreateBgpSession(ctx context.Context, id string) Api
 }
 
 // Execute executes the request
-//  @return FindBgpSessionById200Response
+//
+//	@return FindBgpSessionById200Response
 func (a *DevicesApiService) CreateBgpSessionExecute(r ApiCreateBgpSessionRequest) (*FindBgpSessionById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -78,8 +79,8 @@ func (a *DevicesApiService) CreateBgpSessionExecute(r ApiCreateBgpSessionRequest
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createBgpSessionRequest == nil {
+		return localVarReturnValue, nil, reportError("createBgpSessionRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -100,7 +101,7 @@ func (a *DevicesApiService) CreateBgpSessionExecute(r ApiCreateBgpSessionRequest
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createBgpSessionRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -182,15 +183,15 @@ func (a *DevicesApiService) CreateBgpSessionExecute(r ApiCreateBgpSessionRequest
 }
 
 type ApiCreateDeviceRequest struct {
-	ctx        context.Context
-	ApiService *DevicesApiService
-	id         string
-	body       *CreateDeviceRequest
+	ctx                 context.Context
+	ApiService          *DevicesApiService
+	id                  string
+	createDeviceRequest *CreateDeviceRequest
 }
 
 // Device to create
-func (r ApiCreateDeviceRequest) Body(body CreateDeviceRequest) ApiCreateDeviceRequest {
-	r.body = &body
+func (r ApiCreateDeviceRequest) CreateDeviceRequest(createDeviceRequest CreateDeviceRequest) ApiCreateDeviceRequest {
+	r.createDeviceRequest = &createDeviceRequest
 	return r
 }
 
@@ -205,9 +206,9 @@ Creates a new device and provisions it in the specified location.
 
 Device type-specific options are accepted.  For example, `baremetal` devices accept `operating_system`, `hostname`, and `plan`. These parameters may not be accepted for other device types. The default device type is `baremetal`.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiCreateDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiCreateDeviceRequest
 */
 func (a *DevicesApiService) CreateDevice(ctx context.Context, id string) ApiCreateDeviceRequest {
 	return ApiCreateDeviceRequest{
@@ -218,7 +219,8 @@ func (a *DevicesApiService) CreateDevice(ctx context.Context, id string) ApiCrea
 }
 
 // Execute executes the request
-//  @return FindDeviceById200Response
+//
+//	@return FindDeviceById200Response
 func (a *DevicesApiService) CreateDeviceExecute(r ApiCreateDeviceRequest) (*FindDeviceById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +240,8 @@ func (a *DevicesApiService) CreateDeviceExecute(r ApiCreateDeviceRequest) (*Find
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createDeviceRequest == nil {
+		return localVarReturnValue, nil, reportError("createDeviceRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -260,7 +262,7 @@ func (a *DevicesApiService) CreateDeviceExecute(r ApiCreateDeviceRequest) (*Find
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createDeviceRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -352,15 +354,15 @@ func (a *DevicesApiService) CreateDeviceExecute(r ApiCreateDeviceRequest) (*Find
 }
 
 type ApiCreateIPAssignmentRequest struct {
-	ctx        context.Context
-	ApiService *DevicesApiService
-	id         string
-	body       *CreateIPAssignmentRequest
+	ctx                       context.Context
+	ApiService                *DevicesApiService
+	id                        string
+	createIPAssignmentRequest *CreateIPAssignmentRequest
 }
 
 // IPAssignment to create
-func (r ApiCreateIPAssignmentRequest) Body(body CreateIPAssignmentRequest) ApiCreateIPAssignmentRequest {
-	r.body = &body
+func (r ApiCreateIPAssignmentRequest) CreateIPAssignmentRequest(createIPAssignmentRequest CreateIPAssignmentRequest) ApiCreateIPAssignmentRequest {
+	r.createIPAssignmentRequest = &createIPAssignmentRequest
 	return r
 }
 
@@ -373,9 +375,9 @@ CreateIPAssignment Create an ip assignment
 
 Creates an ip assignment for a device.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiCreateIPAssignmentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiCreateIPAssignmentRequest
 */
 func (a *DevicesApiService) CreateIPAssignment(ctx context.Context, id string) ApiCreateIPAssignmentRequest {
 	return ApiCreateIPAssignmentRequest{
@@ -386,7 +388,8 @@ func (a *DevicesApiService) CreateIPAssignment(ctx context.Context, id string) A
 }
 
 // Execute executes the request
-//  @return FindDeviceById200ResponseIpAddressesInner
+//
+//	@return FindDeviceById200ResponseIpAddressesInner
 func (a *DevicesApiService) CreateIPAssignmentExecute(r ApiCreateIPAssignmentRequest) (*FindDeviceById200ResponseIpAddressesInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -406,8 +409,8 @@ func (a *DevicesApiService) CreateIPAssignmentExecute(r ApiCreateIPAssignmentReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createIPAssignmentRequest == nil {
+		return localVarReturnValue, nil, reportError("createIPAssignmentRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -428,7 +431,7 @@ func (a *DevicesApiService) CreateIPAssignmentExecute(r ApiCreateIPAssignmentReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createIPAssignmentRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -531,9 +534,9 @@ DeleteDevice Delete the device
 
 Deletes a device and deprovisions it in our datacenter.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiDeleteDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiDeleteDeviceRequest
 */
 func (a *DevicesApiService) DeleteDevice(ctx context.Context, id string) ApiDeleteDeviceRequest {
 	return ApiDeleteDeviceRequest{
@@ -679,9 +682,9 @@ FindBgpSessions Retrieve all BGP sessions
 
 Provides a listing of available BGP sessions for the device.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiFindBgpSessionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiFindBgpSessionsRequest
 */
 func (a *DevicesApiService) FindBgpSessions(ctx context.Context, id string) ApiFindBgpSessionsRequest {
 	return ApiFindBgpSessionsRequest{
@@ -692,7 +695,8 @@ func (a *DevicesApiService) FindBgpSessions(ctx context.Context, id string) ApiF
 }
 
 // Execute executes the request
-//  @return FindBgpSessions200Response
+//
+//	@return FindBgpSessions200Response
 func (a *DevicesApiService) FindBgpSessionsExecute(r ApiFindBgpSessionsRequest) (*FindBgpSessions200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -828,11 +832,12 @@ func (r ApiFindDeviceByIdRequest) Execute() (*FindDeviceById200Response, *http.R
 FindDeviceById Retrieve a device
 
 Type-specific options (such as facility for baremetal devices) will be included as part of the main data structure.
-                         State value can be one of: active inactive queued or provisioning
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiFindDeviceByIdRequest
+	                        State value can be one of: active inactive queued or provisioning
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiFindDeviceByIdRequest
 */
 func (a *DevicesApiService) FindDeviceById(ctx context.Context, id string) ApiFindDeviceByIdRequest {
 	return ApiFindDeviceByIdRequest{
@@ -843,7 +848,8 @@ func (a *DevicesApiService) FindDeviceById(ctx context.Context, id string) ApiFi
 }
 
 // Execute executes the request
-//  @return FindDeviceById200Response
+//
+//	@return FindDeviceById200Response
 func (a *DevicesApiService) FindDeviceByIdExecute(r ApiFindDeviceByIdRequest) (*FindDeviceById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -982,9 +988,9 @@ FindDeviceCustomdata Retrieve the custom metadata of an instance
 
 Provides the custom metadata stored for this instance in json format
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Instance UUID
- @return ApiFindDeviceCustomdataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Instance UUID
+	@return ApiFindDeviceCustomdataRequest
 */
 func (a *DevicesApiService) FindDeviceCustomdata(ctx context.Context, id string) ApiFindDeviceCustomdataRequest {
 	return ApiFindDeviceCustomdataRequest{
@@ -1102,6 +1108,300 @@ func (a *DevicesApiService) FindDeviceCustomdataExecute(r ApiFindDeviceCustomdat
 	return localVarHTTPResponse, nil
 }
 
+type ApiFindDeviceMetadataByIDRequest struct {
+	ctx        context.Context
+	ApiService *DevicesApiService
+	id         string
+}
+
+func (r ApiFindDeviceMetadataByIDRequest) Execute() (*FindDeviceMetadataByID200Response, *http.Response, error) {
+	return r.ApiService.FindDeviceMetadataByIDExecute(r)
+}
+
+/*
+FindDeviceMetadataByID Retrieve metadata
+
+Retrieve device metadata
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiFindDeviceMetadataByIDRequest
+*/
+func (a *DevicesApiService) FindDeviceMetadataByID(ctx context.Context, id string) ApiFindDeviceMetadataByIDRequest {
+	return ApiFindDeviceMetadataByIDRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return FindDeviceMetadataByID200Response
+func (a *DevicesApiService) FindDeviceMetadataByIDExecute(r ApiFindDeviceMetadataByIDRequest) (*FindDeviceMetadataByID200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindDeviceMetadataByID200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DevicesApiService.FindDeviceMetadataByID")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/devices/{id}/metadata"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["x_auth_token"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiFindDeviceUserdataByIDRequest struct {
+	ctx        context.Context
+	ApiService *DevicesApiService
+	id         string
+}
+
+func (r ApiFindDeviceUserdataByIDRequest) Execute() (*FindDeviceUserdataByID200Response, *http.Response, error) {
+	return r.ApiService.FindDeviceUserdataByIDExecute(r)
+}
+
+/*
+FindDeviceUserdataByID Retrieve userdata
+
+Retrieve device userdata
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiFindDeviceUserdataByIDRequest
+*/
+func (a *DevicesApiService) FindDeviceUserdataByID(ctx context.Context, id string) ApiFindDeviceUserdataByIDRequest {
+	return ApiFindDeviceUserdataByIDRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return FindDeviceUserdataByID200Response
+func (a *DevicesApiService) FindDeviceUserdataByIDExecute(r ApiFindDeviceUserdataByIDRequest) (*FindDeviceUserdataByID200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindDeviceUserdataByID200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DevicesApiService.FindDeviceUserdataByID")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/devices/{id}/userdata"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["x_auth_token"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiFindIPAssignmentCustomdataRequest struct {
 	ctx        context.Context
 	ApiService *DevicesApiService
@@ -1118,10 +1418,10 @@ FindIPAssignmentCustomdata Retrieve the custom metadata of an IP Assignment
 
 Provides the custom metadata stored for this IP Assignment in json format
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param instanceId Instance UUID
- @param id Ip Assignment UUID
- @return ApiFindIPAssignmentCustomdataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance UUID
+	@param id Ip Assignment UUID
+	@return ApiFindIPAssignmentCustomdataRequest
 */
 func (a *DevicesApiService) FindIPAssignmentCustomdata(ctx context.Context, instanceId string, id string) ApiFindIPAssignmentCustomdataRequest {
 	return ApiFindIPAssignmentCustomdataRequest{
@@ -1270,9 +1570,9 @@ FindIPAssignments Retrieve all ip assignments
 
 Returns all ip assignments for a device.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiFindIPAssignmentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiFindIPAssignmentsRequest
 */
 func (a *DevicesApiService) FindIPAssignments(ctx context.Context, id string) ApiFindIPAssignmentsRequest {
 	return ApiFindIPAssignmentsRequest{
@@ -1283,7 +1583,8 @@ func (a *DevicesApiService) FindIPAssignments(ctx context.Context, id string) Ap
 }
 
 // Execute executes the request
-//  @return FindIPAssignments200Response
+//
+//	@return FindIPAssignments200Response
 func (a *DevicesApiService) FindIPAssignmentsExecute(r ApiFindIPAssignmentsRequest) (*FindIPAssignments200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1426,9 +1727,9 @@ FindInstanceBandwidth Retrieve an instance bandwidth
 
 Retrieve an instance bandwidth for a given period of time.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiFindInstanceBandwidthRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiFindInstanceBandwidthRequest
 */
 func (a *DevicesApiService) FindInstanceBandwidth(ctx context.Context, id string) ApiFindInstanceBandwidthRequest {
 	return ApiFindInstanceBandwidthRequest{
@@ -1622,9 +1923,9 @@ FindOrganizationDevices Retrieve all devices of an organization
 
 Provides a collection of devices for a given organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Organization UUID
- @return ApiFindOrganizationDevicesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Organization UUID
+	@return ApiFindOrganizationDevicesRequest
 */
 func (a *DevicesApiService) FindOrganizationDevices(ctx context.Context, id string) ApiFindOrganizationDevicesRequest {
 	return ApiFindOrganizationDevicesRequest{
@@ -1635,7 +1936,8 @@ func (a *DevicesApiService) FindOrganizationDevices(ctx context.Context, id stri
 }
 
 // Execute executes the request
-//  @return FindOrganizationDevices200Response
+//
+//	@return FindOrganizationDevices200Response
 func (a *DevicesApiService) FindOrganizationDevicesExecute(r ApiFindOrganizationDevicesRequest) (*FindOrganizationDevices200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1858,9 +2160,9 @@ FindProjectDevices Retrieve all devices of a project
 
 Provides a collection of devices for a given project.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiFindProjectDevicesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiFindProjectDevicesRequest
 */
 func (a *DevicesApiService) FindProjectDevices(ctx context.Context, id string) ApiFindProjectDevicesRequest {
 	return ApiFindProjectDevicesRequest{
@@ -1871,7 +2173,8 @@ func (a *DevicesApiService) FindProjectDevices(ctx context.Context, id string) A
 }
 
 // Execute executes the request
-//  @return FindOrganizationDevices200Response
+//
+//	@return FindOrganizationDevices200Response
 func (a *DevicesApiService) FindProjectDevicesExecute(r ApiFindProjectDevicesRequest) (*FindOrganizationDevices200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2021,20 +2324,14 @@ type ApiFindTrafficRequest struct {
 	ApiService *DevicesApiService
 	id         string
 	direction  *string
-	body       *FindTrafficRequest
 	interval   *string
 	bucket     *string
+	timeframe  *FindTrafficTimeframeParameter
 }
 
 // Traffic direction
 func (r ApiFindTrafficRequest) Direction(direction string) ApiFindTrafficRequest {
 	r.direction = &direction
-	return r
-}
-
-// Traffic timeframe
-func (r ApiFindTrafficRequest) Body(body FindTrafficRequest) ApiFindTrafficRequest {
-	r.body = &body
 	return r
 }
 
@@ -2050,6 +2347,11 @@ func (r ApiFindTrafficRequest) Bucket(bucket string) ApiFindTrafficRequest {
 	return r
 }
 
+func (r ApiFindTrafficRequest) Timeframe(timeframe FindTrafficTimeframeParameter) ApiFindTrafficRequest {
+	r.timeframe = &timeframe
+	return r
+}
+
 func (r ApiFindTrafficRequest) Execute() (*http.Response, error) {
 	return r.ApiService.FindTrafficExecute(r)
 }
@@ -2059,9 +2361,9 @@ FindTraffic Retrieve device traffic
 
 Returns traffic for a specific device.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiFindTrafficRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiFindTrafficRequest
 */
 func (a *DevicesApiService) FindTraffic(ctx context.Context, id string) ApiFindTrafficRequest {
 	return ApiFindTrafficRequest{
@@ -2093,9 +2395,6 @@ func (a *DevicesApiService) FindTrafficExecute(r ApiFindTrafficRequest) (*http.R
 	if r.direction == nil {
 		return nil, reportError("direction is required and must be specified")
 	}
-	if r.body == nil {
-		return nil, reportError("body is required and must be specified")
-	}
 
 	localVarQueryParams.Add("direction", parameterToString(*r.direction, ""))
 	if r.interval != nil {
@@ -2104,8 +2403,11 @@ func (a *DevicesApiService) FindTrafficExecute(r ApiFindTrafficRequest) (*http.R
 	if r.bucket != nil {
 		localVarQueryParams.Add("bucket", parameterToString(*r.bucket, ""))
 	}
+	if r.timeframe != nil {
+		localVarQueryParams.Add("timeframe", parameterToString(*r.timeframe, ""))
+	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -2121,8 +2423,6 @@ func (a *DevicesApiService) FindTrafficExecute(r ApiFindTrafficRequest) (*http.R
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2209,9 +2509,9 @@ GetBgpNeighborData Retrieve BGP neighbor data for this device
 
 Provides a summary of the BGP neighbor data associated to the BGP sessions for this device.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiGetBgpNeighborDataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiGetBgpNeighborDataRequest
 */
 func (a *DevicesApiService) GetBgpNeighborData(ctx context.Context, id string) ApiGetBgpNeighborDataRequest {
 	return ApiGetBgpNeighborDataRequest{
@@ -2222,7 +2522,8 @@ func (a *DevicesApiService) GetBgpNeighborData(ctx context.Context, id string) A
 }
 
 // Execute executes the request
-//  @return GetBgpNeighborData200Response
+//
+//	@return GetBgpNeighborData200Response
 func (a *DevicesApiService) GetBgpNeighborDataExecute(r ApiGetBgpNeighborDataRequest) (*GetBgpNeighborData200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2362,9 +2663,9 @@ PerformAction Perform an action
 
 Performs an action for the given device.  Possible actions include: power_on, power_off, reboot, reinstall, and rescue (reboot the device into rescue OS.)
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiPerformActionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiPerformActionRequest
 */
 func (a *DevicesApiService) PerformAction(ctx context.Context, id string) ApiPerformActionRequest {
 	return ApiPerformActionRequest{
@@ -2487,15 +2788,15 @@ func (a *DevicesApiService) PerformActionExecute(r ApiPerformActionRequest) (*ht
 }
 
 type ApiUpdateDeviceRequest struct {
-	ctx        context.Context
-	ApiService *DevicesApiService
-	id         string
-	body       *UpdateDeviceRequest
+	ctx                 context.Context
+	ApiService          *DevicesApiService
+	id                  string
+	updateDeviceRequest *UpdateDeviceRequest
 }
 
 // Facility to update
-func (r ApiUpdateDeviceRequest) Body(body UpdateDeviceRequest) ApiUpdateDeviceRequest {
-	r.body = &body
+func (r ApiUpdateDeviceRequest) UpdateDeviceRequest(updateDeviceRequest UpdateDeviceRequest) ApiUpdateDeviceRequest {
+	r.updateDeviceRequest = &updateDeviceRequest
 	return r
 }
 
@@ -2508,9 +2809,9 @@ UpdateDevice Update the device
 
 Updates the device.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiUpdateDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiUpdateDeviceRequest
 */
 func (a *DevicesApiService) UpdateDevice(ctx context.Context, id string) ApiUpdateDeviceRequest {
 	return ApiUpdateDeviceRequest{
@@ -2521,7 +2822,8 @@ func (a *DevicesApiService) UpdateDevice(ctx context.Context, id string) ApiUpda
 }
 
 // Execute executes the request
-//  @return FindDeviceById200Response
+//
+//	@return FindDeviceById200Response
 func (a *DevicesApiService) UpdateDeviceExecute(r ApiUpdateDeviceRequest) (*FindDeviceById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -2541,8 +2843,8 @@ func (a *DevicesApiService) UpdateDeviceExecute(r ApiUpdateDeviceRequest) (*Find
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.updateDeviceRequest == nil {
+		return localVarReturnValue, nil, reportError("updateDeviceRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2563,7 +2865,7 @@ func (a *DevicesApiService) UpdateDeviceExecute(r ApiUpdateDeviceRequest) (*Find
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.updateDeviceRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

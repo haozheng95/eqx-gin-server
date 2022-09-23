@@ -17,7 +17,6 @@ import (
 
 // VrfVirtualCircuitCreateInput struct for VrfVirtualCircuitCreateInput
 type VrfVirtualCircuitCreateInput struct {
-	Tags []string `json:"tags,omitempty"`
 	// An IP address from the subnet that will be used on the Customer side. This parameter is optional, but if supplied, we will use the other usable IP address in the subnet as the Metal IP. By default, the last usable IP address in the subnet will be used.
 	CustomerIp  *string `json:"customer_ip,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -33,7 +32,8 @@ type VrfVirtualCircuitCreateInput struct {
 	// speed can be passed as integer number representing bps speed or string (e.g. '52m' or '100g' or '4 gbps')
 	Speed *int32 `json:"speed,omitempty"`
 	// The /30 or /31 subnet of one of the VRF IP Blocks that will be used with the VRF for the Virtual Circuit. This subnet does not have to be an existing VRF IP reservation, as we will create the VRF IP reservation on creation if it does not exist. The Metal IP and Customer IP must be IPs from this subnet. For /30 subnets, the network and broadcast IPs cannot be used as the Metal or Customer IP. The subnet specified must be contained within an already-defined IP Range for the VRF.
-	Subnet string `json:"subnet"`
+	Subnet string   `json:"subnet"`
+	Tags   []string `json:"tags,omitempty"`
 	// The UUID of the VRF that will be associated with the Virtual Circuit.
 	Vrf string `json:"vrf"`
 }
@@ -58,38 +58,6 @@ func NewVrfVirtualCircuitCreateInput(nniVlan int32, peerAsn int32, project strin
 func NewVrfVirtualCircuitCreateInputWithDefaults() *VrfVirtualCircuitCreateInput {
 	this := VrfVirtualCircuitCreateInput{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *VrfVirtualCircuitCreateInput) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VrfVirtualCircuitCreateInput) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *VrfVirtualCircuitCreateInput) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *VrfVirtualCircuitCreateInput) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetCustomerIp returns the CustomerIp field value if set, zero value otherwise.
@@ -391,6 +359,38 @@ func (o *VrfVirtualCircuitCreateInput) SetSubnet(v string) {
 	o.Subnet = v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *VrfVirtualCircuitCreateInput) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VrfVirtualCircuitCreateInput) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *VrfVirtualCircuitCreateInput) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *VrfVirtualCircuitCreateInput) SetTags(v []string) {
+	o.Tags = v
+}
+
 // GetVrf returns the Vrf field value
 func (o *VrfVirtualCircuitCreateInput) GetVrf() string {
 	if o == nil {
@@ -417,9 +417,6 @@ func (o *VrfVirtualCircuitCreateInput) SetVrf(v string) {
 
 func (o VrfVirtualCircuitCreateInput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.CustomerIp != nil {
 		toSerialize["customer_ip"] = o.CustomerIp
 	}
@@ -449,6 +446,9 @@ func (o VrfVirtualCircuitCreateInput) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["subnet"] = o.Subnet
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	if true {
 		toSerialize["vrf"] = o.Vrf

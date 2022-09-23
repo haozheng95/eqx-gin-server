@@ -18,16 +18,17 @@ import (
 
 // FindInvitationById200Response struct for FindInvitationById200Response
 type FindInvitationById200Response struct {
-	CreatedAt    *time.Time                            `json:"created_at,omitempty"`
-	Href         *string                               `json:"href,omitempty"`
-	Id           *string                               `json:"id,omitempty"`
-	Invitation   *FindBatchById200ResponseDevicesInner `json:"invitation,omitempty"`
-	InvitedBy    *FindBatchById200ResponseDevicesInner `json:"invited_by,omitempty"`
-	Invitee      *string                               `json:"invitee,omitempty"`
-	Organization *FindBatchById200ResponseDevicesInner `json:"organization,omitempty"`
-	ProjectsIds  []string                              `json:"projects_ids,omitempty"`
-	Roles        []string                              `json:"roles,omitempty"`
-	UpdatedAt    *time.Time                            `json:"updated_at,omitempty"`
+	CreatedAt    *time.Time                             `json:"created_at,omitempty"`
+	Href         *string                                `json:"href,omitempty"`
+	Id           *string                                `json:"id,omitempty"`
+	Invitation   *FindBatchById200ResponseDevicesInner  `json:"invitation,omitempty"`
+	InvitedBy    *FindBatchById200ResponseDevicesInner  `json:"invited_by,omitempty"`
+	Invitee      *string                                `json:"invitee,omitempty"`
+	Nonce        *string                                `json:"nonce,omitempty"`
+	Organization *FindBatchById200ResponseDevicesInner  `json:"organization,omitempty"`
+	Projects     []FindBatchById200ResponseDevicesInner `json:"projects,omitempty"`
+	Roles        []string                               `json:"roles,omitempty"`
+	UpdatedAt    *time.Time                             `json:"updated_at,omitempty"`
 }
 
 // NewFindInvitationById200Response instantiates a new FindInvitationById200Response object
@@ -239,6 +240,38 @@ func (o *FindInvitationById200Response) SetInvitee(v string) {
 	o.Invitee = &v
 }
 
+// GetNonce returns the Nonce field value if set, zero value otherwise.
+func (o *FindInvitationById200Response) GetNonce() string {
+	if o == nil || o.Nonce == nil {
+		var ret string
+		return ret
+	}
+	return *o.Nonce
+}
+
+// GetNonceOk returns a tuple with the Nonce field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FindInvitationById200Response) GetNonceOk() (*string, bool) {
+	if o == nil || o.Nonce == nil {
+		return nil, false
+	}
+	return o.Nonce, true
+}
+
+// HasNonce returns a boolean if a field has been set.
+func (o *FindInvitationById200Response) HasNonce() bool {
+	if o != nil && o.Nonce != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNonce gets a reference to the given string and assigns it to the Nonce field.
+func (o *FindInvitationById200Response) SetNonce(v string) {
+	o.Nonce = &v
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *FindInvitationById200Response) GetOrganization() FindBatchById200ResponseDevicesInner {
 	if o == nil || o.Organization == nil {
@@ -271,36 +304,36 @@ func (o *FindInvitationById200Response) SetOrganization(v FindBatchById200Respon
 	o.Organization = &v
 }
 
-// GetProjectsIds returns the ProjectsIds field value if set, zero value otherwise.
-func (o *FindInvitationById200Response) GetProjectsIds() []string {
-	if o == nil || o.ProjectsIds == nil {
-		var ret []string
+// GetProjects returns the Projects field value if set, zero value otherwise.
+func (o *FindInvitationById200Response) GetProjects() []FindBatchById200ResponseDevicesInner {
+	if o == nil || o.Projects == nil {
+		var ret []FindBatchById200ResponseDevicesInner
 		return ret
 	}
-	return o.ProjectsIds
+	return o.Projects
 }
 
-// GetProjectsIdsOk returns a tuple with the ProjectsIds field value if set, nil otherwise
+// GetProjectsOk returns a tuple with the Projects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FindInvitationById200Response) GetProjectsIdsOk() ([]string, bool) {
-	if o == nil || o.ProjectsIds == nil {
+func (o *FindInvitationById200Response) GetProjectsOk() ([]FindBatchById200ResponseDevicesInner, bool) {
+	if o == nil || o.Projects == nil {
 		return nil, false
 	}
-	return o.ProjectsIds, true
+	return o.Projects, true
 }
 
-// HasProjectsIds returns a boolean if a field has been set.
-func (o *FindInvitationById200Response) HasProjectsIds() bool {
-	if o != nil && o.ProjectsIds != nil {
+// HasProjects returns a boolean if a field has been set.
+func (o *FindInvitationById200Response) HasProjects() bool {
+	if o != nil && o.Projects != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetProjectsIds gets a reference to the given []string and assigns it to the ProjectsIds field.
-func (o *FindInvitationById200Response) SetProjectsIds(v []string) {
-	o.ProjectsIds = v
+// SetProjects gets a reference to the given []FindBatchById200ResponseDevicesInner and assigns it to the Projects field.
+func (o *FindInvitationById200Response) SetProjects(v []FindBatchById200ResponseDevicesInner) {
+	o.Projects = v
 }
 
 // GetRoles returns the Roles field value if set, zero value otherwise.
@@ -387,11 +420,14 @@ func (o FindInvitationById200Response) MarshalJSON() ([]byte, error) {
 	if o.Invitee != nil {
 		toSerialize["invitee"] = o.Invitee
 	}
+	if o.Nonce != nil {
+		toSerialize["nonce"] = o.Nonce
+	}
 	if o.Organization != nil {
 		toSerialize["organization"] = o.Organization
 	}
-	if o.ProjectsIds != nil {
-		toSerialize["projects_ids"] = o.ProjectsIds
+	if o.Projects != nil {
+		toSerialize["projects"] = o.Projects
 	}
 	if o.Roles != nil {
 		toSerialize["roles"] = o.Roles

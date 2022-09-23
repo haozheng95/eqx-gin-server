@@ -47,6 +47,8 @@ type BgpConfig struct {
 // will change when the set of required properties is changed
 func NewBgpConfig() *BgpConfig {
 	this := BgpConfig{}
+	var maxPrefix int32 = 10
+	this.MaxPrefix = &maxPrefix
 	return &this
 }
 
@@ -55,6 +57,8 @@ func NewBgpConfig() *BgpConfig {
 // but it doesn't guarantee that properties required by API are set
 func NewBgpConfigWithDefaults() *BgpConfig {
 	this := BgpConfig{}
+	var maxPrefix int32 = 10
+	this.MaxPrefix = &maxPrefix
 	return &this
 }
 

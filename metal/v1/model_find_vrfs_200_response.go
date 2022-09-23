@@ -17,7 +17,7 @@ import (
 
 // FindVrfs200Response struct for FindVrfs200Response
 type FindVrfs200Response struct {
-	Vrfs []FindVrfs200ResponseVrfsInner `json:"vrfs,omitempty"`
+	Vrfs []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf `json:"vrfs,omitempty"`
 }
 
 // NewFindVrfs200Response instantiates a new FindVrfs200Response object
@@ -38,9 +38,9 @@ func NewFindVrfs200ResponseWithDefaults() *FindVrfs200Response {
 }
 
 // GetVrfs returns the Vrfs field value if set, zero value otherwise.
-func (o *FindVrfs200Response) GetVrfs() []FindVrfs200ResponseVrfsInner {
+func (o *FindVrfs200Response) GetVrfs() []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf {
 	if o == nil || o.Vrfs == nil {
-		var ret []FindVrfs200ResponseVrfsInner
+		var ret []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf
 		return ret
 	}
 	return o.Vrfs
@@ -48,7 +48,7 @@ func (o *FindVrfs200Response) GetVrfs() []FindVrfs200ResponseVrfsInner {
 
 // GetVrfsOk returns a tuple with the Vrfs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FindVrfs200Response) GetVrfsOk() ([]FindVrfs200ResponseVrfsInner, bool) {
+func (o *FindVrfs200Response) GetVrfsOk() ([]GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf, bool) {
 	if o == nil || o.Vrfs == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *FindVrfs200Response) HasVrfs() bool {
 	return false
 }
 
-// SetVrfs gets a reference to the given []FindVrfs200ResponseVrfsInner and assigns it to the Vrfs field.
-func (o *FindVrfs200Response) SetVrfs(v []FindVrfs200ResponseVrfsInner) {
+// SetVrfs gets a reference to the given []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf and assigns it to the Vrfs field.
+func (o *FindVrfs200Response) SetVrfs(v []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf) {
 	o.Vrfs = v
 }
 

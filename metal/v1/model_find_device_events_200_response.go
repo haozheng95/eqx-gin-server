@@ -17,8 +17,8 @@ import (
 
 // FindDeviceEvents200Response struct for FindDeviceEvents200Response
 type FindDeviceEvents200Response struct {
-	Events []FindConnectionEvents200Response `json:"events,omitempty"`
-	Meta   *FindDeviceEvents200ResponseMeta  `json:"meta,omitempty"`
+	Events []FindInterconnectionEvents200Response `json:"events,omitempty"`
+	Meta   *FindDeviceEvents200ResponseMeta       `json:"meta,omitempty"`
 }
 
 // NewFindDeviceEvents200Response instantiates a new FindDeviceEvents200Response object
@@ -39,9 +39,9 @@ func NewFindDeviceEvents200ResponseWithDefaults() *FindDeviceEvents200Response {
 }
 
 // GetEvents returns the Events field value if set, zero value otherwise.
-func (o *FindDeviceEvents200Response) GetEvents() []FindConnectionEvents200Response {
+func (o *FindDeviceEvents200Response) GetEvents() []FindInterconnectionEvents200Response {
 	if o == nil || o.Events == nil {
-		var ret []FindConnectionEvents200Response
+		var ret []FindInterconnectionEvents200Response
 		return ret
 	}
 	return o.Events
@@ -49,7 +49,7 @@ func (o *FindDeviceEvents200Response) GetEvents() []FindConnectionEvents200Respo
 
 // GetEventsOk returns a tuple with the Events field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FindDeviceEvents200Response) GetEventsOk() ([]FindConnectionEvents200Response, bool) {
+func (o *FindDeviceEvents200Response) GetEventsOk() ([]FindInterconnectionEvents200Response, bool) {
 	if o == nil || o.Events == nil {
 		return nil, false
 	}
@@ -65,8 +65,8 @@ func (o *FindDeviceEvents200Response) HasEvents() bool {
 	return false
 }
 
-// SetEvents gets a reference to the given []FindConnectionEvents200Response and assigns it to the Events field.
-func (o *FindDeviceEvents200Response) SetEvents(v []FindConnectionEvents200Response) {
+// SetEvents gets a reference to the given []FindInterconnectionEvents200Response and assigns it to the Events field.
+func (o *FindDeviceEvents200Response) SetEvents(v []FindInterconnectionEvents200Response) {
 	o.Events = v
 }
 

@@ -17,8 +17,8 @@ import (
 
 // EventList struct for EventList
 type EventList struct {
-	Events []FindConnectionEvents200Response `json:"events,omitempty"`
-	Meta   *FindDeviceEvents200ResponseMeta  `json:"meta,omitempty"`
+	Events []FindInterconnectionEvents200Response `json:"events,omitempty"`
+	Meta   *FindDeviceEvents200ResponseMeta       `json:"meta,omitempty"`
 }
 
 // NewEventList instantiates a new EventList object
@@ -39,9 +39,9 @@ func NewEventListWithDefaults() *EventList {
 }
 
 // GetEvents returns the Events field value if set, zero value otherwise.
-func (o *EventList) GetEvents() []FindConnectionEvents200Response {
+func (o *EventList) GetEvents() []FindInterconnectionEvents200Response {
 	if o == nil || o.Events == nil {
-		var ret []FindConnectionEvents200Response
+		var ret []FindInterconnectionEvents200Response
 		return ret
 	}
 	return o.Events
@@ -49,7 +49,7 @@ func (o *EventList) GetEvents() []FindConnectionEvents200Response {
 
 // GetEventsOk returns a tuple with the Events field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EventList) GetEventsOk() ([]FindConnectionEvents200Response, bool) {
+func (o *EventList) GetEventsOk() ([]FindInterconnectionEvents200Response, bool) {
 	if o == nil || o.Events == nil {
 		return nil, false
 	}
@@ -65,8 +65,8 @@ func (o *EventList) HasEvents() bool {
 	return false
 }
 
-// SetEvents gets a reference to the given []FindConnectionEvents200Response and assigns it to the Events field.
-func (o *EventList) SetEvents(v []FindConnectionEvents200Response) {
+// SetEvents gets a reference to the given []FindInterconnectionEvents200Response and assigns it to the Events field.
+func (o *EventList) SetEvents(v []FindInterconnectionEvents200Response) {
 	o.Events = v
 }
 

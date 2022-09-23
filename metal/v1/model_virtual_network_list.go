@@ -17,7 +17,7 @@ import (
 
 // VirtualNetworkList struct for VirtualNetworkList
 type VirtualNetworkList struct {
-	VirtualNetworks []FindVirtualNetworks200ResponseVirtualNetworksInner `json:"virtual_networks,omitempty"`
+	VirtualNetworks []FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork `json:"virtual_networks,omitempty"`
 }
 
 // NewVirtualNetworkList instantiates a new VirtualNetworkList object
@@ -38,9 +38,9 @@ func NewVirtualNetworkListWithDefaults() *VirtualNetworkList {
 }
 
 // GetVirtualNetworks returns the VirtualNetworks field value if set, zero value otherwise.
-func (o *VirtualNetworkList) GetVirtualNetworks() []FindVirtualNetworks200ResponseVirtualNetworksInner {
+func (o *VirtualNetworkList) GetVirtualNetworks() []FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork {
 	if o == nil || o.VirtualNetworks == nil {
-		var ret []FindVirtualNetworks200ResponseVirtualNetworksInner
+		var ret []FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork
 		return ret
 	}
 	return o.VirtualNetworks
@@ -48,7 +48,7 @@ func (o *VirtualNetworkList) GetVirtualNetworks() []FindVirtualNetworks200Respon
 
 // GetVirtualNetworksOk returns a tuple with the VirtualNetworks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VirtualNetworkList) GetVirtualNetworksOk() ([]FindVirtualNetworks200ResponseVirtualNetworksInner, bool) {
+func (o *VirtualNetworkList) GetVirtualNetworksOk() ([]FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork, bool) {
 	if o == nil || o.VirtualNetworks == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *VirtualNetworkList) HasVirtualNetworks() bool {
 	return false
 }
 
-// SetVirtualNetworks gets a reference to the given []FindVirtualNetworks200ResponseVirtualNetworksInner and assigns it to the VirtualNetworks field.
-func (o *VirtualNetworkList) SetVirtualNetworks(v []FindVirtualNetworks200ResponseVirtualNetworksInner) {
+// SetVirtualNetworks gets a reference to the given []FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork and assigns it to the VirtualNetworks field.
+func (o *VirtualNetworkList) SetVirtualNetworks(v []FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork) {
 	o.VirtualNetworks = v
 }
 

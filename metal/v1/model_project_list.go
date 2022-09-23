@@ -17,8 +17,8 @@ import (
 
 // ProjectList struct for ProjectList
 type ProjectList struct {
-	Meta     *FindDeviceEvents200ResponseMeta            `json:"meta,omitempty"`
-	Projects []MoveHardwareReservation201ResponseProject `json:"projects,omitempty"`
+	Meta     *FindDeviceEvents200ResponseMeta                                                             `json:"meta,omitempty"`
+	Projects []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject `json:"projects,omitempty"`
 }
 
 // NewProjectList instantiates a new ProjectList object
@@ -71,9 +71,9 @@ func (o *ProjectList) SetMeta(v FindDeviceEvents200ResponseMeta) {
 }
 
 // GetProjects returns the Projects field value if set, zero value otherwise.
-func (o *ProjectList) GetProjects() []MoveHardwareReservation201ResponseProject {
+func (o *ProjectList) GetProjects() []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject {
 	if o == nil || o.Projects == nil {
-		var ret []MoveHardwareReservation201ResponseProject
+		var ret []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
 		return ret
 	}
 	return o.Projects
@@ -81,7 +81,7 @@ func (o *ProjectList) GetProjects() []MoveHardwareReservation201ResponseProject 
 
 // GetProjectsOk returns a tuple with the Projects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProjectList) GetProjectsOk() ([]MoveHardwareReservation201ResponseProject, bool) {
+func (o *ProjectList) GetProjectsOk() ([]GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, bool) {
 	if o == nil || o.Projects == nil {
 		return nil, false
 	}
@@ -97,8 +97,8 @@ func (o *ProjectList) HasProjects() bool {
 	return false
 }
 
-// SetProjects gets a reference to the given []MoveHardwareReservation201ResponseProject and assigns it to the Projects field.
-func (o *ProjectList) SetProjects(v []MoveHardwareReservation201ResponseProject) {
+// SetProjects gets a reference to the given []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject and assigns it to the Projects field.
+func (o *ProjectList) SetProjects(v []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject) {
 	o.Projects = v
 }
 

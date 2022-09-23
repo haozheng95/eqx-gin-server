@@ -17,10 +17,11 @@ import (
 
 // CreateOrganizationInvitationRequest struct for CreateOrganizationInvitationRequest
 type CreateOrganizationInvitationRequest struct {
-	Invitee     string   `json:"invitee"`
-	Message     *string  `json:"message,omitempty"`
-	ProjectsIds []string `json:"projects_ids,omitempty"`
-	Roles       []string `json:"roles,omitempty"`
+	Invitee        string   `json:"invitee"`
+	Message        *string  `json:"message,omitempty"`
+	OrganizationId *string  `json:"organization_id,omitempty"`
+	ProjectsIds    []string `json:"projects_ids,omitempty"`
+	Roles          []string `json:"roles,omitempty"`
 }
 
 // NewCreateOrganizationInvitationRequest instantiates a new CreateOrganizationInvitationRequest object
@@ -97,6 +98,38 @@ func (o *CreateOrganizationInvitationRequest) SetMessage(v string) {
 	o.Message = &v
 }
 
+// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
+func (o *CreateOrganizationInvitationRequest) GetOrganizationId() string {
+	if o == nil || o.OrganizationId == nil {
+		var ret string
+		return ret
+	}
+	return *o.OrganizationId
+}
+
+// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrganizationInvitationRequest) GetOrganizationIdOk() (*string, bool) {
+	if o == nil || o.OrganizationId == nil {
+		return nil, false
+	}
+	return o.OrganizationId, true
+}
+
+// HasOrganizationId returns a boolean if a field has been set.
+func (o *CreateOrganizationInvitationRequest) HasOrganizationId() bool {
+	if o != nil && o.OrganizationId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
+func (o *CreateOrganizationInvitationRequest) SetOrganizationId(v string) {
+	o.OrganizationId = &v
+}
+
 // GetProjectsIds returns the ProjectsIds field value if set, zero value otherwise.
 func (o *CreateOrganizationInvitationRequest) GetProjectsIds() []string {
 	if o == nil || o.ProjectsIds == nil {
@@ -168,6 +201,9 @@ func (o CreateOrganizationInvitationRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Message != nil {
 		toSerialize["message"] = o.Message
+	}
+	if o.OrganizationId != nil {
+		toSerialize["organization_id"] = o.OrganizationId
 	}
 	if o.ProjectsIds != nil {
 		toSerialize["projects_ids"] = o.ProjectsIds

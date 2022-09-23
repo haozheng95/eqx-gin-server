@@ -20,7 +20,8 @@ type GetInterconnection200ResponsePortsInner struct {
 	Id           *string                               `json:"id,omitempty"`
 	Organization *FindBatchById200ResponseDevicesInner `json:"organization,omitempty"`
 	// Either 'primary' or 'secondary'.
-	Role   *string `json:"role,omitempty"`
+	Role *string `json:"role,omitempty"`
+	// For both Fabric VCs and Dedicated Ports, this will be 'requested' on creation and 'deleting' on deletion. Once the Fabric VC has found its corresponding Fabric connection, this will turn to 'active'. For Dedicated Ports, once the dedicated port is associated, this will also turn to 'active'. For Fabric VCs, this can turn into an 'expired' state if the service token associated is expired.
 	Status *string `json:"status,omitempty"`
 	// A switch 'short ID'
 	SwitchId        *string                                                 `json:"switch_id,omitempty"`

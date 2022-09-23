@@ -17,18 +17,18 @@ import (
 
 // Vrf struct for Vrf
 type Vrf struct {
-	CreatedBy *FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf `json:"created_by,omitempty"`
+	Id   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
 	// Optional field that can be set to describe the VRF
 	Description *string `json:"description,omitempty"`
-	Href        *string `json:"href,omitempty"`
-	Id          *string `json:"id,omitempty"`
-	// A list of CIDR network addresses. Like [\"10.0.0.0/16\", \"2001:d78::/56\"].
-	IpRanges []string `json:"ip_ranges,omitempty"`
 	// A 4-byte ASN associated with the VRF.
-	LocalAsn *int32                                     `json:"local_asn,omitempty"`
-	Metro    *GetInterconnection200ResponseMetroAllOf   `json:"metro,omitempty"`
-	Name     *string                                    `json:"name,omitempty"`
-	Project  *MoveHardwareReservation201ResponseProject `json:"project,omitempty"`
+	LocalAsn *int32 `json:"local_asn,omitempty"`
+	// A list of CIDR network addresses. Like [\"10.0.0.0/16\", \"2001:d78::/56\"].
+	IpRanges  []string                                                                                      `json:"ip_ranges,omitempty"`
+	Project   *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject   `json:"project,omitempty"`
+	Metro     *GetInterconnection200ResponseMetroAllOf                                                      `json:"metro,omitempty"`
+	CreatedBy *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy `json:"created_by,omitempty"`
+	Href      *string                                                                                       `json:"href,omitempty"`
 }
 
 // NewVrf instantiates a new Vrf object
@@ -46,102 +46,6 @@ func NewVrf() *Vrf {
 func NewVrfWithDefaults() *Vrf {
 	this := Vrf{}
 	return &this
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *Vrf) GetCreatedBy() FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf {
-	if o == nil || o.CreatedBy == nil {
-		var ret FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Vrf) GetCreatedByOk() (*FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf, bool) {
-	if o == nil || o.CreatedBy == nil {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *Vrf) HasCreatedBy() bool {
-	if o != nil && o.CreatedBy != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf and assigns it to the CreatedBy field.
-func (o *Vrf) SetCreatedBy(v FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf) {
-	o.CreatedBy = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *Vrf) GetDescription() string {
-	if o == nil || o.Description == nil {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Vrf) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *Vrf) HasDescription() bool {
-	if o != nil && o.Description != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *Vrf) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetHref returns the Href field value if set, zero value otherwise.
-func (o *Vrf) GetHref() string {
-	if o == nil || o.Href == nil {
-		var ret string
-		return ret
-	}
-	return *o.Href
-}
-
-// GetHrefOk returns a tuple with the Href field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Vrf) GetHrefOk() (*string, bool) {
-	if o == nil || o.Href == nil {
-		return nil, false
-	}
-	return o.Href, true
-}
-
-// HasHref returns a boolean if a field has been set.
-func (o *Vrf) HasHref() bool {
-	if o != nil && o.Href != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetHref gets a reference to the given string and assigns it to the Href field.
-func (o *Vrf) SetHref(v string) {
-	o.Href = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -176,36 +80,68 @@ func (o *Vrf) SetId(v string) {
 	o.Id = &v
 }
 
-// GetIpRanges returns the IpRanges field value if set, zero value otherwise.
-func (o *Vrf) GetIpRanges() []string {
-	if o == nil || o.IpRanges == nil {
-		var ret []string
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *Vrf) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
 		return ret
 	}
-	return o.IpRanges
+	return *o.Name
 }
 
-// GetIpRangesOk returns a tuple with the IpRanges field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Vrf) GetIpRangesOk() ([]string, bool) {
-	if o == nil || o.IpRanges == nil {
+func (o *Vrf) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
-	return o.IpRanges, true
+	return o.Name, true
 }
 
-// HasIpRanges returns a boolean if a field has been set.
-func (o *Vrf) HasIpRanges() bool {
-	if o != nil && o.IpRanges != nil {
+// HasName returns a boolean if a field has been set.
+func (o *Vrf) HasName() bool {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetIpRanges gets a reference to the given []string and assigns it to the IpRanges field.
-func (o *Vrf) SetIpRanges(v []string) {
-	o.IpRanges = v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *Vrf) SetName(v string) {
+	o.Name = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *Vrf) GetDescription() string {
+	if o == nil || o.Description == nil {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Vrf) GetDescriptionOk() (*string, bool) {
+	if o == nil || o.Description == nil {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *Vrf) HasDescription() bool {
+	if o != nil && o.Description != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *Vrf) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetLocalAsn returns the LocalAsn field value if set, zero value otherwise.
@@ -240,6 +176,70 @@ func (o *Vrf) SetLocalAsn(v int32) {
 	o.LocalAsn = &v
 }
 
+// GetIpRanges returns the IpRanges field value if set, zero value otherwise.
+func (o *Vrf) GetIpRanges() []string {
+	if o == nil || o.IpRanges == nil {
+		var ret []string
+		return ret
+	}
+	return o.IpRanges
+}
+
+// GetIpRangesOk returns a tuple with the IpRanges field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Vrf) GetIpRangesOk() ([]string, bool) {
+	if o == nil || o.IpRanges == nil {
+		return nil, false
+	}
+	return o.IpRanges, true
+}
+
+// HasIpRanges returns a boolean if a field has been set.
+func (o *Vrf) HasIpRanges() bool {
+	if o != nil && o.IpRanges != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIpRanges gets a reference to the given []string and assigns it to the IpRanges field.
+func (o *Vrf) SetIpRanges(v []string) {
+	o.IpRanges = v
+}
+
+// GetProject returns the Project field value if set, zero value otherwise.
+func (o *Vrf) GetProject() GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject {
+	if o == nil || o.Project == nil {
+		var ret GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
+		return ret
+	}
+	return *o.Project
+}
+
+// GetProjectOk returns a tuple with the Project field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Vrf) GetProjectOk() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, bool) {
+	if o == nil || o.Project == nil {
+		return nil, false
+	}
+	return o.Project, true
+}
+
+// HasProject returns a boolean if a field has been set.
+func (o *Vrf) HasProject() bool {
+	if o != nil && o.Project != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProject gets a reference to the given GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject and assigns it to the Project field.
+func (o *Vrf) SetProject(v GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject) {
+	o.Project = &v
+}
+
 // GetMetro returns the Metro field value if set, zero value otherwise.
 func (o *Vrf) GetMetro() GetInterconnection200ResponseMetroAllOf {
 	if o == nil || o.Metro == nil {
@@ -272,98 +272,98 @@ func (o *Vrf) SetMetro(v GetInterconnection200ResponseMetroAllOf) {
 	o.Metro = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *Vrf) GetName() string {
-	if o == nil || o.Name == nil {
+// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
+func (o *Vrf) GetCreatedBy() GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy {
+	if o == nil || o.CreatedBy == nil {
+		var ret GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy
+		return ret
+	}
+	return *o.CreatedBy
+}
+
+// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Vrf) GetCreatedByOk() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy, bool) {
+	if o == nil || o.CreatedBy == nil {
+		return nil, false
+	}
+	return o.CreatedBy, true
+}
+
+// HasCreatedBy returns a boolean if a field has been set.
+func (o *Vrf) HasCreatedBy() bool {
+	if o != nil && o.CreatedBy != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedBy gets a reference to the given GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy and assigns it to the CreatedBy field.
+func (o *Vrf) SetCreatedBy(v GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy) {
+	o.CreatedBy = &v
+}
+
+// GetHref returns the Href field value if set, zero value otherwise.
+func (o *Vrf) GetHref() string {
+	if o == nil || o.Href == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Href
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetHrefOk returns a tuple with the Href field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Vrf) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+func (o *Vrf) GetHrefOk() (*string, bool) {
+	if o == nil || o.Href == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Href, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *Vrf) HasName() bool {
-	if o != nil && o.Name != nil {
+// HasHref returns a boolean if a field has been set.
+func (o *Vrf) HasHref() bool {
+	if o != nil && o.Href != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *Vrf) SetName(v string) {
-	o.Name = &v
-}
-
-// GetProject returns the Project field value if set, zero value otherwise.
-func (o *Vrf) GetProject() MoveHardwareReservation201ResponseProject {
-	if o == nil || o.Project == nil {
-		var ret MoveHardwareReservation201ResponseProject
-		return ret
-	}
-	return *o.Project
-}
-
-// GetProjectOk returns a tuple with the Project field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Vrf) GetProjectOk() (*MoveHardwareReservation201ResponseProject, bool) {
-	if o == nil || o.Project == nil {
-		return nil, false
-	}
-	return o.Project, true
-}
-
-// HasProject returns a boolean if a field has been set.
-func (o *Vrf) HasProject() bool {
-	if o != nil && o.Project != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetProject gets a reference to the given MoveHardwareReservation201ResponseProject and assigns it to the Project field.
-func (o *Vrf) SetProject(v MoveHardwareReservation201ResponseProject) {
-	o.Project = &v
+// SetHref gets a reference to the given string and assigns it to the Href field.
+func (o *Vrf) SetHref(v string) {
+	o.Href = &v
 }
 
 func (o Vrf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.CreatedBy != nil {
-		toSerialize["created_by"] = o.CreatedBy
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
-	}
-	if o.Href != nil {
-		toSerialize["href"] = o.Href
-	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
-	}
-	if o.IpRanges != nil {
-		toSerialize["ip_ranges"] = o.IpRanges
-	}
-	if o.LocalAsn != nil {
-		toSerialize["local_asn"] = o.LocalAsn
-	}
-	if o.Metro != nil {
-		toSerialize["metro"] = o.Metro
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
+	if o.Description != nil {
+		toSerialize["description"] = o.Description
+	}
+	if o.LocalAsn != nil {
+		toSerialize["local_asn"] = o.LocalAsn
+	}
+	if o.IpRanges != nil {
+		toSerialize["ip_ranges"] = o.IpRanges
+	}
 	if o.Project != nil {
 		toSerialize["project"] = o.Project
+	}
+	if o.Metro != nil {
+		toSerialize["metro"] = o.Metro
+	}
+	if o.CreatedBy != nil {
+		toSerialize["created_by"] = o.CreatedBy
+	}
+	if o.Href != nil {
+		toSerialize["href"] = o.Href
 	}
 	return json.Marshal(toSerialize)
 }

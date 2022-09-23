@@ -37,7 +37,7 @@ func (r ApiAssignNativeVlanRequest) Vnid(vnid string) ApiAssignNativeVlanRequest
 	return r
 }
 
-func (r ApiAssignNativeVlanRequest) Execute() (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+func (r ApiAssignNativeVlanRequest) Execute() (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	return r.ApiService.AssignNativeVlanExecute(r)
 }
 
@@ -46,9 +46,9 @@ AssignNativeVlan Assign a native VLAN
 
 Sets a virtual network on this port as a "native VLAN". The VLAN must have already been assigned using the using the "Assign a port to a virtual network" operation.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiAssignNativeVlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiAssignNativeVlanRequest
 */
 func (a *PortsApiService) AssignNativeVlan(ctx context.Context, id string) ApiAssignNativeVlanRequest {
 	return ApiAssignNativeVlanRequest{
@@ -59,13 +59,14 @@ func (a *PortsApiService) AssignNativeVlan(ctx context.Context, id string) ApiAs
 }
 
 // Execute executes the request
-//  @return FindDeviceById200ResponseNetworkPortsAllOf
-func (a *PortsApiService) AssignNativeVlanExecute(r ApiAssignNativeVlanRequest) (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInner
+func (a *PortsApiService) AssignNativeVlanExecute(r ApiAssignNativeVlanRequest) (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindDeviceById200ResponseNetworkPortsAllOf
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortsApiService.AssignNativeVlan")
@@ -182,18 +183,18 @@ func (a *PortsApiService) AssignNativeVlanExecute(r ApiAssignNativeVlanRequest) 
 }
 
 type ApiAssignPortRequest struct {
-	ctx        context.Context
-	ApiService *PortsApiService
-	id         string
-	body       *AssignPortRequest
+	ctx               context.Context
+	ApiService        *PortsApiService
+	id                string
+	assignPortRequest *AssignPortRequest
 }
 
-func (r ApiAssignPortRequest) Body(body AssignPortRequest) ApiAssignPortRequest {
-	r.body = &body
+func (r ApiAssignPortRequest) AssignPortRequest(assignPortRequest AssignPortRequest) ApiAssignPortRequest {
+	r.assignPortRequest = &assignPortRequest
 	return r
 }
 
-func (r ApiAssignPortRequest) Execute() (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+func (r ApiAssignPortRequest) Execute() (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	return r.ApiService.AssignPortExecute(r)
 }
 
@@ -202,9 +203,9 @@ AssignPort Assign a port to virtual network
 
 Assign a hardware port to a virtual network.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiAssignPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiAssignPortRequest
 */
 func (a *PortsApiService) AssignPort(ctx context.Context, id string) ApiAssignPortRequest {
 	return ApiAssignPortRequest{
@@ -215,13 +216,14 @@ func (a *PortsApiService) AssignPort(ctx context.Context, id string) ApiAssignPo
 }
 
 // Execute executes the request
-//  @return FindDeviceById200ResponseNetworkPortsAllOf
-func (a *PortsApiService) AssignPortExecute(r ApiAssignPortRequest) (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInner
+func (a *PortsApiService) AssignPortExecute(r ApiAssignPortRequest) (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindDeviceById200ResponseNetworkPortsAllOf
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortsApiService.AssignPort")
@@ -235,8 +237,8 @@ func (a *PortsApiService) AssignPortExecute(r ApiAssignPortRequest) (*FindDevice
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.assignPortRequest == nil {
+		return localVarReturnValue, nil, reportError("assignPortRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -257,7 +259,7 @@ func (a *PortsApiService) AssignPortExecute(r ApiAssignPortRequest) (*FindDevice
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.assignPortRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -361,7 +363,7 @@ func (r ApiBondPortRequest) BulkEnable(bulkEnable bool) ApiBondPortRequest {
 	return r
 }
 
-func (r ApiBondPortRequest) Execute() (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+func (r ApiBondPortRequest) Execute() (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	return r.ApiService.BondPortExecute(r)
 }
 
@@ -370,9 +372,9 @@ BondPort Enabling bonding
 
 Enabling bonding for one or all ports
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiBondPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiBondPortRequest
 */
 func (a *PortsApiService) BondPort(ctx context.Context, id string) ApiBondPortRequest {
 	return ApiBondPortRequest{
@@ -383,13 +385,14 @@ func (a *PortsApiService) BondPort(ctx context.Context, id string) ApiBondPortRe
 }
 
 // Execute executes the request
-//  @return FindDeviceById200ResponseNetworkPortsAllOf
-func (a *PortsApiService) BondPortExecute(r ApiBondPortRequest) (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInner
+func (a *PortsApiService) BondPortExecute(r ApiBondPortRequest) (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindDeviceById200ResponseNetworkPortsAllOf
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortsApiService.BondPort")
@@ -515,19 +518,19 @@ func (a *PortsApiService) BondPortExecute(r ApiBondPortRequest) (*FindDeviceById
 }
 
 type ApiConvertLayer2Request struct {
-	ctx        context.Context
-	ApiService *PortsApiService
-	id         string
-	body       *AssignPortRequest
+	ctx               context.Context
+	ApiService        *PortsApiService
+	id                string
+	assignPortRequest *AssignPortRequest
 }
 
 // Virtual Network ID
-func (r ApiConvertLayer2Request) Body(body AssignPortRequest) ApiConvertLayer2Request {
-	r.body = &body
+func (r ApiConvertLayer2Request) AssignPortRequest(assignPortRequest AssignPortRequest) ApiConvertLayer2Request {
+	r.assignPortRequest = &assignPortRequest
 	return r
 }
 
-func (r ApiConvertLayer2Request) Execute() (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+func (r ApiConvertLayer2Request) Execute() (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	return r.ApiService.ConvertLayer2Execute(r)
 }
 
@@ -536,9 +539,9 @@ ConvertLayer2 Convert to Layer 2
 
 Converts a bond port to Layer 2. IP assignments of the port will be removed.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiConvertLayer2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiConvertLayer2Request
 */
 func (a *PortsApiService) ConvertLayer2(ctx context.Context, id string) ApiConvertLayer2Request {
 	return ApiConvertLayer2Request{
@@ -549,13 +552,14 @@ func (a *PortsApiService) ConvertLayer2(ctx context.Context, id string) ApiConve
 }
 
 // Execute executes the request
-//  @return FindDeviceById200ResponseNetworkPortsAllOf
-func (a *PortsApiService) ConvertLayer2Execute(r ApiConvertLayer2Request) (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInner
+func (a *PortsApiService) ConvertLayer2Execute(r ApiConvertLayer2Request) (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindDeviceById200ResponseNetworkPortsAllOf
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortsApiService.ConvertLayer2")
@@ -588,7 +592,7 @@ func (a *PortsApiService) ConvertLayer2Execute(r ApiConvertLayer2Request) (*Find
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.assignPortRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -680,19 +684,19 @@ func (a *PortsApiService) ConvertLayer2Execute(r ApiConvertLayer2Request) (*Find
 }
 
 type ApiConvertLayer3Request struct {
-	ctx        context.Context
-	ApiService *PortsApiService
-	id         string
-	body       *ConvertLayer3Request
+	ctx                  context.Context
+	ApiService           *PortsApiService
+	id                   string
+	convertLayer3Request *ConvertLayer3Request
 }
 
 // IPs to request
-func (r ApiConvertLayer3Request) Body(body ConvertLayer3Request) ApiConvertLayer3Request {
-	r.body = &body
+func (r ApiConvertLayer3Request) ConvertLayer3Request(convertLayer3Request ConvertLayer3Request) ApiConvertLayer3Request {
+	r.convertLayer3Request = &convertLayer3Request
 	return r
 }
 
-func (r ApiConvertLayer3Request) Execute() (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+func (r ApiConvertLayer3Request) Execute() (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	return r.ApiService.ConvertLayer3Execute(r)
 }
 
@@ -701,9 +705,9 @@ ConvertLayer3 Convert to Layer 3
 
 Converts a bond port to Layer 3. VLANs must first be unassigned.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiConvertLayer3Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiConvertLayer3Request
 */
 func (a *PortsApiService) ConvertLayer3(ctx context.Context, id string) ApiConvertLayer3Request {
 	return ApiConvertLayer3Request{
@@ -714,13 +718,14 @@ func (a *PortsApiService) ConvertLayer3(ctx context.Context, id string) ApiConve
 }
 
 // Execute executes the request
-//  @return FindDeviceById200ResponseNetworkPortsAllOf
-func (a *PortsApiService) ConvertLayer3Execute(r ApiConvertLayer3Request) (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInner
+func (a *PortsApiService) ConvertLayer3Execute(r ApiConvertLayer3Request) (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindDeviceById200ResponseNetworkPortsAllOf
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortsApiService.ConvertLayer3")
@@ -753,7 +758,7 @@ func (a *PortsApiService) ConvertLayer3Execute(r ApiConvertLayer3Request) (*Find
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.convertLayer3Request
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -845,15 +850,15 @@ func (a *PortsApiService) ConvertLayer3Execute(r ApiConvertLayer3Request) (*Find
 }
 
 type ApiCreatePortVlanAssignmentBatchRequest struct {
-	ctx        context.Context
-	ApiService *PortsApiService
-	id         string
-	body       *CreatePortVlanAssignmentBatchRequest
+	ctx                                  context.Context
+	ApiService                           *PortsApiService
+	id                                   string
+	createPortVlanAssignmentBatchRequest *CreatePortVlanAssignmentBatchRequest
 }
 
 // VLAN Assignment batch details
-func (r ApiCreatePortVlanAssignmentBatchRequest) Body(body CreatePortVlanAssignmentBatchRequest) ApiCreatePortVlanAssignmentBatchRequest {
-	r.body = &body
+func (r ApiCreatePortVlanAssignmentBatchRequest) CreatePortVlanAssignmentBatchRequest(createPortVlanAssignmentBatchRequest CreatePortVlanAssignmentBatchRequest) ApiCreatePortVlanAssignmentBatchRequest {
+	r.createPortVlanAssignmentBatchRequest = &createPortVlanAssignmentBatchRequest
 	return r
 }
 
@@ -866,9 +871,9 @@ CreatePortVlanAssignmentBatch Create a new Port-VLAN Assignment management batch
 
 Create a new asynchronous batch request which handles adding and/or removing the VLANs to which the port is assigned.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiCreatePortVlanAssignmentBatchRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiCreatePortVlanAssignmentBatchRequest
 */
 func (a *PortsApiService) CreatePortVlanAssignmentBatch(ctx context.Context, id string) ApiCreatePortVlanAssignmentBatchRequest {
 	return ApiCreatePortVlanAssignmentBatchRequest{
@@ -879,7 +884,8 @@ func (a *PortsApiService) CreatePortVlanAssignmentBatch(ctx context.Context, id 
 }
 
 // Execute executes the request
-//  @return FindPortVlanAssignmentBatches200ResponseBatchesInner
+//
+//	@return FindPortVlanAssignmentBatches200ResponseBatchesInner
 func (a *PortsApiService) CreatePortVlanAssignmentBatchExecute(r ApiCreatePortVlanAssignmentBatchRequest) (*FindPortVlanAssignmentBatches200ResponseBatchesInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -899,8 +905,8 @@ func (a *PortsApiService) CreatePortVlanAssignmentBatchExecute(r ApiCreatePortVl
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createPortVlanAssignmentBatchRequest == nil {
+		return localVarReturnValue, nil, reportError("createPortVlanAssignmentBatchRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -921,7 +927,7 @@ func (a *PortsApiService) CreatePortVlanAssignmentBatchExecute(r ApiCreatePortVl
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createPortVlanAssignmentBatchRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1018,7 +1024,7 @@ type ApiDeleteNativeVlanRequest struct {
 	id         string
 }
 
-func (r ApiDeleteNativeVlanRequest) Execute() (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+func (r ApiDeleteNativeVlanRequest) Execute() (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	return r.ApiService.DeleteNativeVlanExecute(r)
 }
 
@@ -1027,9 +1033,9 @@ DeleteNativeVlan Remove native VLAN
 
 Removes the native VLAN from this port
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiDeleteNativeVlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiDeleteNativeVlanRequest
 */
 func (a *PortsApiService) DeleteNativeVlan(ctx context.Context, id string) ApiDeleteNativeVlanRequest {
 	return ApiDeleteNativeVlanRequest{
@@ -1040,13 +1046,14 @@ func (a *PortsApiService) DeleteNativeVlan(ctx context.Context, id string) ApiDe
 }
 
 // Execute executes the request
-//  @return FindDeviceById200ResponseNetworkPortsAllOf
-func (a *PortsApiService) DeleteNativeVlanExecute(r ApiDeleteNativeVlanRequest) (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInner
+func (a *PortsApiService) DeleteNativeVlanExecute(r ApiDeleteNativeVlanRequest) (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindDeviceById200ResponseNetworkPortsAllOf
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortsApiService.DeleteNativeVlan")
@@ -1171,7 +1178,7 @@ func (r ApiDisbondPortRequest) BulkDisable(bulkDisable bool) ApiDisbondPortReque
 	return r
 }
 
-func (r ApiDisbondPortRequest) Execute() (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+func (r ApiDisbondPortRequest) Execute() (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	return r.ApiService.DisbondPortExecute(r)
 }
 
@@ -1180,9 +1187,9 @@ DisbondPort Disabling bonding
 
 Disabling bonding for one or all ports
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiDisbondPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiDisbondPortRequest
 */
 func (a *PortsApiService) DisbondPort(ctx context.Context, id string) ApiDisbondPortRequest {
 	return ApiDisbondPortRequest{
@@ -1193,13 +1200,14 @@ func (a *PortsApiService) DisbondPort(ctx context.Context, id string) ApiDisbond
 }
 
 // Execute executes the request
-//  @return FindDeviceById200ResponseNetworkPortsAllOf
-func (a *PortsApiService) DisbondPortExecute(r ApiDisbondPortRequest) (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInner
+func (a *PortsApiService) DisbondPortExecute(r ApiDisbondPortRequest) (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindDeviceById200ResponseNetworkPortsAllOf
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortsApiService.DisbondPort")
@@ -1344,7 +1352,7 @@ func (r ApiFindPortByIdRequest) Exclude(exclude []string) ApiFindPortByIdRequest
 	return r
 }
 
-func (r ApiFindPortByIdRequest) Execute() (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+func (r ApiFindPortByIdRequest) Execute() (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	return r.ApiService.FindPortByIdExecute(r)
 }
 
@@ -1353,9 +1361,9 @@ FindPortById Retrieve a port
 
 Returns a port
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiFindPortByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiFindPortByIdRequest
 */
 func (a *PortsApiService) FindPortById(ctx context.Context, id string) ApiFindPortByIdRequest {
 	return ApiFindPortByIdRequest{
@@ -1366,13 +1374,14 @@ func (a *PortsApiService) FindPortById(ctx context.Context, id string) ApiFindPo
 }
 
 // Execute executes the request
-//  @return FindDeviceById200ResponseNetworkPortsAllOf
-func (a *PortsApiService) FindPortByIdExecute(r ApiFindPortByIdRequest) (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInner
+func (a *PortsApiService) FindPortByIdExecute(r ApiFindPortByIdRequest) (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindDeviceById200ResponseNetworkPortsAllOf
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortsApiService.FindPortById")
@@ -1496,10 +1505,10 @@ FindPortVlanAssignmentBatchByPortIdAndBatchId Retrieve a VLAN Assignment Batch's
 
 Returns the details of an existing Port-VLAN Assignment batch, including the list of VLANs to assign or unassign, and the current state of the batch.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @param batchId Batch ID
- @return ApiFindPortVlanAssignmentBatchByPortIdAndBatchIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@param batchId Batch ID
+	@return ApiFindPortVlanAssignmentBatchByPortIdAndBatchIdRequest
 */
 func (a *PortsApiService) FindPortVlanAssignmentBatchByPortIdAndBatchId(ctx context.Context, id string, batchId string) ApiFindPortVlanAssignmentBatchByPortIdAndBatchIdRequest {
 	return ApiFindPortVlanAssignmentBatchByPortIdAndBatchIdRequest{
@@ -1511,7 +1520,8 @@ func (a *PortsApiService) FindPortVlanAssignmentBatchByPortIdAndBatchId(ctx cont
 }
 
 // Execute executes the request
-//  @return FindPortVlanAssignmentBatches200ResponseBatchesInner
+//
+//	@return FindPortVlanAssignmentBatches200ResponseBatchesInner
 func (a *PortsApiService) FindPortVlanAssignmentBatchByPortIdAndBatchIdExecute(r ApiFindPortVlanAssignmentBatchByPortIdAndBatchIdRequest) (*FindPortVlanAssignmentBatches200ResponseBatchesInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1645,9 +1655,9 @@ FindPortVlanAssignmentBatches List the VLAN Assignment Batches for a port
 
 Show all the VLAN assignment batches that have been created for managing this port's VLAN assignments
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiFindPortVlanAssignmentBatchesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiFindPortVlanAssignmentBatchesRequest
 */
 func (a *PortsApiService) FindPortVlanAssignmentBatches(ctx context.Context, id string) ApiFindPortVlanAssignmentBatchesRequest {
 	return ApiFindPortVlanAssignmentBatchesRequest{
@@ -1658,7 +1668,8 @@ func (a *PortsApiService) FindPortVlanAssignmentBatches(ctx context.Context, id 
 }
 
 // Execute executes the request
-//  @return FindPortVlanAssignmentBatches200Response
+//
+//	@return FindPortVlanAssignmentBatches200Response
 func (a *PortsApiService) FindPortVlanAssignmentBatchesExecute(r ApiFindPortVlanAssignmentBatchesRequest) (*FindPortVlanAssignmentBatches200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1806,10 +1817,10 @@ FindPortVlanAssignmentByPortIdAndAssignmentId Show a particular Port VLAN assign
 
 Show the details of a specific Port-VLAN assignment, including the current state and if the VLAN is set as native.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @param assignmentId Assignment ID
- @return ApiFindPortVlanAssignmentByPortIdAndAssignmentIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@param assignmentId Assignment ID
+	@return ApiFindPortVlanAssignmentByPortIdAndAssignmentIdRequest
 */
 func (a *PortsApiService) FindPortVlanAssignmentByPortIdAndAssignmentId(ctx context.Context, id string, assignmentId string) ApiFindPortVlanAssignmentByPortIdAndAssignmentIdRequest {
 	return ApiFindPortVlanAssignmentByPortIdAndAssignmentIdRequest{
@@ -1821,7 +1832,8 @@ func (a *PortsApiService) FindPortVlanAssignmentByPortIdAndAssignmentId(ctx cont
 }
 
 // Execute executes the request
-//  @return FindPortVlanAssignments200ResponseVlanAssignmentsInner
+//
+//	@return FindPortVlanAssignments200ResponseVlanAssignmentsInner
 func (a *PortsApiService) FindPortVlanAssignmentByPortIdAndAssignmentIdExecute(r ApiFindPortVlanAssignmentByPortIdAndAssignmentIdRequest) (*FindPortVlanAssignments200ResponseVlanAssignmentsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1991,9 +2003,9 @@ FindPortVlanAssignments List Current VLAN assignments for a port
 
 Show the port's current VLAN assignments, including if this VLAN is set as native, and the current state of the assignment (ex. 'assigned' or 'unassigning')
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiFindPortVlanAssignmentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiFindPortVlanAssignmentsRequest
 */
 func (a *PortsApiService) FindPortVlanAssignments(ctx context.Context, id string) ApiFindPortVlanAssignmentsRequest {
 	return ApiFindPortVlanAssignmentsRequest{
@@ -2004,7 +2016,8 @@ func (a *PortsApiService) FindPortVlanAssignments(ctx context.Context, id string
 }
 
 // Execute executes the request
-//  @return FindPortVlanAssignments200Response
+//
+//	@return FindPortVlanAssignments200Response
 func (a *PortsApiService) FindPortVlanAssignmentsExecute(r ApiFindPortVlanAssignmentsRequest) (*FindPortVlanAssignments200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2145,19 +2158,19 @@ func (a *PortsApiService) FindPortVlanAssignmentsExecute(r ApiFindPortVlanAssign
 }
 
 type ApiUnassignPortRequest struct {
-	ctx        context.Context
-	ApiService *PortsApiService
-	id         string
-	body       *AssignPortRequest
+	ctx               context.Context
+	ApiService        *PortsApiService
+	id                string
+	assignPortRequest *AssignPortRequest
 }
 
 // Virtual Network ID. May be the UUID of the Virtual Network record, or the VLAN value itself (ex: &#39;1001&#39;).
-func (r ApiUnassignPortRequest) Body(body AssignPortRequest) ApiUnassignPortRequest {
-	r.body = &body
+func (r ApiUnassignPortRequest) AssignPortRequest(assignPortRequest AssignPortRequest) ApiUnassignPortRequest {
+	r.assignPortRequest = &assignPortRequest
 	return r
 }
 
-func (r ApiUnassignPortRequest) Execute() (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+func (r ApiUnassignPortRequest) Execute() (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	return r.ApiService.UnassignPortExecute(r)
 }
 
@@ -2166,9 +2179,9 @@ UnassignPort Unassign a port
 
 Unassign a port for a hardware.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Port UUID
- @return ApiUnassignPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Port UUID
+	@return ApiUnassignPortRequest
 */
 func (a *PortsApiService) UnassignPort(ctx context.Context, id string) ApiUnassignPortRequest {
 	return ApiUnassignPortRequest{
@@ -2179,13 +2192,14 @@ func (a *PortsApiService) UnassignPort(ctx context.Context, id string) ApiUnassi
 }
 
 // Execute executes the request
-//  @return FindDeviceById200ResponseNetworkPortsAllOf
-func (a *PortsApiService) UnassignPortExecute(r ApiUnassignPortRequest) (*FindDeviceById200ResponseNetworkPortsAllOf, *http.Response, error) {
+//
+//	@return FindDeviceById200ResponseNetworkPortsInner
+func (a *PortsApiService) UnassignPortExecute(r ApiUnassignPortRequest) (*FindDeviceById200ResponseNetworkPortsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindDeviceById200ResponseNetworkPortsAllOf
+		localVarReturnValue *FindDeviceById200ResponseNetworkPortsInner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortsApiService.UnassignPort")
@@ -2199,8 +2213,8 @@ func (a *PortsApiService) UnassignPortExecute(r ApiUnassignPortRequest) (*FindDe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.assignPortRequest == nil {
+		return localVarReturnValue, nil, reportError("assignPortRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2221,7 +2235,7 @@ func (a *PortsApiService) UnassignPortExecute(r ApiUnassignPortRequest) (*FindDe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.assignPortRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

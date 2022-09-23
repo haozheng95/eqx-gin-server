@@ -17,7 +17,7 @@ import (
 
 // GetInterconnection200ResponsePortsInnerVirtualCircuits struct for GetInterconnection200ResponsePortsInnerVirtualCircuits
 type GetInterconnection200ResponsePortsInnerVirtualCircuits struct {
-	VirtualCircuits []map[string]interface{} `json:"virtual_circuits,omitempty"`
+	VirtualCircuits []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner `json:"virtual_circuits,omitempty"`
 }
 
 // NewGetInterconnection200ResponsePortsInnerVirtualCircuits instantiates a new GetInterconnection200ResponsePortsInnerVirtualCircuits object
@@ -38,9 +38,9 @@ func NewGetInterconnection200ResponsePortsInnerVirtualCircuitsWithDefaults() *Ge
 }
 
 // GetVirtualCircuits returns the VirtualCircuits field value if set, zero value otherwise.
-func (o *GetInterconnection200ResponsePortsInnerVirtualCircuits) GetVirtualCircuits() []map[string]interface{} {
+func (o *GetInterconnection200ResponsePortsInnerVirtualCircuits) GetVirtualCircuits() []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner {
 	if o == nil || o.VirtualCircuits == nil {
-		var ret []map[string]interface{}
+		var ret []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner
 		return ret
 	}
 	return o.VirtualCircuits
@@ -48,7 +48,7 @@ func (o *GetInterconnection200ResponsePortsInnerVirtualCircuits) GetVirtualCircu
 
 // GetVirtualCircuitsOk returns a tuple with the VirtualCircuits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetInterconnection200ResponsePortsInnerVirtualCircuits) GetVirtualCircuitsOk() ([]map[string]interface{}, bool) {
+func (o *GetInterconnection200ResponsePortsInnerVirtualCircuits) GetVirtualCircuitsOk() ([]GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner, bool) {
 	if o == nil || o.VirtualCircuits == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *GetInterconnection200ResponsePortsInnerVirtualCircuits) HasVirtualCircu
 	return false
 }
 
-// SetVirtualCircuits gets a reference to the given []map[string]interface{} and assigns it to the VirtualCircuits field.
-func (o *GetInterconnection200ResponsePortsInnerVirtualCircuits) SetVirtualCircuits(v []map[string]interface{}) {
+// SetVirtualCircuits gets a reference to the given []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner and assigns it to the VirtualCircuits field.
+func (o *GetInterconnection200ResponsePortsInnerVirtualCircuits) SetVirtualCircuits(v []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner) {
 	o.VirtualCircuits = v
 }
 

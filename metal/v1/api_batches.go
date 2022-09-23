@@ -24,15 +24,15 @@ import (
 type BatchesApiService service
 
 type ApiCreateDeviceBatchRequest struct {
-	ctx        context.Context
-	ApiService *BatchesApiService
-	id         string
-	body       *CreateDeviceBatchRequest
+	ctx                      context.Context
+	ApiService               *BatchesApiService
+	id                       string
+	createDeviceBatchRequest *CreateDeviceBatchRequest
 }
 
 // Batches to create
-func (r ApiCreateDeviceBatchRequest) Body(body CreateDeviceBatchRequest) ApiCreateDeviceBatchRequest {
-	r.body = &body
+func (r ApiCreateDeviceBatchRequest) CreateDeviceBatchRequest(createDeviceBatchRequest CreateDeviceBatchRequest) ApiCreateDeviceBatchRequest {
+	r.createDeviceBatchRequest = &createDeviceBatchRequest
 	return r
 }
 
@@ -81,9 +81,9 @@ For example, `{ "ip_addresses": [..., {"address_family": 4, "public": true, "ip_
 
 To access a server without public IPs, you can use our Out-of-Band console access (SOS) or use another server with public IPs as a proxy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiCreateDeviceBatchRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiCreateDeviceBatchRequest
 */
 func (a *BatchesApiService) CreateDeviceBatch(ctx context.Context, id string) ApiCreateDeviceBatchRequest {
 	return ApiCreateDeviceBatchRequest{
@@ -94,7 +94,8 @@ func (a *BatchesApiService) CreateDeviceBatch(ctx context.Context, id string) Ap
 }
 
 // Execute executes the request
-//  @return FindBatchesByProject200Response
+//
+//	@return FindBatchesByProject200Response
 func (a *BatchesApiService) CreateDeviceBatchExecute(r ApiCreateDeviceBatchRequest) (*FindBatchesByProject200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -114,8 +115,8 @@ func (a *BatchesApiService) CreateDeviceBatchExecute(r ApiCreateDeviceBatchReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createDeviceBatchRequest == nil {
+		return localVarReturnValue, nil, reportError("createDeviceBatchRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -136,7 +137,7 @@ func (a *BatchesApiService) CreateDeviceBatchExecute(r ApiCreateDeviceBatchReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createDeviceBatchRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -249,9 +250,9 @@ DeleteBatch Delete the Batch
 
 Deletes the Batch.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Batch UUID
- @return ApiDeleteBatchRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Batch UUID
+	@return ApiDeleteBatchRequest
 */
 func (a *BatchesApiService) DeleteBatch(ctx context.Context, id string) ApiDeleteBatchRequest {
 	return ApiDeleteBatchRequest{
@@ -391,9 +392,9 @@ FindBatchById Retrieve a Batch
 
 Returns a Batch
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Batch UUID
- @return ApiFindBatchByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Batch UUID
+	@return ApiFindBatchByIdRequest
 */
 func (a *BatchesApiService) FindBatchById(ctx context.Context, id string) ApiFindBatchByIdRequest {
 	return ApiFindBatchByIdRequest{
@@ -404,7 +405,8 @@ func (a *BatchesApiService) FindBatchById(ctx context.Context, id string) ApiFin
 }
 
 // Execute executes the request
-//  @return FindBatchById200Response
+//
+//	@return FindBatchById200Response
 func (a *BatchesApiService) FindBatchByIdExecute(r ApiFindBatchByIdRequest) (*FindBatchById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -547,9 +549,9 @@ FindBatchesByProject Retrieve all batches by project
 
 Returns all batches for the given project
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiFindBatchesByProjectRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiFindBatchesByProjectRequest
 */
 func (a *BatchesApiService) FindBatchesByProject(ctx context.Context, id string) ApiFindBatchesByProjectRequest {
 	return ApiFindBatchesByProjectRequest{
@@ -560,7 +562,8 @@ func (a *BatchesApiService) FindBatchesByProject(ctx context.Context, id string)
 }
 
 // Execute executes the request
-//  @return FindBatchesByProject200Response
+//
+//	@return FindBatchesByProject200Response
 func (a *BatchesApiService) FindBatchesByProjectExecute(r ApiFindBatchesByProjectRequest) (*FindBatchesByProject200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

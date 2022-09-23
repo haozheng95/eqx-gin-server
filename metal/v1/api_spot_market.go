@@ -24,15 +24,15 @@ import (
 type SpotMarketApiService service
 
 type ApiCreateSpotMarketRequestRequest struct {
-	ctx        context.Context
-	ApiService *SpotMarketApiService
-	id         string
-	body       *CreateSpotMarketRequestRequest
+	ctx                            context.Context
+	ApiService                     *SpotMarketApiService
+	id                             string
+	createSpotMarketRequestRequest *CreateSpotMarketRequestRequest
 }
 
 // Spot Market Request to create
-func (r ApiCreateSpotMarketRequestRequest) Body(body CreateSpotMarketRequestRequest) ApiCreateSpotMarketRequestRequest {
-	r.body = &body
+func (r ApiCreateSpotMarketRequestRequest) CreateSpotMarketRequestRequest(createSpotMarketRequestRequest CreateSpotMarketRequestRequest) ApiCreateSpotMarketRequestRequest {
+	r.createSpotMarketRequestRequest = &createSpotMarketRequestRequest
 	return r
 }
 
@@ -53,9 +53,9 @@ The request will fail if there are no available servers matching your criteria. 
 
 The request will not fail if we have no servers with that feature in our inventory.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiCreateSpotMarketRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiCreateSpotMarketRequestRequest
 */
 func (a *SpotMarketApiService) CreateSpotMarketRequest(ctx context.Context, id string) ApiCreateSpotMarketRequestRequest {
 	return ApiCreateSpotMarketRequestRequest{
@@ -66,7 +66,8 @@ func (a *SpotMarketApiService) CreateSpotMarketRequest(ctx context.Context, id s
 }
 
 // Execute executes the request
-//  @return ListSpotMarketRequests200ResponseSpotMarketRequestsInner
+//
+//	@return ListSpotMarketRequests200ResponseSpotMarketRequestsInner
 func (a *SpotMarketApiService) CreateSpotMarketRequestExecute(r ApiCreateSpotMarketRequestRequest) (*ListSpotMarketRequests200ResponseSpotMarketRequestsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -86,8 +87,8 @@ func (a *SpotMarketApiService) CreateSpotMarketRequestExecute(r ApiCreateSpotMar
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createSpotMarketRequestRequest == nil {
+		return localVarReturnValue, nil, reportError("createSpotMarketRequestRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -108,7 +109,7 @@ func (a *SpotMarketApiService) CreateSpotMarketRequestExecute(r ApiCreateSpotMar
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createSpotMarketRequestRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -211,9 +212,9 @@ DeleteSpotMarketRequest Delete the spot market request
 
 Deletes the spot market request.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id SpotMarketRequest UUID
- @return ApiDeleteSpotMarketRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id SpotMarketRequest UUID
+	@return ApiDeleteSpotMarketRequestRequest
 */
 func (a *SpotMarketApiService) DeleteSpotMarketRequest(ctx context.Context, id string) ApiDeleteSpotMarketRequestRequest {
 	return ApiDeleteSpotMarketRequestRequest{
@@ -362,8 +363,8 @@ FindMetroSpotMarketPrices Get current spot market prices for metros
 
 Get Equinix Metal current spot market prices for all metros.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindMetroSpotMarketPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindMetroSpotMarketPricesRequest
 */
 func (a *SpotMarketApiService) FindMetroSpotMarketPrices(ctx context.Context) ApiFindMetroSpotMarketPricesRequest {
 	return ApiFindMetroSpotMarketPricesRequest{
@@ -373,7 +374,8 @@ func (a *SpotMarketApiService) FindMetroSpotMarketPrices(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return FindMetroSpotMarketPrices200Response
+//
+//	@return FindMetroSpotMarketPrices200Response
 func (a *SpotMarketApiService) FindMetroSpotMarketPricesExecute(r ApiFindMetroSpotMarketPricesRequest) (*FindMetroSpotMarketPrices200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -514,8 +516,8 @@ FindSpotMarketPrices Get current spot market prices
 
 Get Equinix Metal current spot market prices.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindSpotMarketPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindSpotMarketPricesRequest
 */
 func (a *SpotMarketApiService) FindSpotMarketPrices(ctx context.Context) ApiFindSpotMarketPricesRequest {
 	return ApiFindSpotMarketPricesRequest{
@@ -525,7 +527,8 @@ func (a *SpotMarketApiService) FindSpotMarketPrices(ctx context.Context) ApiFind
 }
 
 // Execute executes the request
-//  @return FindSpotMarketPrices200Response
+//
+//	@return FindSpotMarketPrices200Response
 func (a *SpotMarketApiService) FindSpotMarketPricesExecute(r ApiFindSpotMarketPricesRequest) (*FindSpotMarketPrices200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -685,12 +688,12 @@ func (r ApiFindSpotMarketPricesHistoryRequest) Execute() (*FindSpotMarketPricesH
 /*
 FindSpotMarketPricesHistory Get spot market prices for a given period of time
 
-Get spot market prices for a given plan and facility in a fixed period of time
+# Get spot market prices for a given plan and facility in a fixed period of time
 
 *Note: In the `200` response, the property `datapoints` contains arrays of `[float, integer]`.*
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindSpotMarketPricesHistoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindSpotMarketPricesHistoryRequest
 */
 func (a *SpotMarketApiService) FindSpotMarketPricesHistory(ctx context.Context) ApiFindSpotMarketPricesHistoryRequest {
 	return ApiFindSpotMarketPricesHistoryRequest{
@@ -700,7 +703,8 @@ func (a *SpotMarketApiService) FindSpotMarketPricesHistory(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return FindSpotMarketPricesHistory200Response
+//
+//	@return FindSpotMarketPricesHistory200Response
 func (a *SpotMarketApiService) FindSpotMarketPricesHistoryExecute(r ApiFindSpotMarketPricesHistoryRequest) (*FindSpotMarketPricesHistory200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -855,9 +859,9 @@ FindSpotMarketRequestById Retrieve a spot market request
 
 Returns a single spot market request
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id SpotMarketRequest UUID
- @return ApiFindSpotMarketRequestByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id SpotMarketRequest UUID
+	@return ApiFindSpotMarketRequestByIdRequest
 */
 func (a *SpotMarketApiService) FindSpotMarketRequestById(ctx context.Context, id string) ApiFindSpotMarketRequestByIdRequest {
 	return ApiFindSpotMarketRequestByIdRequest{
@@ -868,7 +872,8 @@ func (a *SpotMarketApiService) FindSpotMarketRequestById(ctx context.Context, id
 }
 
 // Execute executes the request
-//  @return ListSpotMarketRequests200ResponseSpotMarketRequestsInner
+//
+//	@return ListSpotMarketRequests200ResponseSpotMarketRequestsInner
 func (a *SpotMarketApiService) FindSpotMarketRequestByIdExecute(r ApiFindSpotMarketRequestByIdRequest) (*ListSpotMarketRequests200ResponseSpotMarketRequestsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1007,9 +1012,9 @@ ListSpotMarketRequests List spot market requests
 
 View all spot market requests for a given project.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiListSpotMarketRequestsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiListSpotMarketRequestsRequest
 */
 func (a *SpotMarketApiService) ListSpotMarketRequests(ctx context.Context, id string) ApiListSpotMarketRequestsRequest {
 	return ApiListSpotMarketRequestsRequest{
@@ -1020,7 +1025,8 @@ func (a *SpotMarketApiService) ListSpotMarketRequests(ctx context.Context, id st
 }
 
 // Execute executes the request
-//  @return ListSpotMarketRequests200Response
+//
+//	@return ListSpotMarketRequests200Response
 func (a *SpotMarketApiService) ListSpotMarketRequestsExecute(r ApiListSpotMarketRequestsRequest) (*ListSpotMarketRequests200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

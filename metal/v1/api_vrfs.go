@@ -25,19 +25,19 @@ import (
 type VRFsApiService service
 
 type ApiCreateVrfRequest struct {
-	ctx        context.Context
-	ApiService *VRFsApiService
-	id         string
-	body       *CreateVrfRequest
+	ctx              context.Context
+	ApiService       *VRFsApiService
+	id               string
+	createVrfRequest *CreateVrfRequest
 }
 
 // VRF to create
-func (r ApiCreateVrfRequest) Body(body CreateVrfRequest) ApiCreateVrfRequest {
-	r.body = &body
+func (r ApiCreateVrfRequest) CreateVrfRequest(createVrfRequest CreateVrfRequest) ApiCreateVrfRequest {
+	r.createVrfRequest = &createVrfRequest
 	return r
 }
 
-func (r ApiCreateVrfRequest) Execute() (*FindVrfs200ResponseVrfsInner, *http.Response, error) {
+func (r ApiCreateVrfRequest) Execute() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf, *http.Response, error) {
 	return r.ApiService.CreateVrfExecute(r)
 }
 
@@ -46,9 +46,9 @@ CreateVrf Create a new VRF in the specified project
 
 Creates a new VRF in the specified project
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiCreateVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiCreateVrfRequest
 */
 func (a *VRFsApiService) CreateVrf(ctx context.Context, id string) ApiCreateVrfRequest {
 	return ApiCreateVrfRequest{
@@ -59,13 +59,14 @@ func (a *VRFsApiService) CreateVrf(ctx context.Context, id string) ApiCreateVrfR
 }
 
 // Execute executes the request
-//  @return FindVrfs200ResponseVrfsInner
-func (a *VRFsApiService) CreateVrfExecute(r ApiCreateVrfRequest) (*FindVrfs200ResponseVrfsInner, *http.Response, error) {
+//
+//	@return GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf
+func (a *VRFsApiService) CreateVrfExecute(r ApiCreateVrfRequest) (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindVrfs200ResponseVrfsInner
+		localVarReturnValue *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VRFsApiService.CreateVrf")
@@ -79,8 +80,8 @@ func (a *VRFsApiService) CreateVrfExecute(r ApiCreateVrfRequest) (*FindVrfs200Re
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createVrfRequest == nil {
+		return localVarReturnValue, nil, reportError("createVrfRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -101,7 +102,7 @@ func (a *VRFsApiService) CreateVrfExecute(r ApiCreateVrfRequest) (*FindVrfs200Re
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createVrfRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -197,9 +198,9 @@ DeleteVrf Delete the VRF
 
 Deletes the VRF
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id VRF UUID
- @return ApiDeleteVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id VRF UUID
+	@return ApiDeleteVrfRequest
 */
 func (a *VRFsApiService) DeleteVrf(ctx context.Context, id string) ApiDeleteVrfRequest {
 	return ApiDeleteVrfRequest{
@@ -337,7 +338,7 @@ func (r ApiFindVrfByIdRequest) Exclude(exclude []string) ApiFindVrfByIdRequest {
 	return r
 }
 
-func (r ApiFindVrfByIdRequest) Execute() (*FindVrfs200ResponseVrfsInner, *http.Response, error) {
+func (r ApiFindVrfByIdRequest) Execute() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf, *http.Response, error) {
 	return r.ApiService.FindVrfByIdExecute(r)
 }
 
@@ -346,9 +347,9 @@ FindVrfById Retrieve a VRF
 
 Returns a single VRF resource
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id VRF UUID
- @return ApiFindVrfByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id VRF UUID
+	@return ApiFindVrfByIdRequest
 */
 func (a *VRFsApiService) FindVrfById(ctx context.Context, id string) ApiFindVrfByIdRequest {
 	return ApiFindVrfByIdRequest{
@@ -359,13 +360,14 @@ func (a *VRFsApiService) FindVrfById(ctx context.Context, id string) ApiFindVrfB
 }
 
 // Execute executes the request
-//  @return FindVrfs200ResponseVrfsInner
-func (a *VRFsApiService) FindVrfByIdExecute(r ApiFindVrfByIdRequest) (*FindVrfs200ResponseVrfsInner, *http.Response, error) {
+//
+//	@return GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf
+func (a *VRFsApiService) FindVrfByIdExecute(r ApiFindVrfByIdRequest) (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindVrfs200ResponseVrfsInner
+		localVarReturnValue *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VRFsApiService.FindVrfById")
@@ -512,9 +514,9 @@ FindVrfIpReservations Retrieve all VRF IP Reservations in the VRF
 
 Returns the list of VRF IP Reservations for the VRF.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id VRF UUID
- @return ApiFindVrfIpReservationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id VRF UUID
+	@return ApiFindVrfIpReservationsRequest
 */
 func (a *VRFsApiService) FindVrfIpReservations(ctx context.Context, id string) ApiFindVrfIpReservationsRequest {
 	return ApiFindVrfIpReservationsRequest{
@@ -525,7 +527,8 @@ func (a *VRFsApiService) FindVrfIpReservations(ctx context.Context, id string) A
 }
 
 // Execute executes the request
-//  @return FindVrfIpReservations200Response
+//
+//	@return FindVrfIpReservations200Response
 func (a *VRFsApiService) FindVrfIpReservationsExecute(r ApiFindVrfIpReservationsRequest) (*FindVrfIpReservations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -691,9 +694,9 @@ FindVrfs Retrieve all VRFs in the project
 
 Returns the list of VRFs for a single project.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiFindVrfsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiFindVrfsRequest
 */
 func (a *VRFsApiService) FindVrfs(ctx context.Context, id string) ApiFindVrfsRequest {
 	return ApiFindVrfsRequest{
@@ -704,7 +707,8 @@ func (a *VRFsApiService) FindVrfs(ctx context.Context, id string) ApiFindVrfsReq
 }
 
 // Execute executes the request
-//  @return FindVrfs200Response
+//
+//	@return FindVrfs200Response
 func (a *VRFsApiService) FindVrfsExecute(r ApiFindVrfsRequest) (*FindVrfs200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -822,19 +826,19 @@ func (a *VRFsApiService) FindVrfsExecute(r ApiFindVrfsRequest) (*FindVrfs200Resp
 }
 
 type ApiUpdateVrfRequest struct {
-	ctx        context.Context
-	ApiService *VRFsApiService
-	id         string
-	body       *UpdateVrfRequest
+	ctx              context.Context
+	ApiService       *VRFsApiService
+	id               string
+	updateVrfRequest *UpdateVrfRequest
 }
 
 // VRF to update
-func (r ApiUpdateVrfRequest) Body(body UpdateVrfRequest) ApiUpdateVrfRequest {
-	r.body = &body
+func (r ApiUpdateVrfRequest) UpdateVrfRequest(updateVrfRequest UpdateVrfRequest) ApiUpdateVrfRequest {
+	r.updateVrfRequest = &updateVrfRequest
 	return r
 }
 
-func (r ApiUpdateVrfRequest) Execute() (*FindVrfs200ResponseVrfsInner, *http.Response, error) {
+func (r ApiUpdateVrfRequest) Execute() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf, *http.Response, error) {
 	return r.ApiService.UpdateVrfExecute(r)
 }
 
@@ -843,9 +847,9 @@ UpdateVrf Update the VRF
 
 Updates the VRF.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id VRF UUID
- @return ApiUpdateVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id VRF UUID
+	@return ApiUpdateVrfRequest
 */
 func (a *VRFsApiService) UpdateVrf(ctx context.Context, id string) ApiUpdateVrfRequest {
 	return ApiUpdateVrfRequest{
@@ -856,13 +860,14 @@ func (a *VRFsApiService) UpdateVrf(ctx context.Context, id string) ApiUpdateVrfR
 }
 
 // Execute executes the request
-//  @return FindVrfs200ResponseVrfsInner
-func (a *VRFsApiService) UpdateVrfExecute(r ApiUpdateVrfRequest) (*FindVrfs200ResponseVrfsInner, *http.Response, error) {
+//
+//	@return GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf
+func (a *VRFsApiService) UpdateVrfExecute(r ApiUpdateVrfRequest) (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindVrfs200ResponseVrfsInner
+		localVarReturnValue *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VRFsApiService.UpdateVrf")
@@ -876,8 +881,8 @@ func (a *VRFsApiService) UpdateVrfExecute(r ApiUpdateVrfRequest) (*FindVrfs200Re
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.updateVrfRequest == nil {
+		return localVarReturnValue, nil, reportError("updateVrfRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -898,7 +903,7 @@ func (a *VRFsApiService) UpdateVrfExecute(r ApiUpdateVrfRequest) (*FindVrfs200Re
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.updateVrfRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

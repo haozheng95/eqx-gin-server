@@ -24,18 +24,18 @@ import (
 type UsersApiService service
 
 type ApiCreateUserRequest struct {
-	ctx        context.Context
-	ApiService *UsersApiService
-	body       *CreateUserRequest
+	ctx               context.Context
+	ApiService        *UsersApiService
+	createUserRequest *CreateUserRequest
 }
 
 // User to create
-func (r ApiCreateUserRequest) Body(body CreateUserRequest) ApiCreateUserRequest {
-	r.body = &body
+func (r ApiCreateUserRequest) CreateUserRequest(createUserRequest CreateUserRequest) ApiCreateUserRequest {
+	r.createUserRequest = &createUserRequest
 	return r
 }
 
-func (r ApiCreateUserRequest) Execute() (*FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf, *http.Response, error) {
+func (r ApiCreateUserRequest) Execute() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy, *http.Response, error) {
 	return r.ApiService.CreateUserExecute(r)
 }
 
@@ -44,8 +44,8 @@ CreateUser Create a user
 
 Creates a user.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateUserRequest
 */
 func (a *UsersApiService) CreateUser(ctx context.Context) ApiCreateUserRequest {
 	return ApiCreateUserRequest{
@@ -55,13 +55,14 @@ func (a *UsersApiService) CreateUser(ctx context.Context) ApiCreateUserRequest {
 }
 
 // Execute executes the request
-//  @return FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf
-func (a *UsersApiService) CreateUserExecute(r ApiCreateUserRequest) (*FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf, *http.Response, error) {
+//
+//	@return GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy
+func (a *UsersApiService) CreateUserExecute(r ApiCreateUserRequest) (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf
+		localVarReturnValue *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.CreateUser")
@@ -74,8 +75,8 @@ func (a *UsersApiService) CreateUserExecute(r ApiCreateUserRequest) (*FindProjec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createUserRequest == nil {
+		return localVarReturnValue, nil, reportError("createUserRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -96,7 +97,7 @@ func (a *UsersApiService) CreateUserExecute(r ApiCreateUserRequest) (*FindProjec
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createUserRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -186,7 +187,7 @@ func (r ApiFindCurrentUserRequest) Exclude(exclude []string) ApiFindCurrentUserR
 	return r
 }
 
-func (r ApiFindCurrentUserRequest) Execute() (*FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf, *http.Response, error) {
+func (r ApiFindCurrentUserRequest) Execute() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy, *http.Response, error) {
 	return r.ApiService.FindCurrentUserExecute(r)
 }
 
@@ -195,8 +196,8 @@ FindCurrentUser Retrieve the current user
 
 Returns the user object for the currently logged-in user.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindCurrentUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindCurrentUserRequest
 */
 func (a *UsersApiService) FindCurrentUser(ctx context.Context) ApiFindCurrentUserRequest {
 	return ApiFindCurrentUserRequest{
@@ -206,13 +207,14 @@ func (a *UsersApiService) FindCurrentUser(ctx context.Context) ApiFindCurrentUse
 }
 
 // Execute executes the request
-//  @return FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf
-func (a *UsersApiService) FindCurrentUserExecute(r ApiFindCurrentUserRequest) (*FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf, *http.Response, error) {
+//
+//	@return GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy
+func (a *UsersApiService) FindCurrentUserExecute(r ApiFindCurrentUserRequest) (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf
+		localVarReturnValue *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.FindCurrentUser")
@@ -351,8 +353,8 @@ FindInvitations Retrieve current user invitations
 
 Returns all invitations in current user.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindInvitationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindInvitationsRequest
 */
 func (a *UsersApiService) FindInvitations(ctx context.Context) ApiFindInvitationsRequest {
 	return ApiFindInvitationsRequest{
@@ -362,7 +364,8 @@ func (a *UsersApiService) FindInvitations(ctx context.Context) ApiFindInvitation
 }
 
 // Execute executes the request
-//  @return FindInvitations200Response
+//
+//	@return FindInvitations200Response
 func (a *UsersApiService) FindInvitationsExecute(r ApiFindInvitationsRequest) (*FindInvitations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -511,7 +514,7 @@ func (r ApiFindUserByIdRequest) Exclude(exclude []string) ApiFindUserByIdRequest
 	return r
 }
 
-func (r ApiFindUserByIdRequest) Execute() (*FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf, *http.Response, error) {
+func (r ApiFindUserByIdRequest) Execute() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy, *http.Response, error) {
 	return r.ApiService.FindUserByIdExecute(r)
 }
 
@@ -520,9 +523,9 @@ FindUserById Retrieve a user
 
 Returns a single user if the user has access
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id User UUID
- @return ApiFindUserByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id User UUID
+	@return ApiFindUserByIdRequest
 */
 func (a *UsersApiService) FindUserById(ctx context.Context, id string) ApiFindUserByIdRequest {
 	return ApiFindUserByIdRequest{
@@ -533,13 +536,14 @@ func (a *UsersApiService) FindUserById(ctx context.Context, id string) ApiFindUs
 }
 
 // Execute executes the request
-//  @return FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf
-func (a *UsersApiService) FindUserByIdExecute(r ApiFindUserByIdRequest) (*FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf, *http.Response, error) {
+//
+//	@return GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy
+func (a *UsersApiService) FindUserByIdExecute(r ApiFindUserByIdRequest) (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf
+		localVarReturnValue *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.FindUserById")
@@ -672,9 +676,9 @@ FindUserCustomdata Retrieve the custom metadata of a user
 
 Provides the custom metadata stored for this user in json format
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id User UUID
- @return ApiFindUserCustomdataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id User UUID
+	@return ApiFindUserCustomdataRequest
 */
 func (a *UsersApiService) FindUserCustomdata(ctx context.Context, id string) ApiFindUserCustomdataRequest {
 	return ApiFindUserCustomdataRequest{
@@ -834,8 +838,8 @@ FindUsers Retrieve all users
 
 Returns a list of users that the are accessible to the current user (all users in the current user’s projects, essentially).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindUsersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindUsersRequest
 */
 func (a *UsersApiService) FindUsers(ctx context.Context) ApiFindUsersRequest {
 	return ApiFindUsersRequest{
@@ -845,7 +849,8 @@ func (a *UsersApiService) FindUsers(ctx context.Context) ApiFindUsersRequest {
 }
 
 // Execute executes the request
-//  @return FindUsers200Response
+//
+//	@return FindUsers200Response
 func (a *UsersApiService) FindUsersExecute(r ApiFindUsersRequest) (*FindUsers200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -955,18 +960,18 @@ func (a *UsersApiService) FindUsersExecute(r ApiFindUsersRequest) (*FindUsers200
 }
 
 type ApiUpdateCurrentUserRequest struct {
-	ctx        context.Context
-	ApiService *UsersApiService
-	body       *UpdateCurrentUserRequest
+	ctx                      context.Context
+	ApiService               *UsersApiService
+	updateCurrentUserRequest *UpdateCurrentUserRequest
 }
 
 // User to update
-func (r ApiUpdateCurrentUserRequest) Body(body UpdateCurrentUserRequest) ApiUpdateCurrentUserRequest {
-	r.body = &body
+func (r ApiUpdateCurrentUserRequest) UpdateCurrentUserRequest(updateCurrentUserRequest UpdateCurrentUserRequest) ApiUpdateCurrentUserRequest {
+	r.updateCurrentUserRequest = &updateCurrentUserRequest
 	return r
 }
 
-func (r ApiUpdateCurrentUserRequest) Execute() (*FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf, *http.Response, error) {
+func (r ApiUpdateCurrentUserRequest) Execute() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy, *http.Response, error) {
 	return r.ApiService.UpdateCurrentUserExecute(r)
 }
 
@@ -975,8 +980,8 @@ UpdateCurrentUser Update the current user
 
 Updates the currently logged-in user.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateCurrentUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateCurrentUserRequest
 */
 func (a *UsersApiService) UpdateCurrentUser(ctx context.Context) ApiUpdateCurrentUserRequest {
 	return ApiUpdateCurrentUserRequest{
@@ -986,13 +991,14 @@ func (a *UsersApiService) UpdateCurrentUser(ctx context.Context) ApiUpdateCurren
 }
 
 // Execute executes the request
-//  @return FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf
-func (a *UsersApiService) UpdateCurrentUserExecute(r ApiUpdateCurrentUserRequest) (*FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf, *http.Response, error) {
+//
+//	@return GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy
+func (a *UsersApiService) UpdateCurrentUserExecute(r ApiUpdateCurrentUserRequest) (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf
+		localVarReturnValue *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.UpdateCurrentUser")
@@ -1005,8 +1011,8 @@ func (a *UsersApiService) UpdateCurrentUserExecute(r ApiUpdateCurrentUserRequest
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.updateCurrentUserRequest == nil {
+		return localVarReturnValue, nil, reportError("updateCurrentUserRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1027,7 +1033,7 @@ func (a *UsersApiService) UpdateCurrentUserExecute(r ApiUpdateCurrentUserRequest
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.updateCurrentUserRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

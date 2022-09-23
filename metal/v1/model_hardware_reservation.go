@@ -26,9 +26,9 @@ type HardwareReservation struct {
 	Href       *string                            `json:"href,omitempty"`
 	Id         *string                            `json:"id,omitempty"`
 	// Whether this Device requires assistance from Metal Equinix.
-	NeedOfService *bool                                      `json:"need_of_service,omitempty"`
-	Plan          *FindDeviceById200ResponsePlan             `json:"plan,omitempty"`
-	Project       *MoveHardwareReservation201ResponseProject `json:"project,omitempty"`
+	NeedOfService *bool                                                                                       `json:"need_of_service,omitempty"`
+	Plan          *FindDeviceById200ResponsePlan                                                              `json:"plan,omitempty"`
+	Project       *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject `json:"project,omitempty"`
 	// Whether the reserved server is provisionable or not. Spare devices can't be provisioned unless they are activated first.
 	Provisionable *bool `json:"provisionable,omitempty"`
 	// Short version of the ID.
@@ -313,9 +313,9 @@ func (o *HardwareReservation) SetPlan(v FindDeviceById200ResponsePlan) {
 }
 
 // GetProject returns the Project field value if set, zero value otherwise.
-func (o *HardwareReservation) GetProject() MoveHardwareReservation201ResponseProject {
+func (o *HardwareReservation) GetProject() GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject {
 	if o == nil || o.Project == nil {
-		var ret MoveHardwareReservation201ResponseProject
+		var ret GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
 		return ret
 	}
 	return *o.Project
@@ -323,7 +323,7 @@ func (o *HardwareReservation) GetProject() MoveHardwareReservation201ResponsePro
 
 // GetProjectOk returns a tuple with the Project field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HardwareReservation) GetProjectOk() (*MoveHardwareReservation201ResponseProject, bool) {
+func (o *HardwareReservation) GetProjectOk() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, bool) {
 	if o == nil || o.Project == nil {
 		return nil, false
 	}
@@ -339,8 +339,8 @@ func (o *HardwareReservation) HasProject() bool {
 	return false
 }
 
-// SetProject gets a reference to the given MoveHardwareReservation201ResponseProject and assigns it to the Project field.
-func (o *HardwareReservation) SetProject(v MoveHardwareReservation201ResponseProject) {
+// SetProject gets a reference to the given GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject and assigns it to the Project field.
+func (o *HardwareReservation) SetProject(v GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject) {
 	o.Project = &v
 }
 

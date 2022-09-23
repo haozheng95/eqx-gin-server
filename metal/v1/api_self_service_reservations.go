@@ -24,15 +24,15 @@ import (
 type SelfServiceReservationsApiService service
 
 type ApiCreateSelfServiceReservationRequest struct {
-	ctx        context.Context
-	ApiService *SelfServiceReservationsApiService
-	projectId  string
-	body       *CreateSelfServiceReservationRequest
+	ctx                                 context.Context
+	ApiService                          *SelfServiceReservationsApiService
+	projectId                           string
+	createSelfServiceReservationRequest *CreateSelfServiceReservationRequest
 }
 
 // reservation to create
-func (r ApiCreateSelfServiceReservationRequest) Body(body CreateSelfServiceReservationRequest) ApiCreateSelfServiceReservationRequest {
-	r.body = &body
+func (r ApiCreateSelfServiceReservationRequest) CreateSelfServiceReservationRequest(createSelfServiceReservationRequest CreateSelfServiceReservationRequest) ApiCreateSelfServiceReservationRequest {
+	r.createSelfServiceReservationRequest = &createSelfServiceReservationRequest
 	return r
 }
 
@@ -45,9 +45,9 @@ CreateSelfServiceReservation Create a reservation
 
 Creates a reservation.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId Project UUID
- @return ApiCreateSelfServiceReservationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param projectId Project UUID
+	@return ApiCreateSelfServiceReservationRequest
 */
 func (a *SelfServiceReservationsApiService) CreateSelfServiceReservation(ctx context.Context, projectId string) ApiCreateSelfServiceReservationRequest {
 	return ApiCreateSelfServiceReservationRequest{
@@ -58,7 +58,8 @@ func (a *SelfServiceReservationsApiService) CreateSelfServiceReservation(ctx con
 }
 
 // Execute executes the request
-//  @return FindSelfServiceReservations200ResponseReservationsInner
+//
+//	@return FindSelfServiceReservations200ResponseReservationsInner
 func (a *SelfServiceReservationsApiService) CreateSelfServiceReservationExecute(r ApiCreateSelfServiceReservationRequest) (*FindSelfServiceReservations200ResponseReservationsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -78,8 +79,8 @@ func (a *SelfServiceReservationsApiService) CreateSelfServiceReservationExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createSelfServiceReservationRequest == nil {
+		return localVarReturnValue, nil, reportError("createSelfServiceReservationRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -100,7 +101,7 @@ func (a *SelfServiceReservationsApiService) CreateSelfServiceReservationExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createSelfServiceReservationRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -187,10 +188,10 @@ FindSelfServiceReservation Retrieve a reservation
 
 Returns a reservation
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Reservation short_id
- @param projectId Project UUID
- @return ApiFindSelfServiceReservationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Reservation short_id
+	@param projectId Project UUID
+	@return ApiFindSelfServiceReservationRequest
 */
 func (a *SelfServiceReservationsApiService) FindSelfServiceReservation(ctx context.Context, id string, projectId string) ApiFindSelfServiceReservationRequest {
 	return ApiFindSelfServiceReservationRequest{
@@ -202,7 +203,8 @@ func (a *SelfServiceReservationsApiService) FindSelfServiceReservation(ctx conte
 }
 
 // Execute executes the request
-//  @return FindSelfServiceReservations200ResponseReservationsInner
+//
+//	@return FindSelfServiceReservations200ResponseReservationsInner
 func (a *SelfServiceReservationsApiService) FindSelfServiceReservationExecute(r ApiFindSelfServiceReservationRequest) (*FindSelfServiceReservations200ResponseReservationsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -340,9 +342,9 @@ FindSelfServiceReservations Retrieve all reservations
 
 Returns all reservations.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId Project UUID
- @return ApiFindSelfServiceReservationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param projectId Project UUID
+	@return ApiFindSelfServiceReservationsRequest
 */
 func (a *SelfServiceReservationsApiService) FindSelfServiceReservations(ctx context.Context, projectId string) ApiFindSelfServiceReservationsRequest {
 	return ApiFindSelfServiceReservationsRequest{
@@ -353,7 +355,8 @@ func (a *SelfServiceReservationsApiService) FindSelfServiceReservations(ctx cont
 }
 
 // Execute executes the request
-//  @return FindSelfServiceReservations200Response
+//
+//	@return FindSelfServiceReservations200Response
 func (a *SelfServiceReservationsApiService) FindSelfServiceReservationsExecute(r ApiFindSelfServiceReservationsRequest) (*FindSelfServiceReservations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

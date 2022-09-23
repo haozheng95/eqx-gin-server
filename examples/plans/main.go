@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"sigs.k8s.io/yaml"
 
 	metal "github.com/equinix-labs/metal-go/metal/v1"
-	"sigs.k8s.io/yaml"
 )
 
 func main() {
@@ -18,16 +18,18 @@ func main() {
 	exclude := []string{"available_in"}
 	configuration := metal.NewConfiguration()
 	configuration.Debug = true
-	configuration.AddDefaultHeader("X-Auth-Token", os.Getenv("METAL_AUTH_TOKEN"))
+	//configuration.AddDefaultHeader("X-Auth-Token", os.Getenv("METAL_AUTH_TOKEN"))
+	configuration.AddDefaultHeader("X-Auth-Token", "h9FYNNnc3sbdcSr3PUyptriEyRQPqwhg")
 	api_client := metal.NewAPIClient(configuration)
-	resp, r, err := api_client.PlansApi.FindPlans(context.Background()).Include(include).Exclude(exclude).Execute()
+	//resp, r, err := api_client.PlansApi.FindPlans(context.Background()).Include(include).Exclude(exclude).Execute()
+	resp, r, err := api_client.DevicesApi.FindProjectDevices(context.Background(), "42207fc3-dda2-471e-8c84-179908f64f7b").Include(include).Exclude(exclude).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PlansApi.FindPlans``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 
-	// response from `FindPlans`: PlanList
-	s, err := yaml.Marshal(resp.Plans)
+	//response from `FindPlans`: PlanList
+	s, err := yaml.Marshal(resp.Devices)
 	if err != nil {
 		panic(err)
 	}

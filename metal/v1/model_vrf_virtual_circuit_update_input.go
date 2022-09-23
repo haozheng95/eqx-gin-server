@@ -17,11 +17,11 @@ import (
 
 // VrfVirtualCircuitUpdateInput struct for VrfVirtualCircuitUpdateInput
 type VrfVirtualCircuitUpdateInput struct {
-	Tags        []string `json:"tags,omitempty"`
-	Description *string  `json:"description,omitempty"`
-	Name        *string  `json:"name,omitempty"`
-	// Speed can be changed only if it is a dedicated connection
-	Speed *string `json:"speed,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	// Speed can be changed only if it is an interconnection on a Dedicated Port
+	Speed *string  `json:"speed,omitempty"`
+	Tags  []string `json:"tags,omitempty"`
 }
 
 // NewVrfVirtualCircuitUpdateInput instantiates a new VrfVirtualCircuitUpdateInput object
@@ -39,38 +39,6 @@ func NewVrfVirtualCircuitUpdateInput() *VrfVirtualCircuitUpdateInput {
 func NewVrfVirtualCircuitUpdateInputWithDefaults() *VrfVirtualCircuitUpdateInput {
 	this := VrfVirtualCircuitUpdateInput{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *VrfVirtualCircuitUpdateInput) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VrfVirtualCircuitUpdateInput) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *VrfVirtualCircuitUpdateInput) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *VrfVirtualCircuitUpdateInput) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -169,11 +137,40 @@ func (o *VrfVirtualCircuitUpdateInput) SetSpeed(v string) {
 	o.Speed = &v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *VrfVirtualCircuitUpdateInput) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VrfVirtualCircuitUpdateInput) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *VrfVirtualCircuitUpdateInput) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *VrfVirtualCircuitUpdateInput) SetTags(v []string) {
+	o.Tags = v
+}
+
 func (o VrfVirtualCircuitUpdateInput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
@@ -182,6 +179,9 @@ func (o VrfVirtualCircuitUpdateInput) MarshalJSON() ([]byte, error) {
 	}
 	if o.Speed != nil {
 		toSerialize["speed"] = o.Speed
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	return json.Marshal(toSerialize)
 }

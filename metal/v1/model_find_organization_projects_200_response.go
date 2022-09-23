@@ -17,8 +17,8 @@ import (
 
 // FindOrganizationProjects200Response struct for FindOrganizationProjects200Response
 type FindOrganizationProjects200Response struct {
-	Meta     *FindDeviceEvents200ResponseMeta            `json:"meta,omitempty"`
-	Projects []MoveHardwareReservation201ResponseProject `json:"projects,omitempty"`
+	Meta     *FindDeviceEvents200ResponseMeta                                                             `json:"meta,omitempty"`
+	Projects []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject `json:"projects,omitempty"`
 }
 
 // NewFindOrganizationProjects200Response instantiates a new FindOrganizationProjects200Response object
@@ -71,9 +71,9 @@ func (o *FindOrganizationProjects200Response) SetMeta(v FindDeviceEvents200Respo
 }
 
 // GetProjects returns the Projects field value if set, zero value otherwise.
-func (o *FindOrganizationProjects200Response) GetProjects() []MoveHardwareReservation201ResponseProject {
+func (o *FindOrganizationProjects200Response) GetProjects() []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject {
 	if o == nil || o.Projects == nil {
-		var ret []MoveHardwareReservation201ResponseProject
+		var ret []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
 		return ret
 	}
 	return o.Projects
@@ -81,7 +81,7 @@ func (o *FindOrganizationProjects200Response) GetProjects() []MoveHardwareReserv
 
 // GetProjectsOk returns a tuple with the Projects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FindOrganizationProjects200Response) GetProjectsOk() ([]MoveHardwareReservation201ResponseProject, bool) {
+func (o *FindOrganizationProjects200Response) GetProjectsOk() ([]GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, bool) {
 	if o == nil || o.Projects == nil {
 		return nil, false
 	}
@@ -97,8 +97,8 @@ func (o *FindOrganizationProjects200Response) HasProjects() bool {
 	return false
 }
 
-// SetProjects gets a reference to the given []MoveHardwareReservation201ResponseProject and assigns it to the Projects field.
-func (o *FindOrganizationProjects200Response) SetProjects(v []MoveHardwareReservation201ResponseProject) {
+// SetProjects gets a reference to the given []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject and assigns it to the Projects field.
+func (o *FindOrganizationProjects200Response) SetProjects(v []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject) {
 	o.Projects = v
 }
 

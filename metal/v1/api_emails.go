@@ -24,14 +24,14 @@ import (
 type EmailsApiService service
 
 type ApiCreateEmailRequest struct {
-	ctx        context.Context
-	ApiService *EmailsApiService
-	body       *CreateEmailRequest
+	ctx                context.Context
+	ApiService         *EmailsApiService
+	createEmailRequest *CreateEmailRequest
 }
 
 // Email to create
-func (r ApiCreateEmailRequest) Body(body CreateEmailRequest) ApiCreateEmailRequest {
-	r.body = &body
+func (r ApiCreateEmailRequest) CreateEmailRequest(createEmailRequest CreateEmailRequest) ApiCreateEmailRequest {
+	r.createEmailRequest = &createEmailRequest
 	return r
 }
 
@@ -44,8 +44,8 @@ CreateEmail Create an email
 
 Add a new email address to the current user.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateEmailRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateEmailRequest
 */
 func (a *EmailsApiService) CreateEmail(ctx context.Context) ApiCreateEmailRequest {
 	return ApiCreateEmailRequest{
@@ -55,7 +55,8 @@ func (a *EmailsApiService) CreateEmail(ctx context.Context) ApiCreateEmailReques
 }
 
 // Execute executes the request
-//  @return CreateEmail201Response
+//
+//	@return CreateEmail201Response
 func (a *EmailsApiService) CreateEmailExecute(r ApiCreateEmailRequest) (*CreateEmail201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -74,8 +75,8 @@ func (a *EmailsApiService) CreateEmailExecute(r ApiCreateEmailRequest) (*CreateE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createEmailRequest == nil {
+		return localVarReturnValue, nil, reportError("createEmailRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -96,7 +97,7 @@ func (a *EmailsApiService) CreateEmailExecute(r ApiCreateEmailRequest) (*CreateE
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createEmailRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -182,9 +183,9 @@ DeleteEmail Delete the email
 
 Deletes the email.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Email UUID
- @return ApiDeleteEmailRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Email UUID
+	@return ApiDeleteEmailRequest
 */
 func (a *EmailsApiService) DeleteEmail(ctx context.Context, id string) ApiDeleteEmailRequest {
 	return ApiDeleteEmailRequest{
@@ -331,9 +332,9 @@ FindEmailById Retrieve an email
 
 Provides one of the user’s emails.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Email UUID
- @return ApiFindEmailByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Email UUID
+	@return ApiFindEmailByIdRequest
 */
 func (a *EmailsApiService) FindEmailById(ctx context.Context, id string) ApiFindEmailByIdRequest {
 	return ApiFindEmailByIdRequest{
@@ -344,7 +345,8 @@ func (a *EmailsApiService) FindEmailById(ctx context.Context, id string) ApiFind
 }
 
 // Execute executes the request
-//  @return CreateEmail201Response
+//
+//	@return CreateEmail201Response
 func (a *EmailsApiService) FindEmailByIdExecute(r ApiFindEmailByIdRequest) (*CreateEmail201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -469,15 +471,15 @@ func (a *EmailsApiService) FindEmailByIdExecute(r ApiFindEmailByIdRequest) (*Cre
 }
 
 type ApiUpdateEmailRequest struct {
-	ctx        context.Context
-	ApiService *EmailsApiService
-	id         string
-	body       *UpdateEmailRequest
+	ctx                context.Context
+	ApiService         *EmailsApiService
+	id                 string
+	updateEmailRequest *UpdateEmailRequest
 }
 
 // email to update
-func (r ApiUpdateEmailRequest) Body(body UpdateEmailRequest) ApiUpdateEmailRequest {
-	r.body = &body
+func (r ApiUpdateEmailRequest) UpdateEmailRequest(updateEmailRequest UpdateEmailRequest) ApiUpdateEmailRequest {
+	r.updateEmailRequest = &updateEmailRequest
 	return r
 }
 
@@ -490,9 +492,9 @@ UpdateEmail Update the email
 
 Updates the email.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Email UUID
- @return ApiUpdateEmailRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Email UUID
+	@return ApiUpdateEmailRequest
 */
 func (a *EmailsApiService) UpdateEmail(ctx context.Context, id string) ApiUpdateEmailRequest {
 	return ApiUpdateEmailRequest{
@@ -503,7 +505,8 @@ func (a *EmailsApiService) UpdateEmail(ctx context.Context, id string) ApiUpdate
 }
 
 // Execute executes the request
-//  @return CreateEmail201Response
+//
+//	@return CreateEmail201Response
 func (a *EmailsApiService) UpdateEmailExecute(r ApiUpdateEmailRequest) (*CreateEmail201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -523,8 +526,8 @@ func (a *EmailsApiService) UpdateEmailExecute(r ApiUpdateEmailRequest) (*CreateE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.updateEmailRequest == nil {
+		return localVarReturnValue, nil, reportError("updateEmailRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -545,7 +548,7 @@ func (a *EmailsApiService) UpdateEmailExecute(r ApiUpdateEmailRequest) (*CreateE
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.updateEmailRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

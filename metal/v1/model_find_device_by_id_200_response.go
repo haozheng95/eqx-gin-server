@@ -18,7 +18,6 @@ import (
 
 // FindDeviceById200Response struct for FindDeviceById200Response
 type FindDeviceById200Response struct {
-	Tags                []string                                    `json:"tags,omitempty"`
 	AlwaysPxe           *bool                                       `json:"always_pxe,omitempty"`
 	BillingCycle        *string                                     `json:"billing_cycle,omitempty"`
 	BondingMode         *int32                                      `json:"bonding_mode,omitempty"`
@@ -37,12 +36,15 @@ type FindDeviceById200Response struct {
 	Iqn                 *string                                     `json:"iqn,omitempty"`
 	Locked              *bool                                       `json:"locked,omitempty"`
 	Metro               *FindDeviceById200ResponseFacilityMetro     `json:"metro,omitempty"`
-	NetworkPorts        *FindDeviceById200ResponseNetworkPorts      `json:"network_ports,omitempty"`
-	OperatingSystem     *FindDeviceById200ResponseOperatingSystem   `json:"operating_system,omitempty"`
-	Plan                *FindDeviceById200ResponsePlan              `json:"plan,omitempty"`
-	Project             *FindDeviceById200ResponseProject           `json:"project,omitempty"`
-	ProjectLite         *FindDeviceById200ResponseProjectLite       `json:"project_lite,omitempty"`
-	ProvisioningEvents  []FindConnectionEvents200Response           `json:"provisioning_events,omitempty"`
+	// By default, servers at Equinix Metal are configured in a “bonded” mode using LACP (Link Aggregation Control Protocol). Each 2-NIC server is configured with a single bond (namely bond0) with both interfaces eth0 and eth1 as members of the bond in a default Layer 3 mode. Some device plans may have a different number of ports and bonds available.
+	NetworkPorts    []FindDeviceById200ResponseNetworkPortsInner `json:"network_ports,omitempty"`
+	OperatingSystem *FindDeviceById200ResponseOperatingSystem    `json:"operating_system,omitempty"`
+	// Actions supported by the device instance.
+	Actions            []FindDeviceById200ResponseActionsInner `json:"actions,omitempty"`
+	Plan               *FindDeviceById200ResponsePlan          `json:"plan,omitempty"`
+	Project            *FindDeviceById200ResponseProject       `json:"project,omitempty"`
+	ProjectLite        *FindDeviceById200ResponseProjectLite   `json:"project_lite,omitempty"`
+	ProvisioningEvents []FindInterconnectionEvents200Response  `json:"provisioning_events,omitempty"`
 	// Only visible while device provisioning
 	ProvisioningPercentage *float32 `json:"provisioning_percentage,omitempty"`
 	// Root password is automatically generated when server is provisioned and it is removed after 24 hours
@@ -55,7 +57,8 @@ type FindDeviceById200Response struct {
 	SshKeys      []FindBatchById200ResponseDevicesInner `json:"ssh_keys,omitempty"`
 	State        *string                                `json:"state,omitempty"`
 	// Switch short id. This can be used to determine if two devices are connected to the same switch, for example.
-	SwitchUuid *string `json:"switch_uuid,omitempty"`
+	SwitchUuid *string  `json:"switch_uuid,omitempty"`
+	Tags       []string `json:"tags,omitempty"`
 	// When the device will be terminated. This is commonly set in advance for ephemeral spot market instances but this field may also be set with on-demand and reservation instances to automatically delete the resource at a given time. The termination time can also be used to release a hardware reservation instance at a given time, keeping the reservation open for other uses.  On a spot market device, the termination time will be set automatically when outbid.
 	TerminationTime *time.Time                             `json:"termination_time,omitempty"`
 	UpdatedAt       *time.Time                             `json:"updated_at,omitempty"`
@@ -79,38 +82,6 @@ func NewFindDeviceById200Response() *FindDeviceById200Response {
 func NewFindDeviceById200ResponseWithDefaults() *FindDeviceById200Response {
 	this := FindDeviceById200Response{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *FindDeviceById200Response) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FindDeviceById200Response) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *FindDeviceById200Response) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *FindDeviceById200Response) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetAlwaysPxe returns the AlwaysPxe field value if set, zero value otherwise.
@@ -690,17 +661,17 @@ func (o *FindDeviceById200Response) SetMetro(v FindDeviceById200ResponseFacility
 }
 
 // GetNetworkPorts returns the NetworkPorts field value if set, zero value otherwise.
-func (o *FindDeviceById200Response) GetNetworkPorts() FindDeviceById200ResponseNetworkPorts {
+func (o *FindDeviceById200Response) GetNetworkPorts() []FindDeviceById200ResponseNetworkPortsInner {
 	if o == nil || o.NetworkPorts == nil {
-		var ret FindDeviceById200ResponseNetworkPorts
+		var ret []FindDeviceById200ResponseNetworkPortsInner
 		return ret
 	}
-	return *o.NetworkPorts
+	return o.NetworkPorts
 }
 
 // GetNetworkPortsOk returns a tuple with the NetworkPorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FindDeviceById200Response) GetNetworkPortsOk() (*FindDeviceById200ResponseNetworkPorts, bool) {
+func (o *FindDeviceById200Response) GetNetworkPortsOk() ([]FindDeviceById200ResponseNetworkPortsInner, bool) {
 	if o == nil || o.NetworkPorts == nil {
 		return nil, false
 	}
@@ -716,9 +687,9 @@ func (o *FindDeviceById200Response) HasNetworkPorts() bool {
 	return false
 }
 
-// SetNetworkPorts gets a reference to the given FindDeviceById200ResponseNetworkPorts and assigns it to the NetworkPorts field.
-func (o *FindDeviceById200Response) SetNetworkPorts(v FindDeviceById200ResponseNetworkPorts) {
-	o.NetworkPorts = &v
+// SetNetworkPorts gets a reference to the given []FindDeviceById200ResponseNetworkPortsInner and assigns it to the NetworkPorts field.
+func (o *FindDeviceById200Response) SetNetworkPorts(v []FindDeviceById200ResponseNetworkPortsInner) {
+	o.NetworkPorts = v
 }
 
 // GetOperatingSystem returns the OperatingSystem field value if set, zero value otherwise.
@@ -751,6 +722,38 @@ func (o *FindDeviceById200Response) HasOperatingSystem() bool {
 // SetOperatingSystem gets a reference to the given FindDeviceById200ResponseOperatingSystem and assigns it to the OperatingSystem field.
 func (o *FindDeviceById200Response) SetOperatingSystem(v FindDeviceById200ResponseOperatingSystem) {
 	o.OperatingSystem = &v
+}
+
+// GetActions returns the Actions field value if set, zero value otherwise.
+func (o *FindDeviceById200Response) GetActions() []FindDeviceById200ResponseActionsInner {
+	if o == nil || o.Actions == nil {
+		var ret []FindDeviceById200ResponseActionsInner
+		return ret
+	}
+	return o.Actions
+}
+
+// GetActionsOk returns a tuple with the Actions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FindDeviceById200Response) GetActionsOk() ([]FindDeviceById200ResponseActionsInner, bool) {
+	if o == nil || o.Actions == nil {
+		return nil, false
+	}
+	return o.Actions, true
+}
+
+// HasActions returns a boolean if a field has been set.
+func (o *FindDeviceById200Response) HasActions() bool {
+	if o != nil && o.Actions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetActions gets a reference to the given []FindDeviceById200ResponseActionsInner and assigns it to the Actions field.
+func (o *FindDeviceById200Response) SetActions(v []FindDeviceById200ResponseActionsInner) {
+	o.Actions = v
 }
 
 // GetPlan returns the Plan field value if set, zero value otherwise.
@@ -850,9 +853,9 @@ func (o *FindDeviceById200Response) SetProjectLite(v FindDeviceById200ResponsePr
 }
 
 // GetProvisioningEvents returns the ProvisioningEvents field value if set, zero value otherwise.
-func (o *FindDeviceById200Response) GetProvisioningEvents() []FindConnectionEvents200Response {
+func (o *FindDeviceById200Response) GetProvisioningEvents() []FindInterconnectionEvents200Response {
 	if o == nil || o.ProvisioningEvents == nil {
-		var ret []FindConnectionEvents200Response
+		var ret []FindInterconnectionEvents200Response
 		return ret
 	}
 	return o.ProvisioningEvents
@@ -860,7 +863,7 @@ func (o *FindDeviceById200Response) GetProvisioningEvents() []FindConnectionEven
 
 // GetProvisioningEventsOk returns a tuple with the ProvisioningEvents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FindDeviceById200Response) GetProvisioningEventsOk() ([]FindConnectionEvents200Response, bool) {
+func (o *FindDeviceById200Response) GetProvisioningEventsOk() ([]FindInterconnectionEvents200Response, bool) {
 	if o == nil || o.ProvisioningEvents == nil {
 		return nil, false
 	}
@@ -876,8 +879,8 @@ func (o *FindDeviceById200Response) HasProvisioningEvents() bool {
 	return false
 }
 
-// SetProvisioningEvents gets a reference to the given []FindConnectionEvents200Response and assigns it to the ProvisioningEvents field.
-func (o *FindDeviceById200Response) SetProvisioningEvents(v []FindConnectionEvents200Response) {
+// SetProvisioningEvents gets a reference to the given []FindInterconnectionEvents200Response and assigns it to the ProvisioningEvents field.
+func (o *FindDeviceById200Response) SetProvisioningEvents(v []FindInterconnectionEvents200Response) {
 	o.ProvisioningEvents = v
 }
 
@@ -1137,6 +1140,38 @@ func (o *FindDeviceById200Response) SetSwitchUuid(v string) {
 	o.SwitchUuid = &v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *FindDeviceById200Response) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FindDeviceById200Response) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *FindDeviceById200Response) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *FindDeviceById200Response) SetTags(v []string) {
+	o.Tags = v
+}
+
 // GetTerminationTime returns the TerminationTime field value if set, zero value otherwise.
 func (o *FindDeviceById200Response) GetTerminationTime() time.Time {
 	if o == nil || o.TerminationTime == nil {
@@ -1299,9 +1334,6 @@ func (o *FindDeviceById200Response) SetVolumes(v []FindBatchById200ResponseDevic
 
 func (o FindDeviceById200Response) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.AlwaysPxe != nil {
 		toSerialize["always_pxe"] = o.AlwaysPxe
 	}
@@ -1362,6 +1394,9 @@ func (o FindDeviceById200Response) MarshalJSON() ([]byte, error) {
 	if o.OperatingSystem != nil {
 		toSerialize["operating_system"] = o.OperatingSystem
 	}
+	if o.Actions != nil {
+		toSerialize["actions"] = o.Actions
+	}
 	if o.Plan != nil {
 		toSerialize["plan"] = o.Plan
 	}
@@ -1397,6 +1432,9 @@ func (o FindDeviceById200Response) MarshalJSON() ([]byte, error) {
 	}
 	if o.SwitchUuid != nil {
 		toSerialize["switch_uuid"] = o.SwitchUuid
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	if o.TerminationTime != nil {
 		toSerialize["termination_time"] = o.TerminationTime

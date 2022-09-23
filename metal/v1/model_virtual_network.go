@@ -25,9 +25,10 @@ type VirtualNetwork struct {
 	Href                     *string                               `json:"href,omitempty"`
 	Id                       *string                               `json:"id,omitempty"`
 	// A list of instances with ports currently associated to this Virtual Network.
-	Instances    []FindBatchById200ResponseDevicesInner                          `json:"instances,omitempty"`
-	MetalGateway *FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway `json:"metal_gateway,omitempty"`
-	Metro        *FindBatchById200ResponseDevicesInner                           `json:"metro,omitempty"`
+	Instances []FindBatchById200ResponseDevicesInner `json:"instances,omitempty"`
+	// A list of metal gateways currently associated to this Virtual Network.
+	MetalGateways []FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner `json:"metal_gateways,omitempty"`
+	Metro         *FindBatchById200ResponseDevicesInner                                              `json:"metro,omitempty"`
 	// The Metro code of the metro in which this Virtual Network is defined.
 	MetroCode *string `json:"metro_code,omitempty"`
 	Vxlan     *int32  `json:"vxlan,omitempty"`
@@ -274,36 +275,36 @@ func (o *VirtualNetwork) SetInstances(v []FindBatchById200ResponseDevicesInner) 
 	o.Instances = v
 }
 
-// GetMetalGateway returns the MetalGateway field value if set, zero value otherwise.
-func (o *VirtualNetwork) GetMetalGateway() FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway {
-	if o == nil || o.MetalGateway == nil {
-		var ret FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway
+// GetMetalGateways returns the MetalGateways field value if set, zero value otherwise.
+func (o *VirtualNetwork) GetMetalGateways() []FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner {
+	if o == nil || o.MetalGateways == nil {
+		var ret []FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner
 		return ret
 	}
-	return *o.MetalGateway
+	return o.MetalGateways
 }
 
-// GetMetalGatewayOk returns a tuple with the MetalGateway field value if set, nil otherwise
+// GetMetalGatewaysOk returns a tuple with the MetalGateways field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VirtualNetwork) GetMetalGatewayOk() (*FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway, bool) {
-	if o == nil || o.MetalGateway == nil {
+func (o *VirtualNetwork) GetMetalGatewaysOk() ([]FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner, bool) {
+	if o == nil || o.MetalGateways == nil {
 		return nil, false
 	}
-	return o.MetalGateway, true
+	return o.MetalGateways, true
 }
 
-// HasMetalGateway returns a boolean if a field has been set.
-func (o *VirtualNetwork) HasMetalGateway() bool {
-	if o != nil && o.MetalGateway != nil {
+// HasMetalGateways returns a boolean if a field has been set.
+func (o *VirtualNetwork) HasMetalGateways() bool {
+	if o != nil && o.MetalGateways != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetMetalGateway gets a reference to the given FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway and assigns it to the MetalGateway field.
-func (o *VirtualNetwork) SetMetalGateway(v FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway) {
-	o.MetalGateway = &v
+// SetMetalGateways gets a reference to the given []FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner and assigns it to the MetalGateways field.
+func (o *VirtualNetwork) SetMetalGateways(v []FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner) {
+	o.MetalGateways = v
 }
 
 // GetMetro returns the Metro field value if set, zero value otherwise.
@@ -425,8 +426,8 @@ func (o VirtualNetwork) MarshalJSON() ([]byte, error) {
 	if o.Instances != nil {
 		toSerialize["instances"] = o.Instances
 	}
-	if o.MetalGateway != nil {
-		toSerialize["metal_gateway"] = o.MetalGateway
+	if o.MetalGateways != nil {
+		toSerialize["metal_gateways"] = o.MetalGateways
 	}
 	if o.Metro != nil {
 		toSerialize["metro"] = o.Metro

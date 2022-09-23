@@ -24,15 +24,15 @@ import (
 type LicensesApiService service
 
 type ApiCreateLicenseRequest struct {
-	ctx        context.Context
-	ApiService *LicensesApiService
-	id         string
-	body       *CreateLicenseRequest
+	ctx                  context.Context
+	ApiService           *LicensesApiService
+	id                   string
+	createLicenseRequest *CreateLicenseRequest
 }
 
 // License to create
-func (r ApiCreateLicenseRequest) Body(body CreateLicenseRequest) ApiCreateLicenseRequest {
-	r.body = &body
+func (r ApiCreateLicenseRequest) CreateLicenseRequest(createLicenseRequest CreateLicenseRequest) ApiCreateLicenseRequest {
+	r.createLicenseRequest = &createLicenseRequest
 	return r
 }
 
@@ -45,9 +45,9 @@ CreateLicense Create a License
 
 Creates a new license for the given project
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiCreateLicenseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiCreateLicenseRequest
 */
 func (a *LicensesApiService) CreateLicense(ctx context.Context, id string) ApiCreateLicenseRequest {
 	return ApiCreateLicenseRequest{
@@ -58,7 +58,8 @@ func (a *LicensesApiService) CreateLicense(ctx context.Context, id string) ApiCr
 }
 
 // Execute executes the request
-//  @return FindLicenseById200Response
+//
+//	@return FindLicenseById200Response
 func (a *LicensesApiService) CreateLicenseExecute(r ApiCreateLicenseRequest) (*FindLicenseById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -78,8 +79,8 @@ func (a *LicensesApiService) CreateLicenseExecute(r ApiCreateLicenseRequest) (*F
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createLicenseRequest == nil {
+		return localVarReturnValue, nil, reportError("createLicenseRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -100,7 +101,7 @@ func (a *LicensesApiService) CreateLicenseExecute(r ApiCreateLicenseRequest) (*F
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createLicenseRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -206,9 +207,9 @@ DeleteLicense Delete the license
 
 Deletes a license.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id License UUID
- @return ApiDeleteLicenseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id License UUID
+	@return ApiDeleteLicenseRequest
 */
 func (a *LicensesApiService) DeleteLicense(ctx context.Context, id string) ApiDeleteLicenseRequest {
 	return ApiDeleteLicenseRequest{
@@ -355,9 +356,9 @@ FindLicenseById Retrieve a license
 
 Returns a license
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id License UUID
- @return ApiFindLicenseByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id License UUID
+	@return ApiFindLicenseByIdRequest
 */
 func (a *LicensesApiService) FindLicenseById(ctx context.Context, id string) ApiFindLicenseByIdRequest {
 	return ApiFindLicenseByIdRequest{
@@ -368,7 +369,8 @@ func (a *LicensesApiService) FindLicenseById(ctx context.Context, id string) Api
 }
 
 // Execute executes the request
-//  @return FindLicenseById200Response
+//
+//	@return FindLicenseById200Response
 func (a *LicensesApiService) FindLicenseByIdExecute(r ApiFindLicenseByIdRequest) (*FindLicenseById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -535,9 +537,9 @@ FindProjectLicenses Retrieve all licenses
 
 Provides a collection of licenses for a given project.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiFindProjectLicensesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiFindProjectLicensesRequest
 */
 func (a *LicensesApiService) FindProjectLicenses(ctx context.Context, id string) ApiFindProjectLicensesRequest {
 	return ApiFindProjectLicensesRequest{
@@ -548,7 +550,8 @@ func (a *LicensesApiService) FindProjectLicenses(ctx context.Context, id string)
 }
 
 // Execute executes the request
-//  @return FindProjectLicenses200Response
+//
+//	@return FindProjectLicenses200Response
 func (a *LicensesApiService) FindProjectLicensesExecute(r ApiFindProjectLicensesRequest) (*FindProjectLicenses200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -679,15 +682,15 @@ func (a *LicensesApiService) FindProjectLicensesExecute(r ApiFindProjectLicenses
 }
 
 type ApiUpdateLicenseRequest struct {
-	ctx        context.Context
-	ApiService *LicensesApiService
-	id         string
-	body       *UpdateLicenseRequest
+	ctx                  context.Context
+	ApiService           *LicensesApiService
+	id                   string
+	updateLicenseRequest *UpdateLicenseRequest
 }
 
 // License to update
-func (r ApiUpdateLicenseRequest) Body(body UpdateLicenseRequest) ApiUpdateLicenseRequest {
-	r.body = &body
+func (r ApiUpdateLicenseRequest) UpdateLicenseRequest(updateLicenseRequest UpdateLicenseRequest) ApiUpdateLicenseRequest {
+	r.updateLicenseRequest = &updateLicenseRequest
 	return r
 }
 
@@ -700,9 +703,9 @@ UpdateLicense Update the license
 
 Updates the license.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id License UUID
- @return ApiUpdateLicenseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id License UUID
+	@return ApiUpdateLicenseRequest
 */
 func (a *LicensesApiService) UpdateLicense(ctx context.Context, id string) ApiUpdateLicenseRequest {
 	return ApiUpdateLicenseRequest{
@@ -713,7 +716,8 @@ func (a *LicensesApiService) UpdateLicense(ctx context.Context, id string) ApiUp
 }
 
 // Execute executes the request
-//  @return FindLicenseById200Response
+//
+//	@return FindLicenseById200Response
 func (a *LicensesApiService) UpdateLicenseExecute(r ApiUpdateLicenseRequest) (*FindLicenseById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -733,8 +737,8 @@ func (a *LicensesApiService) UpdateLicenseExecute(r ApiUpdateLicenseRequest) (*F
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.updateLicenseRequest == nil {
+		return localVarReturnValue, nil, reportError("updateLicenseRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -755,7 +759,7 @@ func (a *LicensesApiService) UpdateLicenseExecute(r ApiUpdateLicenseRequest) (*F
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.updateLicenseRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -58,8 +58,6 @@ type APIClient struct {
 
 	CapacityApi *CapacityApiService
 
-	ConnectionsApi *ConnectionsApiService
-
 	DevicesApi *DevicesApiService
 
 	EmailsApi *EmailsApiService
@@ -73,6 +71,8 @@ type APIClient struct {
 	IPAddressesApi *IPAddressesApiService
 
 	IncidentsApi *IncidentsApiService
+
+	InterconnectionsApi *InterconnectionsApiService
 
 	InvitationsApi *InvitationsApiService
 
@@ -145,7 +145,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.BGPApi = (*BGPApiService)(&c.common)
 	c.BatchesApi = (*BatchesApiService)(&c.common)
 	c.CapacityApi = (*CapacityApiService)(&c.common)
-	c.ConnectionsApi = (*ConnectionsApiService)(&c.common)
 	c.DevicesApi = (*DevicesApiService)(&c.common)
 	c.EmailsApi = (*EmailsApiService)(&c.common)
 	c.EventsApi = (*EventsApiService)(&c.common)
@@ -153,6 +152,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.HardwareReservationsApi = (*HardwareReservationsApiService)(&c.common)
 	c.IPAddressesApi = (*IPAddressesApiService)(&c.common)
 	c.IncidentsApi = (*IncidentsApiService)(&c.common)
+	c.InterconnectionsApi = (*InterconnectionsApiService)(&c.common)
 	c.InvitationsApi = (*InvitationsApiService)(&c.common)
 	c.LicensesApi = (*LicensesApiService)(&c.common)
 	c.MembershipsApi = (*MembershipsApiService)(&c.common)

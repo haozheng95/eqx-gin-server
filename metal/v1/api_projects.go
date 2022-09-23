@@ -24,18 +24,18 @@ import (
 type ProjectsApiService service
 
 type ApiCreateProjectRequest struct {
-	ctx        context.Context
-	ApiService *ProjectsApiService
-	body       *CreateProjectRequest
+	ctx                  context.Context
+	ApiService           *ProjectsApiService
+	createProjectRequest *CreateProjectRequest
 }
 
 // Project to create
-func (r ApiCreateProjectRequest) Body(body CreateProjectRequest) ApiCreateProjectRequest {
-	r.body = &body
+func (r ApiCreateProjectRequest) CreateProjectRequest(createProjectRequest CreateProjectRequest) ApiCreateProjectRequest {
+	r.createProjectRequest = &createProjectRequest
 	return r
 }
 
-func (r ApiCreateProjectRequest) Execute() (*MoveHardwareReservation201ResponseProject, *http.Response, error) {
+func (r ApiCreateProjectRequest) Execute() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, *http.Response, error) {
 	return r.ApiService.CreateProjectExecute(r)
 }
 
@@ -44,8 +44,8 @@ CreateProject Create a project
 
 Creates a new project for the user default organization. If the user don't have an organization, a new one will be created.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateProjectRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateProjectRequest
 */
 func (a *ProjectsApiService) CreateProject(ctx context.Context) ApiCreateProjectRequest {
 	return ApiCreateProjectRequest{
@@ -55,13 +55,14 @@ func (a *ProjectsApiService) CreateProject(ctx context.Context) ApiCreateProject
 }
 
 // Execute executes the request
-//  @return MoveHardwareReservation201ResponseProject
-func (a *ProjectsApiService) CreateProjectExecute(r ApiCreateProjectRequest) (*MoveHardwareReservation201ResponseProject, *http.Response, error) {
+//
+//	@return GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
+func (a *ProjectsApiService) CreateProjectExecute(r ApiCreateProjectRequest) (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *MoveHardwareReservation201ResponseProject
+		localVarReturnValue *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsApiService.CreateProject")
@@ -74,8 +75,8 @@ func (a *ProjectsApiService) CreateProjectExecute(r ApiCreateProjectRequest) (*M
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createProjectRequest == nil {
+		return localVarReturnValue, nil, reportError("createProjectRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -96,7 +97,7 @@ func (a *ProjectsApiService) CreateProjectExecute(r ApiCreateProjectRequest) (*M
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createProjectRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -168,15 +169,15 @@ func (a *ProjectsApiService) CreateProjectExecute(r ApiCreateProjectRequest) (*M
 }
 
 type ApiCreateProjectInvitationRequest struct {
-	ctx        context.Context
-	ApiService *ProjectsApiService
-	projectId  string
-	body       *CreateOrganizationInvitationRequest
+	ctx                                 context.Context
+	ApiService                          *ProjectsApiService
+	projectId                           string
+	createOrganizationInvitationRequest *CreateOrganizationInvitationRequest
 }
 
 // Invitation to create
-func (r ApiCreateProjectInvitationRequest) Body(body CreateOrganizationInvitationRequest) ApiCreateProjectInvitationRequest {
-	r.body = &body
+func (r ApiCreateProjectInvitationRequest) CreateOrganizationInvitationRequest(createOrganizationInvitationRequest CreateOrganizationInvitationRequest) ApiCreateProjectInvitationRequest {
+	r.createOrganizationInvitationRequest = &createOrganizationInvitationRequest
 	return r
 }
 
@@ -189,9 +190,9 @@ CreateProjectInvitation Create an invitation for a project
 
 In order to add a user to a project, they must first be invited.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId Project UUID
- @return ApiCreateProjectInvitationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param projectId Project UUID
+	@return ApiCreateProjectInvitationRequest
 */
 func (a *ProjectsApiService) CreateProjectInvitation(ctx context.Context, projectId string) ApiCreateProjectInvitationRequest {
 	return ApiCreateProjectInvitationRequest{
@@ -202,7 +203,8 @@ func (a *ProjectsApiService) CreateProjectInvitation(ctx context.Context, projec
 }
 
 // Execute executes the request
-//  @return FindInvitationById200Response
+//
+//	@return FindInvitationById200Response
 func (a *ProjectsApiService) CreateProjectInvitationExecute(r ApiCreateProjectInvitationRequest) (*FindInvitationById200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -222,8 +224,8 @@ func (a *ProjectsApiService) CreateProjectInvitationExecute(r ApiCreateProjectIn
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createOrganizationInvitationRequest == nil {
+		return localVarReturnValue, nil, reportError("createOrganizationInvitationRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -244,7 +246,7 @@ func (a *ProjectsApiService) CreateProjectInvitationExecute(r ApiCreateProjectIn
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createOrganizationInvitationRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -336,15 +338,15 @@ func (a *ProjectsApiService) CreateProjectInvitationExecute(r ApiCreateProjectIn
 }
 
 type ApiCreateTransferRequestRequest struct {
-	ctx        context.Context
-	ApiService *ProjectsApiService
-	id         string
-	body       *CreateTransferRequestRequest
+	ctx                          context.Context
+	ApiService                   *ProjectsApiService
+	id                           string
+	createTransferRequestRequest *CreateTransferRequestRequest
 }
 
 // Transfer Request to create
-func (r ApiCreateTransferRequestRequest) Body(body CreateTransferRequestRequest) ApiCreateTransferRequestRequest {
-	r.body = &body
+func (r ApiCreateTransferRequestRequest) CreateTransferRequestRequest(createTransferRequestRequest CreateTransferRequestRequest) ApiCreateTransferRequestRequest {
+	r.createTransferRequestRequest = &createTransferRequestRequest
 	return r
 }
 
@@ -357,9 +359,9 @@ CreateTransferRequest Create a transfer request
 
 Organization owners can transfer their projects to other organizations.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id UUID of the project to be transferred
- @return ApiCreateTransferRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id UUID of the project to be transferred
+	@return ApiCreateTransferRequestRequest
 */
 func (a *ProjectsApiService) CreateTransferRequest(ctx context.Context, id string) ApiCreateTransferRequestRequest {
 	return ApiCreateTransferRequestRequest{
@@ -370,7 +372,8 @@ func (a *ProjectsApiService) CreateTransferRequest(ctx context.Context, id strin
 }
 
 // Execute executes the request
-//  @return FindOrganizationTransfers200ResponseTransfersInner
+//
+//	@return FindOrganizationTransfers200ResponseTransfersInner
 func (a *ProjectsApiService) CreateTransferRequestExecute(r ApiCreateTransferRequestRequest) (*FindOrganizationTransfers200ResponseTransfersInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -390,8 +393,8 @@ func (a *ProjectsApiService) CreateTransferRequestExecute(r ApiCreateTransferReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.createTransferRequestRequest == nil {
+		return localVarReturnValue, nil, reportError("createTransferRequestRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -412,7 +415,7 @@ func (a *ProjectsApiService) CreateTransferRequestExecute(r ApiCreateTransferReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.createTransferRequestRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -518,9 +521,9 @@ DeleteProject Delete the project
 
 Deletes the project.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiDeleteProjectRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiDeleteProjectRequest
 */
 func (a *ProjectsApiService) DeleteProject(ctx context.Context, id string) ApiDeleteProjectRequest {
 	return ApiDeleteProjectRequest{
@@ -654,10 +657,10 @@ FindIPReservationCustomdata Retrieve the custom metadata of an IP Reservation
 
 Provides the custom metadata stored for this IP Reservation in json format
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId Project UUID
- @param id Ip Reservation UUID
- @return ApiFindIPReservationCustomdataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param projectId Project UUID
+	@param id Ip Reservation UUID
+	@return ApiFindIPReservationCustomdataRequest
 */
 func (a *ProjectsApiService) FindIPReservationCustomdata(ctx context.Context, projectId string, id string) ApiFindIPReservationCustomdataRequest {
 	return ApiFindIPReservationCustomdataRequest{
@@ -797,7 +800,7 @@ func (r ApiFindProjectByIdRequest) Exclude(exclude []string) ApiFindProjectByIdR
 	return r
 }
 
-func (r ApiFindProjectByIdRequest) Execute() (*MoveHardwareReservation201ResponseProject, *http.Response, error) {
+func (r ApiFindProjectByIdRequest) Execute() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, *http.Response, error) {
 	return r.ApiService.FindProjectByIdExecute(r)
 }
 
@@ -806,9 +809,9 @@ FindProjectById Retrieve a project
 
 Returns a single project if the user has access
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiFindProjectByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiFindProjectByIdRequest
 */
 func (a *ProjectsApiService) FindProjectById(ctx context.Context, id string) ApiFindProjectByIdRequest {
 	return ApiFindProjectByIdRequest{
@@ -819,13 +822,14 @@ func (a *ProjectsApiService) FindProjectById(ctx context.Context, id string) Api
 }
 
 // Execute executes the request
-//  @return MoveHardwareReservation201ResponseProject
-func (a *ProjectsApiService) FindProjectByIdExecute(r ApiFindProjectByIdRequest) (*MoveHardwareReservation201ResponseProject, *http.Response, error) {
+//
+//	@return GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
+func (a *ProjectsApiService) FindProjectByIdExecute(r ApiFindProjectByIdRequest) (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *MoveHardwareReservation201ResponseProject
+		localVarReturnValue *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsApiService.FindProjectById")
@@ -958,9 +962,9 @@ FindProjectCustomdata Retrieve the custom metadata of a project
 
 Provides the custom metadata stored for this project in json format
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiFindProjectCustomdataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiFindProjectCustomdataRequest
 */
 func (a *ProjectsApiService) FindProjectCustomdata(ctx context.Context, id string) ApiFindProjectCustomdataRequest {
 	return ApiFindProjectCustomdataRequest{
@@ -1121,9 +1125,9 @@ FindProjectInvitations Retrieve project invitations
 
 Returns all invitations in a project.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId Project UUID
- @return ApiFindProjectInvitationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param projectId Project UUID
+	@return ApiFindProjectInvitationsRequest
 */
 func (a *ProjectsApiService) FindProjectInvitations(ctx context.Context, projectId string) ApiFindProjectInvitationsRequest {
 	return ApiFindProjectInvitationsRequest{
@@ -1134,7 +1138,8 @@ func (a *ProjectsApiService) FindProjectInvitations(ctx context.Context, project
 }
 
 // Execute executes the request
-//  @return FindInvitations200Response
+//
+//	@return FindInvitations200Response
 func (a *ProjectsApiService) FindProjectInvitationsExecute(r ApiFindProjectInvitationsRequest) (*FindInvitations200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1307,9 +1312,9 @@ FindProjectMemberships Retrieve project memberships
 
 Returns all memberships in a project.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId Project UUID
- @return ApiFindProjectMembershipsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param projectId Project UUID
+	@return ApiFindProjectMembershipsRequest
 */
 func (a *ProjectsApiService) FindProjectMemberships(ctx context.Context, projectId string) ApiFindProjectMembershipsRequest {
 	return ApiFindProjectMembershipsRequest{
@@ -1320,7 +1325,8 @@ func (a *ProjectsApiService) FindProjectMemberships(ctx context.Context, project
 }
 
 // Execute executes the request
-//  @return FindProjectMemberships200Response
+//
+//	@return FindProjectMemberships200Response
 func (a *ProjectsApiService) FindProjectMembershipsExecute(r ApiFindProjectMembershipsRequest) (*FindProjectMemberships200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1492,8 +1498,8 @@ FindProjects Retrieve all projects
 
 Returns a collection of projects that the current user is a member of.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindProjectsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindProjectsRequest
 */
 func (a *ProjectsApiService) FindProjects(ctx context.Context) ApiFindProjectsRequest {
 	return ApiFindProjectsRequest{
@@ -1503,7 +1509,8 @@ func (a *ProjectsApiService) FindProjects(ctx context.Context) ApiFindProjectsRe
 }
 
 // Execute executes the request
-//  @return FindOrganizationProjects200Response
+//
+//	@return FindOrganizationProjects200Response
 func (a *ProjectsApiService) FindProjectsExecute(r ApiFindProjectsRequest) (*FindOrganizationProjects200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1613,19 +1620,19 @@ func (a *ProjectsApiService) FindProjectsExecute(r ApiFindProjectsRequest) (*Fin
 }
 
 type ApiUpdateProjectRequest struct {
-	ctx        context.Context
-	ApiService *ProjectsApiService
-	id         string
-	body       *UpdateProjectRequest
+	ctx                  context.Context
+	ApiService           *ProjectsApiService
+	id                   string
+	updateProjectRequest *UpdateProjectRequest
 }
 
 // Project to update
-func (r ApiUpdateProjectRequest) Body(body UpdateProjectRequest) ApiUpdateProjectRequest {
-	r.body = &body
+func (r ApiUpdateProjectRequest) UpdateProjectRequest(updateProjectRequest UpdateProjectRequest) ApiUpdateProjectRequest {
+	r.updateProjectRequest = &updateProjectRequest
 	return r
 }
 
-func (r ApiUpdateProjectRequest) Execute() (*MoveHardwareReservation201ResponseProject, *http.Response, error) {
+func (r ApiUpdateProjectRequest) Execute() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, *http.Response, error) {
 	return r.ApiService.UpdateProjectExecute(r)
 }
 
@@ -1634,9 +1641,9 @@ UpdateProject Update the project
 
 Updates the project.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiUpdateProjectRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiUpdateProjectRequest
 */
 func (a *ProjectsApiService) UpdateProject(ctx context.Context, id string) ApiUpdateProjectRequest {
 	return ApiUpdateProjectRequest{
@@ -1647,13 +1654,14 @@ func (a *ProjectsApiService) UpdateProject(ctx context.Context, id string) ApiUp
 }
 
 // Execute executes the request
-//  @return MoveHardwareReservation201ResponseProject
-func (a *ProjectsApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*MoveHardwareReservation201ResponseProject, *http.Response, error) {
+//
+//	@return GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
+func (a *ProjectsApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *MoveHardwareReservation201ResponseProject
+		localVarReturnValue *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsApiService.UpdateProject")
@@ -1667,8 +1675,8 @@ func (a *ProjectsApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*M
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.updateProjectRequest == nil {
+		return localVarReturnValue, nil, reportError("updateProjectRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1689,7 +1697,7 @@ func (a *ProjectsApiService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*M
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.updateProjectRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

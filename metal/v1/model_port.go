@@ -15,16 +15,21 @@ import (
 	"encoding/json"
 )
 
-// Port struct for Port
+// Port Port is a hardware port associated with a reserved or instantiated hardware device.
 type Port struct {
-	Data map[string]interface{} `json:"data,omitempty"`
+	Bond *FindDeviceById200ResponseNetworkPortsInnerBond `json:"bond,omitempty"`
+	Data *FindDeviceById200ResponseNetworkPortsInnerData `json:"data,omitempty"`
 	// Indicates whether or not the bond can be broken on the port (when applicable).
-	DisbondOperationSupported *bool                                  `json:"disbond_operation_supported,omitempty"`
-	Href                      *string                                `json:"href,omitempty"`
-	Id                        *string                                `json:"id,omitempty"`
-	Name                      *string                                `json:"name,omitempty"`
-	Type                      *string                                `json:"type,omitempty"`
-	VirtualNetworks           []FindBatchById200ResponseDevicesInner `json:"virtual_networks,omitempty"`
+	DisbondOperationSupported *bool   `json:"disbond_operation_supported,omitempty"`
+	Href                      *string `json:"href,omitempty"`
+	Id                        *string `json:"id,omitempty"`
+	Name                      *string `json:"name,omitempty"`
+	// Type is either \"NetworkBondPort\" for bond ports or \"NetworkPort\" for bondable ethernet ports
+	Type *string `json:"type,omitempty"`
+	// Composite network type of the bond
+	NetworkType          *string                                                         `json:"network_type,omitempty"`
+	NativeVirtualNetwork *FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork `json:"native_virtual_network,omitempty"`
+	VirtualNetworks      []FindBatchById200ResponseDevicesInner                          `json:"virtual_networks,omitempty"`
 }
 
 // NewPort instantiates a new Port object
@@ -44,18 +49,50 @@ func NewPortWithDefaults() *Port {
 	return &this
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
-func (o *Port) GetData() map[string]interface{} {
-	if o == nil || o.Data == nil {
-		var ret map[string]interface{}
+// GetBond returns the Bond field value if set, zero value otherwise.
+func (o *Port) GetBond() FindDeviceById200ResponseNetworkPortsInnerBond {
+	if o == nil || o.Bond == nil {
+		var ret FindDeviceById200ResponseNetworkPortsInnerBond
 		return ret
 	}
-	return o.Data
+	return *o.Bond
+}
+
+// GetBondOk returns a tuple with the Bond field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Port) GetBondOk() (*FindDeviceById200ResponseNetworkPortsInnerBond, bool) {
+	if o == nil || o.Bond == nil {
+		return nil, false
+	}
+	return o.Bond, true
+}
+
+// HasBond returns a boolean if a field has been set.
+func (o *Port) HasBond() bool {
+	if o != nil && o.Bond != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBond gets a reference to the given FindDeviceById200ResponseNetworkPortsInnerBond and assigns it to the Bond field.
+func (o *Port) SetBond(v FindDeviceById200ResponseNetworkPortsInnerBond) {
+	o.Bond = &v
+}
+
+// GetData returns the Data field value if set, zero value otherwise.
+func (o *Port) GetData() FindDeviceById200ResponseNetworkPortsInnerData {
+	if o == nil || o.Data == nil {
+		var ret FindDeviceById200ResponseNetworkPortsInnerData
+		return ret
+	}
+	return *o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Port) GetDataOk() (map[string]interface{}, bool) {
+func (o *Port) GetDataOk() (*FindDeviceById200ResponseNetworkPortsInnerData, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -71,9 +108,9 @@ func (o *Port) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given map[string]interface{} and assigns it to the Data field.
-func (o *Port) SetData(v map[string]interface{}) {
-	o.Data = v
+// SetData gets a reference to the given FindDeviceById200ResponseNetworkPortsInnerData and assigns it to the Data field.
+func (o *Port) SetData(v FindDeviceById200ResponseNetworkPortsInnerData) {
+	o.Data = &v
 }
 
 // GetDisbondOperationSupported returns the DisbondOperationSupported field value if set, zero value otherwise.
@@ -236,6 +273,70 @@ func (o *Port) SetType(v string) {
 	o.Type = &v
 }
 
+// GetNetworkType returns the NetworkType field value if set, zero value otherwise.
+func (o *Port) GetNetworkType() string {
+	if o == nil || o.NetworkType == nil {
+		var ret string
+		return ret
+	}
+	return *o.NetworkType
+}
+
+// GetNetworkTypeOk returns a tuple with the NetworkType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Port) GetNetworkTypeOk() (*string, bool) {
+	if o == nil || o.NetworkType == nil {
+		return nil, false
+	}
+	return o.NetworkType, true
+}
+
+// HasNetworkType returns a boolean if a field has been set.
+func (o *Port) HasNetworkType() bool {
+	if o != nil && o.NetworkType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkType gets a reference to the given string and assigns it to the NetworkType field.
+func (o *Port) SetNetworkType(v string) {
+	o.NetworkType = &v
+}
+
+// GetNativeVirtualNetwork returns the NativeVirtualNetwork field value if set, zero value otherwise.
+func (o *Port) GetNativeVirtualNetwork() FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork {
+	if o == nil || o.NativeVirtualNetwork == nil {
+		var ret FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork
+		return ret
+	}
+	return *o.NativeVirtualNetwork
+}
+
+// GetNativeVirtualNetworkOk returns a tuple with the NativeVirtualNetwork field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Port) GetNativeVirtualNetworkOk() (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork, bool) {
+	if o == nil || o.NativeVirtualNetwork == nil {
+		return nil, false
+	}
+	return o.NativeVirtualNetwork, true
+}
+
+// HasNativeVirtualNetwork returns a boolean if a field has been set.
+func (o *Port) HasNativeVirtualNetwork() bool {
+	if o != nil && o.NativeVirtualNetwork != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNativeVirtualNetwork gets a reference to the given FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork and assigns it to the NativeVirtualNetwork field.
+func (o *Port) SetNativeVirtualNetwork(v FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetwork) {
+	o.NativeVirtualNetwork = &v
+}
+
 // GetVirtualNetworks returns the VirtualNetworks field value if set, zero value otherwise.
 func (o *Port) GetVirtualNetworks() []FindBatchById200ResponseDevicesInner {
 	if o == nil || o.VirtualNetworks == nil {
@@ -270,6 +371,9 @@ func (o *Port) SetVirtualNetworks(v []FindBatchById200ResponseDevicesInner) {
 
 func (o Port) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Bond != nil {
+		toSerialize["bond"] = o.Bond
+	}
 	if o.Data != nil {
 		toSerialize["data"] = o.Data
 	}
@@ -287,6 +391,12 @@ func (o Port) MarshalJSON() ([]byte, error) {
 	}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
+	}
+	if o.NetworkType != nil {
+		toSerialize["network_type"] = o.NetworkType
+	}
+	if o.NativeVirtualNetwork != nil {
+		toSerialize["native_virtual_network"] = o.NativeVirtualNetwork
 	}
 	if o.VirtualNetworks != nil {
 		toSerialize["virtual_networks"] = o.VirtualNetworks

@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Tags** | Pointer to **[]string** |  | [optional] 
 **Addon** | Pointer to **bool** |  | [optional] 
 **AddressFamily** | Pointer to **int32** |  | [optional] 
 **Assignments** | Pointer to [**[]FindDeviceById200ResponseIpAddressesInner**](FindDeviceById200ResponseIpAddressesInner.md) |  | [optional] 
@@ -12,18 +11,19 @@ Name | Type | Description | Notes
 **Cidr** | Pointer to **int32** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **Enabled** | Pointer to **bool** |  | [optional] 
-**Facility** | Pointer to [**IPReservationFacility**](IPReservationFacility.md) |  | [optional] 
+**Facility** | Pointer to [**FindIPAddressById200ResponseOneOfFacility**](FindIPAddressById200ResponseOneOfFacility.md) |  | [optional] 
 **GlobalIp** | Pointer to **bool** |  | [optional] 
 **Href** | Pointer to **string** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **Manageable** | Pointer to **bool** |  | [optional] 
 **Management** | Pointer to **bool** |  | [optional] 
-**MetalGateway** | Pointer to [**FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway**](FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway.md) |  | [optional] 
-**Metro** | Pointer to [**IPReservationMetro**](IPReservationMetro.md) |  | [optional] 
+**MetalGateway** | Pointer to [**FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner**](FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner.md) |  | [optional] 
+**Metro** | Pointer to [**FindIPAddressById200ResponseOneOfMetro**](FindIPAddressById200ResponseOneOfMetro.md) |  | [optional] 
 **Netmask** | Pointer to **string** |  | [optional] 
 **Network** | Pointer to **string** |  | [optional] 
 **Public** | Pointer to **bool** |  | [optional] 
 **State** | Pointer to **string** |  | [optional] 
+**Tags** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -43,31 +43,6 @@ will change when the set of required properties is changed
 NewIPReservationWithDefaults instantiates a new IPReservation object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetTags
-
-`func (o *IPReservation) GetTags() []string`
-
-GetTags returns the Tags field if non-nil, zero value otherwise.
-
-### GetTagsOk
-
-`func (o *IPReservation) GetTagsOk() (*[]string, bool)`
-
-GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTags
-
-`func (o *IPReservation) SetTags(v []string)`
-
-SetTags sets Tags field to given value.
-
-### HasTags
-
-`func (o *IPReservation) HasTags() bool`
-
-HasTags returns a boolean if a field has been set.
 
 ### GetAddon
 
@@ -246,20 +221,20 @@ HasEnabled returns a boolean if a field has been set.
 
 ### GetFacility
 
-`func (o *IPReservation) GetFacility() IPReservationFacility`
+`func (o *IPReservation) GetFacility() FindIPAddressById200ResponseOneOfFacility`
 
 GetFacility returns the Facility field if non-nil, zero value otherwise.
 
 ### GetFacilityOk
 
-`func (o *IPReservation) GetFacilityOk() (*IPReservationFacility, bool)`
+`func (o *IPReservation) GetFacilityOk() (*FindIPAddressById200ResponseOneOfFacility, bool)`
 
 GetFacilityOk returns a tuple with the Facility field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFacility
 
-`func (o *IPReservation) SetFacility(v IPReservationFacility)`
+`func (o *IPReservation) SetFacility(v FindIPAddressById200ResponseOneOfFacility)`
 
 SetFacility sets Facility field to given value.
 
@@ -396,20 +371,20 @@ HasManagement returns a boolean if a field has been set.
 
 ### GetMetalGateway
 
-`func (o *IPReservation) GetMetalGateway() FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway`
+`func (o *IPReservation) GetMetalGateway() FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner`
 
 GetMetalGateway returns the MetalGateway field if non-nil, zero value otherwise.
 
 ### GetMetalGatewayOk
 
-`func (o *IPReservation) GetMetalGatewayOk() (*FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway, bool)`
+`func (o *IPReservation) GetMetalGatewayOk() (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner, bool)`
 
 GetMetalGatewayOk returns a tuple with the MetalGateway field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetalGateway
 
-`func (o *IPReservation) SetMetalGateway(v FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway)`
+`func (o *IPReservation) SetMetalGateway(v FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner)`
 
 SetMetalGateway sets MetalGateway field to given value.
 
@@ -421,20 +396,20 @@ HasMetalGateway returns a boolean if a field has been set.
 
 ### GetMetro
 
-`func (o *IPReservation) GetMetro() IPReservationMetro`
+`func (o *IPReservation) GetMetro() FindIPAddressById200ResponseOneOfMetro`
 
 GetMetro returns the Metro field if non-nil, zero value otherwise.
 
 ### GetMetroOk
 
-`func (o *IPReservation) GetMetroOk() (*IPReservationMetro, bool)`
+`func (o *IPReservation) GetMetroOk() (*FindIPAddressById200ResponseOneOfMetro, bool)`
 
 GetMetroOk returns a tuple with the Metro field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetro
 
-`func (o *IPReservation) SetMetro(v IPReservationMetro)`
+`func (o *IPReservation) SetMetro(v FindIPAddressById200ResponseOneOfMetro)`
 
 SetMetro sets Metro field to given value.
 
@@ -543,6 +518,31 @@ SetState sets State field to given value.
 `func (o *IPReservation) HasState() bool`
 
 HasState returns a boolean if a field has been set.
+
+### GetTags
+
+`func (o *IPReservation) GetTags() []string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *IPReservation) GetTagsOk() (*[]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *IPReservation) SetTags(v []string)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *IPReservation) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

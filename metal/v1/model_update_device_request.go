@@ -17,7 +17,6 @@ import (
 
 // UpdateDeviceRequest struct for UpdateDeviceRequest
 type UpdateDeviceRequest struct {
-	Tags          []string               `json:"tags,omitempty"`
 	AlwaysPxe     *bool                  `json:"always_pxe,omitempty"`
 	BillingCycle  *string                `json:"billing_cycle,omitempty"`
 	Customdata    map[string]interface{} `json:"customdata,omitempty"`
@@ -26,9 +25,10 @@ type UpdateDeviceRequest struct {
 	IpxeScriptUrl *string                `json:"ipxe_script_url,omitempty"`
 	Locked        *bool                  `json:"locked,omitempty"`
 	// If true, this instance can not be converted to a different network type.
-	NetworkFrozen *bool   `json:"network_frozen,omitempty"`
-	SpotInstance  *bool   `json:"spot_instance,omitempty"`
-	Userdata      *string `json:"userdata,omitempty"`
+	NetworkFrozen *bool    `json:"network_frozen,omitempty"`
+	SpotInstance  *bool    `json:"spot_instance,omitempty"`
+	Tags          []string `json:"tags,omitempty"`
+	Userdata      *string  `json:"userdata,omitempty"`
 }
 
 // NewUpdateDeviceRequest instantiates a new UpdateDeviceRequest object
@@ -46,38 +46,6 @@ func NewUpdateDeviceRequest() *UpdateDeviceRequest {
 func NewUpdateDeviceRequestWithDefaults() *UpdateDeviceRequest {
 	this := UpdateDeviceRequest{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *UpdateDeviceRequest) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateDeviceRequest) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *UpdateDeviceRequest) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *UpdateDeviceRequest) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetAlwaysPxe returns the AlwaysPxe field value if set, zero value otherwise.
@@ -368,6 +336,38 @@ func (o *UpdateDeviceRequest) SetSpotInstance(v bool) {
 	o.SpotInstance = &v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *UpdateDeviceRequest) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateDeviceRequest) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *UpdateDeviceRequest) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *UpdateDeviceRequest) SetTags(v []string) {
+	o.Tags = v
+}
+
 // GetUserdata returns the Userdata field value if set, zero value otherwise.
 func (o *UpdateDeviceRequest) GetUserdata() string {
 	if o == nil || o.Userdata == nil {
@@ -402,9 +402,6 @@ func (o *UpdateDeviceRequest) SetUserdata(v string) {
 
 func (o UpdateDeviceRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.AlwaysPxe != nil {
 		toSerialize["always_pxe"] = o.AlwaysPxe
 	}
@@ -431,6 +428,9 @@ func (o UpdateDeviceRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.SpotInstance != nil {
 		toSerialize["spot_instance"] = o.SpotInstance
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	if o.Userdata != nil {
 		toSerialize["userdata"] = o.Userdata

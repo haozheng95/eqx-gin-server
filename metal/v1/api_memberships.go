@@ -38,9 +38,9 @@ DeleteMembership Delete the membership
 
 Deletes the membership.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Membership UUID
- @return ApiDeleteMembershipRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Membership UUID
+	@return ApiDeleteMembershipRequest
 */
 func (a *MembershipsApiService) DeleteMembership(ctx context.Context, id string) ApiDeleteMembershipRequest {
 	return ApiDeleteMembershipRequest{
@@ -187,9 +187,9 @@ FindMembershipById Retrieve a membership
 
 Returns a single membership.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Membership UUID
- @return ApiFindMembershipByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Membership UUID
+	@return ApiFindMembershipByIdRequest
 */
 func (a *MembershipsApiService) FindMembershipById(ctx context.Context, id string) ApiFindMembershipByIdRequest {
 	return ApiFindMembershipByIdRequest{
@@ -200,7 +200,8 @@ func (a *MembershipsApiService) FindMembershipById(ctx context.Context, id strin
 }
 
 // Execute executes the request
-//  @return FindInvitations200ResponseInvitationsInner
+//
+//	@return FindInvitations200ResponseInvitationsInner
 func (a *MembershipsApiService) FindMembershipByIdExecute(r ApiFindMembershipByIdRequest) (*FindInvitations200ResponseInvitationsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -325,15 +326,15 @@ func (a *MembershipsApiService) FindMembershipByIdExecute(r ApiFindMembershipByI
 }
 
 type ApiUpdateMembershipRequest struct {
-	ctx        context.Context
-	ApiService *MembershipsApiService
-	id         string
-	body       *UpdateMembershipRequest
+	ctx                     context.Context
+	ApiService              *MembershipsApiService
+	id                      string
+	updateMembershipRequest *UpdateMembershipRequest
 }
 
 // Membership to update
-func (r ApiUpdateMembershipRequest) Body(body UpdateMembershipRequest) ApiUpdateMembershipRequest {
-	r.body = &body
+func (r ApiUpdateMembershipRequest) UpdateMembershipRequest(updateMembershipRequest UpdateMembershipRequest) ApiUpdateMembershipRequest {
+	r.updateMembershipRequest = &updateMembershipRequest
 	return r
 }
 
@@ -346,9 +347,9 @@ UpdateMembership Update the membership
 
 Updates the membership.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Membership UUID
- @return ApiUpdateMembershipRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Membership UUID
+	@return ApiUpdateMembershipRequest
 */
 func (a *MembershipsApiService) UpdateMembership(ctx context.Context, id string) ApiUpdateMembershipRequest {
 	return ApiUpdateMembershipRequest{
@@ -359,7 +360,8 @@ func (a *MembershipsApiService) UpdateMembership(ctx context.Context, id string)
 }
 
 // Execute executes the request
-//  @return FindInvitations200ResponseInvitationsInner
+//
+//	@return FindInvitations200ResponseInvitationsInner
 func (a *MembershipsApiService) UpdateMembershipExecute(r ApiUpdateMembershipRequest) (*FindInvitations200ResponseInvitationsInner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -379,8 +381,8 @@ func (a *MembershipsApiService) UpdateMembershipExecute(r ApiUpdateMembershipReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.updateMembershipRequest == nil {
+		return localVarReturnValue, nil, reportError("updateMembershipRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -401,7 +403,7 @@ func (a *MembershipsApiService) UpdateMembershipExecute(r ApiUpdateMembershipReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.updateMembershipRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

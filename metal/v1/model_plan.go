@@ -18,16 +18,21 @@ import (
 // Plan struct for Plan
 type Plan struct {
 	// Shows which facilities the plan is available in, and the facility-based price if it is different from the default price.
-	AvailableIn []FindBatchById200ResponseDevicesInner `json:"available_in,omitempty"`
-	Class       *string                                `json:"class,omitempty"`
-	Description *string                                `json:"description,omitempty"`
-	Id          *string                                `json:"id,omitempty"`
-	Legacy      *bool                                  `json:"legacy,omitempty"`
-	Line        *string                                `json:"line,omitempty"`
-	Name        *string                                `json:"name,omitempty"`
-	Pricing     map[string]interface{}                 `json:"pricing,omitempty"`
-	Slug        *string                                `json:"slug,omitempty"`
-	Specs       map[string]interface{}                 `json:"specs,omitempty"`
+	AvailableIn []FindDeviceById200ResponsePlanAvailableInInner `json:"available_in,omitempty"`
+	// Shows which metros the plan is available in, and the metro-based price if it is different from the default price.
+	AvailableInMetros []FindDeviceById200ResponsePlanAvailableInMetrosInner `json:"available_in_metros,omitempty"`
+	Class             *string                                               `json:"class,omitempty"`
+	Description       *string                                               `json:"description,omitempty"`
+	DeploymentTypes   []string                                              `json:"deployment_types,omitempty"`
+	Id                *string                                               `json:"id,omitempty"`
+	Legacy            *bool                                                 `json:"legacy,omitempty"`
+	Line              *string                                               `json:"line,omitempty"`
+	Name              *string                                               `json:"name,omitempty"`
+	Pricing           map[string]interface{}                                `json:"pricing,omitempty"`
+	Slug              *string                                               `json:"slug,omitempty"`
+	Specs             *FindDeviceById200ResponsePlanSpecs                   `json:"specs,omitempty"`
+	// The plan type
+	Type *string `json:"type,omitempty"`
 }
 
 // NewPlan instantiates a new Plan object
@@ -48,9 +53,9 @@ func NewPlanWithDefaults() *Plan {
 }
 
 // GetAvailableIn returns the AvailableIn field value if set, zero value otherwise.
-func (o *Plan) GetAvailableIn() []FindBatchById200ResponseDevicesInner {
+func (o *Plan) GetAvailableIn() []FindDeviceById200ResponsePlanAvailableInInner {
 	if o == nil || o.AvailableIn == nil {
-		var ret []FindBatchById200ResponseDevicesInner
+		var ret []FindDeviceById200ResponsePlanAvailableInInner
 		return ret
 	}
 	return o.AvailableIn
@@ -58,7 +63,7 @@ func (o *Plan) GetAvailableIn() []FindBatchById200ResponseDevicesInner {
 
 // GetAvailableInOk returns a tuple with the AvailableIn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Plan) GetAvailableInOk() ([]FindBatchById200ResponseDevicesInner, bool) {
+func (o *Plan) GetAvailableInOk() ([]FindDeviceById200ResponsePlanAvailableInInner, bool) {
 	if o == nil || o.AvailableIn == nil {
 		return nil, false
 	}
@@ -74,9 +79,41 @@ func (o *Plan) HasAvailableIn() bool {
 	return false
 }
 
-// SetAvailableIn gets a reference to the given []FindBatchById200ResponseDevicesInner and assigns it to the AvailableIn field.
-func (o *Plan) SetAvailableIn(v []FindBatchById200ResponseDevicesInner) {
+// SetAvailableIn gets a reference to the given []FindDeviceById200ResponsePlanAvailableInInner and assigns it to the AvailableIn field.
+func (o *Plan) SetAvailableIn(v []FindDeviceById200ResponsePlanAvailableInInner) {
 	o.AvailableIn = v
+}
+
+// GetAvailableInMetros returns the AvailableInMetros field value if set, zero value otherwise.
+func (o *Plan) GetAvailableInMetros() []FindDeviceById200ResponsePlanAvailableInMetrosInner {
+	if o == nil || o.AvailableInMetros == nil {
+		var ret []FindDeviceById200ResponsePlanAvailableInMetrosInner
+		return ret
+	}
+	return o.AvailableInMetros
+}
+
+// GetAvailableInMetrosOk returns a tuple with the AvailableInMetros field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Plan) GetAvailableInMetrosOk() ([]FindDeviceById200ResponsePlanAvailableInMetrosInner, bool) {
+	if o == nil || o.AvailableInMetros == nil {
+		return nil, false
+	}
+	return o.AvailableInMetros, true
+}
+
+// HasAvailableInMetros returns a boolean if a field has been set.
+func (o *Plan) HasAvailableInMetros() bool {
+	if o != nil && o.AvailableInMetros != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailableInMetros gets a reference to the given []FindDeviceById200ResponsePlanAvailableInMetrosInner and assigns it to the AvailableInMetros field.
+func (o *Plan) SetAvailableInMetros(v []FindDeviceById200ResponsePlanAvailableInMetrosInner) {
+	o.AvailableInMetros = v
 }
 
 // GetClass returns the Class field value if set, zero value otherwise.
@@ -141,6 +178,38 @@ func (o *Plan) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *Plan) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetDeploymentTypes returns the DeploymentTypes field value if set, zero value otherwise.
+func (o *Plan) GetDeploymentTypes() []string {
+	if o == nil || o.DeploymentTypes == nil {
+		var ret []string
+		return ret
+	}
+	return o.DeploymentTypes
+}
+
+// GetDeploymentTypesOk returns a tuple with the DeploymentTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Plan) GetDeploymentTypesOk() ([]string, bool) {
+	if o == nil || o.DeploymentTypes == nil {
+		return nil, false
+	}
+	return o.DeploymentTypes, true
+}
+
+// HasDeploymentTypes returns a boolean if a field has been set.
+func (o *Plan) HasDeploymentTypes() bool {
+	if o != nil && o.DeploymentTypes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeploymentTypes gets a reference to the given []string and assigns it to the DeploymentTypes field.
+func (o *Plan) SetDeploymentTypes(v []string) {
+	o.DeploymentTypes = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -336,17 +405,17 @@ func (o *Plan) SetSlug(v string) {
 }
 
 // GetSpecs returns the Specs field value if set, zero value otherwise.
-func (o *Plan) GetSpecs() map[string]interface{} {
+func (o *Plan) GetSpecs() FindDeviceById200ResponsePlanSpecs {
 	if o == nil || o.Specs == nil {
-		var ret map[string]interface{}
+		var ret FindDeviceById200ResponsePlanSpecs
 		return ret
 	}
-	return o.Specs
+	return *o.Specs
 }
 
 // GetSpecsOk returns a tuple with the Specs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Plan) GetSpecsOk() (map[string]interface{}, bool) {
+func (o *Plan) GetSpecsOk() (*FindDeviceById200ResponsePlanSpecs, bool) {
 	if o == nil || o.Specs == nil {
 		return nil, false
 	}
@@ -362,9 +431,41 @@ func (o *Plan) HasSpecs() bool {
 	return false
 }
 
-// SetSpecs gets a reference to the given map[string]interface{} and assigns it to the Specs field.
-func (o *Plan) SetSpecs(v map[string]interface{}) {
-	o.Specs = v
+// SetSpecs gets a reference to the given FindDeviceById200ResponsePlanSpecs and assigns it to the Specs field.
+func (o *Plan) SetSpecs(v FindDeviceById200ResponsePlanSpecs) {
+	o.Specs = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *Plan) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Plan) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *Plan) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *Plan) SetType(v string) {
+	o.Type = &v
 }
 
 func (o Plan) MarshalJSON() ([]byte, error) {
@@ -372,11 +473,17 @@ func (o Plan) MarshalJSON() ([]byte, error) {
 	if o.AvailableIn != nil {
 		toSerialize["available_in"] = o.AvailableIn
 	}
+	if o.AvailableInMetros != nil {
+		toSerialize["available_in_metros"] = o.AvailableInMetros
+	}
 	if o.Class != nil {
 		toSerialize["class"] = o.Class
 	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
+	}
+	if o.DeploymentTypes != nil {
+		toSerialize["deployment_types"] = o.DeploymentTypes
 	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
@@ -398,6 +505,9 @@ func (o Plan) MarshalJSON() ([]byte, error) {
 	}
 	if o.Specs != nil {
 		toSerialize["specs"] = o.Specs
+	}
+	if o.Type != nil {
+		toSerialize["type"] = o.Type
 	}
 	return json.Marshal(toSerialize)
 }

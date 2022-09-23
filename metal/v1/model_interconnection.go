@@ -17,23 +17,29 @@ import (
 
 // Interconnection struct for Interconnection
 type Interconnection struct {
-	Tags         []string                              `json:"tags,omitempty"`
 	ContactEmail *string                               `json:"contact_email,omitempty"`
 	Description  *string                               `json:"description,omitempty"`
 	Facility     *FindBatchById200ResponseDevicesInner `json:"facility,omitempty"`
 	Id           *string                               `json:"id,omitempty"`
 	Metro        *GetInterconnection200ResponseMetro   `json:"metro,omitempty"`
-	// The mode of the connection (only relevant to dedicated connections). Shared connections won't have this field. Can be either 'standard' or 'tunnel'.   The default mode of a dedicated connection is 'standard'. The mode can only be changed when there are no associated virtual circuits on the connection.   In tunnel mode, an 802.1q tunnel is added to a port to send/receive double tagged packets from server instances.
-	Mode          *string                                           `json:"mode,omitempty"`
-	Name          *string                                           `json:"name,omitempty"`
-	Organization  *FindBatchById200ResponseDevicesInner             `json:"organization,omitempty"`
-	Ports         []GetInterconnection200ResponsePortsInner         `json:"ports,omitempty"`
-	Redundancy    *string                                           `json:"redundancy,omitempty"`
+	// The mode of the interconnection (only relevant to Dedicated Ports). Shared connections won't have this field. Can be either 'standard' or 'tunnel'.   The default mode of an interconnection on a Dedicated Port is 'standard'. The mode can only be changed when there are no associated virtual circuits on the interconnection.   In tunnel mode, an 802.1q tunnel is added to a port to send/receive double tagged packets from server instances.
+	Mode         *string                               `json:"mode,omitempty"`
+	Name         *string                               `json:"name,omitempty"`
+	Organization *FindBatchById200ResponseDevicesInner `json:"organization,omitempty"`
+	// For Fabric VCs, these represent Virtual Port(s) created for the interconnection. For dedicated interconnections, these represent the Dedicated Port(s).
+	Ports []GetInterconnection200ResponsePortsInner `json:"ports,omitempty"`
+	// Either 'primary', meaning a single interconnection, or 'redundant', meaning a redundant interconnection.
+	Redundancy *string `json:"redundancy,omitempty"`
+	// For Fabric VCs (Metal Billed), this will show details of the A-Side service tokens issued for the interconnection. For Fabric VCs (Fabric Billed), this will show the details of the Z-Side service tokens issued for the interconnection. Dedicated interconnections will not have any service tokens issued. There will be one per interconnection, so for redundant interconnections, there should be two service tokens issued. For access to Fabric VCs, which are not generally available, please contact our Support Team for more details.
 	ServiceTokens []GetInterconnection200ResponseServiceTokensInner `json:"service_tokens,omitempty"`
-	// The connection's speed in bps.
-	Speed  *int32  `json:"speed,omitempty"`
-	Status *string `json:"status,omitempty"`
-	Type   *string `json:"type,omitempty"`
+	// For interconnections on Dedicated Ports and shared connections, this represents the interconnection's speed in bps. For Fabric VCs, this field refers to the maximum speed of the interconnection in bps. This value will default to 10Gbps for Fabric VCs (Fabric Billed). For access to Fabric VCs, which are not generally available, please contact our Support Team for more details.
+	Speed  *int32   `json:"speed,omitempty"`
+	Status *string  `json:"status,omitempty"`
+	Tags   []string `json:"tags,omitempty"`
+	// This token is used for shared interconnections to be used as the Fabric Token. This field will be deprecated when we release Fabric VCs. With the release of Fabric VCs that use A-Side and Z-Side service tokens, we will no longer issue these tokens for any shared interconnections created after the release of Fabric VCs. This token will also never be issued for dedicated interconnections. For access to Fabric VCs, which are not generally available, please contact our Support Team for more details.
+	Token *string `json:"token,omitempty"`
+	// The 'shared' type of interconnection refers to shared connections, or later also known as Fabric Virtual Connections (or Fabric VCs). The 'dedicated' type of interconnection refers to interconnections created with Dedicated Ports. For access to Fabric VCs, which are not generally available, please contact our Support Team for more details.
+	Type *string `json:"type,omitempty"`
 }
 
 // NewInterconnection instantiates a new Interconnection object
@@ -51,38 +57,6 @@ func NewInterconnection() *Interconnection {
 func NewInterconnectionWithDefaults() *Interconnection {
 	this := Interconnection{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *Interconnection) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Interconnection) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *Interconnection) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *Interconnection) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetContactEmail returns the ContactEmail field value if set, zero value otherwise.
@@ -501,6 +475,70 @@ func (o *Interconnection) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *Interconnection) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Interconnection) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *Interconnection) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *Interconnection) SetTags(v []string) {
+	o.Tags = v
+}
+
+// GetToken returns the Token field value if set, zero value otherwise.
+func (o *Interconnection) GetToken() string {
+	if o == nil || o.Token == nil {
+		var ret string
+		return ret
+	}
+	return *o.Token
+}
+
+// GetTokenOk returns a tuple with the Token field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Interconnection) GetTokenOk() (*string, bool) {
+	if o == nil || o.Token == nil {
+		return nil, false
+	}
+	return o.Token, true
+}
+
+// HasToken returns a boolean if a field has been set.
+func (o *Interconnection) HasToken() bool {
+	if o != nil && o.Token != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetToken gets a reference to the given string and assigns it to the Token field.
+func (o *Interconnection) SetToken(v string) {
+	o.Token = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *Interconnection) GetType() string {
 	if o == nil || o.Type == nil {
@@ -535,9 +573,6 @@ func (o *Interconnection) SetType(v string) {
 
 func (o Interconnection) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.ContactEmail != nil {
 		toSerialize["contact_email"] = o.ContactEmail
 	}
@@ -576,6 +611,12 @@ func (o Interconnection) MarshalJSON() ([]byte, error) {
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
+	}
+	if o.Token != nil {
+		toSerialize["token"] = o.Token
 	}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type

@@ -18,29 +18,30 @@ import (
 
 // VrfIpReservation struct for VrfIpReservation
 type VrfIpReservation struct {
-	Tags          []string                                                        `json:"tags,omitempty"`
-	AddressFamily *int32                                                          `json:"address_family,omitempty"`
-	Cidr          *int32                                                          `json:"cidr,omitempty"`
-	CreatedAt     *time.Time                                                      `json:"created_at,omitempty"`
-	CreatedBy     *FindBatchById200ResponseDevicesInner                           `json:"created_by,omitempty"`
-	Details       *string                                                         `json:"details,omitempty"`
-	Href          *string                                                         `json:"href,omitempty"`
-	Id            *string                                                         `json:"id,omitempty"`
-	MetalGateway  *FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway `json:"metal_gateway,omitempty"`
-	Netmask       *string                                                         `json:"netmask,omitempty"`
-	Network       *string                                                         `json:"network,omitempty"`
-	Project       *MoveHardwareReservation201ResponseProject                      `json:"project,omitempty"`
-	State         *string                                                         `json:"state,omitempty"`
-	Type          *string                                                         `json:"type,omitempty"`
-	Vrf           *FindVrfs200ResponseVrfsInner                                   `json:"vrf,omitempty"`
+	AddressFamily *int32                                                                                      `json:"address_family,omitempty"`
+	Cidr          *int32                                                                                      `json:"cidr,omitempty"`
+	CreatedAt     *time.Time                                                                                  `json:"created_at,omitempty"`
+	CreatedBy     *FindBatchById200ResponseDevicesInner                                                       `json:"created_by,omitempty"`
+	Details       *string                                                                                     `json:"details,omitempty"`
+	Href          *string                                                                                     `json:"href,omitempty"`
+	Id            *string                                                                                     `json:"id,omitempty"`
+	MetalGateway  *FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner           `json:"metal_gateway,omitempty"`
+	Netmask       *string                                                                                     `json:"netmask,omitempty"`
+	Network       *string                                                                                     `json:"network,omitempty"`
+	Project       *GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject `json:"project,omitempty"`
+	State         *string                                                                                     `json:"state,omitempty"`
+	Tags          []string                                                                                    `json:"tags,omitempty"`
+	Type          *string                                                                                     `json:"type,omitempty"`
+	Vrf           GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf         `json:"vrf"`
 }
 
 // NewVrfIpReservation instantiates a new VrfIpReservation object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVrfIpReservation() *VrfIpReservation {
+func NewVrfIpReservation(vrf GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf) *VrfIpReservation {
 	this := VrfIpReservation{}
+	this.Vrf = vrf
 	return &this
 }
 
@@ -50,38 +51,6 @@ func NewVrfIpReservation() *VrfIpReservation {
 func NewVrfIpReservationWithDefaults() *VrfIpReservation {
 	this := VrfIpReservation{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *VrfIpReservation) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VrfIpReservation) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *VrfIpReservation) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *VrfIpReservation) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetAddressFamily returns the AddressFamily field value if set, zero value otherwise.
@@ -309,9 +278,9 @@ func (o *VrfIpReservation) SetId(v string) {
 }
 
 // GetMetalGateway returns the MetalGateway field value if set, zero value otherwise.
-func (o *VrfIpReservation) GetMetalGateway() FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway {
+func (o *VrfIpReservation) GetMetalGateway() FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner {
 	if o == nil || o.MetalGateway == nil {
-		var ret FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway
+		var ret FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner
 		return ret
 	}
 	return *o.MetalGateway
@@ -319,7 +288,7 @@ func (o *VrfIpReservation) GetMetalGateway() FindVirtualNetworks200ResponseVirtu
 
 // GetMetalGatewayOk returns a tuple with the MetalGateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VrfIpReservation) GetMetalGatewayOk() (*FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway, bool) {
+func (o *VrfIpReservation) GetMetalGatewayOk() (*FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner, bool) {
 	if o == nil || o.MetalGateway == nil {
 		return nil, false
 	}
@@ -335,8 +304,8 @@ func (o *VrfIpReservation) HasMetalGateway() bool {
 	return false
 }
 
-// SetMetalGateway gets a reference to the given FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway and assigns it to the MetalGateway field.
-func (o *VrfIpReservation) SetMetalGateway(v FindVirtualNetworks200ResponseVirtualNetworksInnerMetalGateway) {
+// SetMetalGateway gets a reference to the given FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner and assigns it to the MetalGateway field.
+func (o *VrfIpReservation) SetMetalGateway(v FindDeviceById200ResponseNetworkPortsInnerNativeVirtualNetworkMetalGatewaysInner) {
 	o.MetalGateway = &v
 }
 
@@ -405,9 +374,9 @@ func (o *VrfIpReservation) SetNetwork(v string) {
 }
 
 // GetProject returns the Project field value if set, zero value otherwise.
-func (o *VrfIpReservation) GetProject() MoveHardwareReservation201ResponseProject {
+func (o *VrfIpReservation) GetProject() GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject {
 	if o == nil || o.Project == nil {
-		var ret MoveHardwareReservation201ResponseProject
+		var ret GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject
 		return ret
 	}
 	return *o.Project
@@ -415,7 +384,7 @@ func (o *VrfIpReservation) GetProject() MoveHardwareReservation201ResponseProjec
 
 // GetProjectOk returns a tuple with the Project field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VrfIpReservation) GetProjectOk() (*MoveHardwareReservation201ResponseProject, bool) {
+func (o *VrfIpReservation) GetProjectOk() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject, bool) {
 	if o == nil || o.Project == nil {
 		return nil, false
 	}
@@ -431,8 +400,8 @@ func (o *VrfIpReservation) HasProject() bool {
 	return false
 }
 
-// SetProject gets a reference to the given MoveHardwareReservation201ResponseProject and assigns it to the Project field.
-func (o *VrfIpReservation) SetProject(v MoveHardwareReservation201ResponseProject) {
+// SetProject gets a reference to the given GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject and assigns it to the Project field.
+func (o *VrfIpReservation) SetProject(v GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfProject) {
 	o.Project = &v
 }
 
@@ -468,6 +437,38 @@ func (o *VrfIpReservation) SetState(v string) {
 	o.State = &v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *VrfIpReservation) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VrfIpReservation) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *VrfIpReservation) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *VrfIpReservation) SetTags(v []string) {
+	o.Tags = v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *VrfIpReservation) GetType() string {
 	if o == nil || o.Type == nil {
@@ -500,43 +501,32 @@ func (o *VrfIpReservation) SetType(v string) {
 	o.Type = &v
 }
 
-// GetVrf returns the Vrf field value if set, zero value otherwise.
-func (o *VrfIpReservation) GetVrf() FindVrfs200ResponseVrfsInner {
-	if o == nil || o.Vrf == nil {
-		var ret FindVrfs200ResponseVrfsInner
+// GetVrf returns the Vrf field value
+func (o *VrfIpReservation) GetVrf() GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf {
+	if o == nil {
+		var ret GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf
 		return ret
 	}
-	return *o.Vrf
+
+	return o.Vrf
 }
 
-// GetVrfOk returns a tuple with the Vrf field value if set, nil otherwise
+// GetVrfOk returns a tuple with the Vrf field value
 // and a boolean to check if the value has been set.
-func (o *VrfIpReservation) GetVrfOk() (*FindVrfs200ResponseVrfsInner, bool) {
-	if o == nil || o.Vrf == nil {
+func (o *VrfIpReservation) GetVrfOk() (*GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Vrf, true
+	return &o.Vrf, true
 }
 
-// HasVrf returns a boolean if a field has been set.
-func (o *VrfIpReservation) HasVrf() bool {
-	if o != nil && o.Vrf != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVrf gets a reference to the given FindVrfs200ResponseVrfsInner and assigns it to the Vrf field.
-func (o *VrfIpReservation) SetVrf(v FindVrfs200ResponseVrfsInner) {
-	o.Vrf = &v
+// SetVrf sets field value
+func (o *VrfIpReservation) SetVrf(v GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1Vrf) {
+	o.Vrf = v
 }
 
 func (o VrfIpReservation) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.AddressFamily != nil {
 		toSerialize["address_family"] = o.AddressFamily
 	}
@@ -573,10 +563,13 @@ func (o VrfIpReservation) MarshalJSON() ([]byte, error) {
 	if o.State != nil {
 		toSerialize["state"] = o.State
 	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
+	}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
 	}
-	if o.Vrf != nil {
+	if true {
 		toSerialize["vrf"] = o.Vrf
 	}
 	return json.Marshal(toSerialize)

@@ -38,6 +38,8 @@ type Entitlement struct {
 func NewEntitlement(id string, slug string, weight int32) *Entitlement {
 	this := Entitlement{}
 	this.Id = id
+	var projectQuota int32 = 0
+	this.ProjectQuota = &projectQuota
 	this.Slug = slug
 	this.Weight = weight
 	return &this
@@ -48,6 +50,8 @@ func NewEntitlement(id string, slug string, weight int32) *Entitlement {
 // but it doesn't guarantee that properties required by API are set
 func NewEntitlementWithDefaults() *Entitlement {
 	this := Entitlement{}
+	var projectQuota int32 = 0
+	this.ProjectQuota = &projectQuota
 	return &this
 }
 

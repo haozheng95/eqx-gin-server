@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## FindIPAddressById
 
-> map[string]interface{} FindIPAddressById(ctx, id).Include(include).Exclude(exclude).Execute()
+> FindIPAddressById200Response FindIPAddressById(ctx, id).Include(include).Exclude(exclude).Execute()
 
 Retrieve an ip address
 
@@ -114,7 +114,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `IPAddressesApi.FindIPAddressById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FindIPAddressById`: map[string]interface{}
+    // response from `FindIPAddressById`: FindIPAddressById200Response
     fmt.Fprintf(os.Stdout, "Response from `IPAddressesApi.FindIPAddressById`: %v\n", resp)
 }
 ```
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]interface{}**
+[**FindIPAddressById200Response**](FindIPAddressById200Response.md)
 
 ### Authorization
 
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 
 ## RequestIPReservation
 
-> map[string]interface{} RequestIPReservation(ctx, id).Body(body).Execute()
+> RequestIPReservation201Response RequestIPReservation(ctx, id).RequestIPReservationRequest(requestIPReservationRequest).Execute()
 
 Requesting IP reservations
 
@@ -394,16 +394,16 @@ import (
 
 func main() {
     id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Project UUID
-    body := map[string]interface{}{ ... } // map[string]interface{} | IP Reservation Request to create
+    requestIPReservationRequest := openapiclient.requestIPReservation_request{RequestIPReservationRequestOneOf: openapiclient.NewRequestIPReservationRequestOneOf(int32(123), "Type_example")} // RequestIPReservationRequest | IP Reservation Request to create
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.IPAddressesApi.RequestIPReservation(context.Background(), id).Body(body).Execute()
+    resp, r, err := apiClient.IPAddressesApi.RequestIPReservation(context.Background(), id).RequestIPReservationRequest(requestIPReservationRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IPAddressesApi.RequestIPReservation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `RequestIPReservation`: map[string]interface{}
+    // response from `RequestIPReservation`: RequestIPReservation201Response
     fmt.Fprintf(os.Stdout, "Response from `IPAddressesApi.RequestIPReservation`: %v\n", resp)
 }
 ```
@@ -424,11 +424,11 @@ Other parameters are passed through a pointer to a apiRequestIPReservationReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | **map[string]interface{}** | IP Reservation Request to create | 
+ **requestIPReservationRequest** | [**RequestIPReservationRequest**](RequestIPReservationRequest.md) | IP Reservation Request to create | 
 
 ### Return type
 
-**map[string]interface{}**
+[**RequestIPReservation201Response**](RequestIPReservation201Response.md)
 
 ### Authorization
 
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
 
 ## UpdateIPAddress
 
-> map[string]interface{} UpdateIPAddress(ctx, id).Details(details).Customdata(customdata).Execute()
+> FindIPAddressById200Response UpdateIPAddress(ctx, id).Details(details).Customdata(customdata).Execute()
 
 Update an ip address
 
@@ -476,7 +476,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `IPAddressesApi.UpdateIPAddress``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateIPAddress`: map[string]interface{}
+    // response from `UpdateIPAddress`: FindIPAddressById200Response
     fmt.Fprintf(os.Stdout, "Response from `IPAddressesApi.UpdateIPAddress`: %v\n", resp)
 }
 ```
@@ -502,7 +502,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]interface{}**
+[**FindIPAddressById200Response**](FindIPAddressById200Response.md)
 
 ### Authorization
 

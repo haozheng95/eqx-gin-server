@@ -17,16 +17,16 @@ import (
 
 // IPReservationRequestInput struct for IPReservationRequestInput
 type IPReservationRequestInput struct {
-	Tags                   []string               `json:"tags,omitempty"`
 	Comments               *string                `json:"comments,omitempty"`
 	Customdata             map[string]interface{} `json:"customdata,omitempty"`
 	Details                *string                `json:"details,omitempty"`
 	Facility               *string                `json:"facility,omitempty"`
 	FailOnApprovalRequired *bool                  `json:"fail_on_approval_required,omitempty"`
 	// The code of the metro you are requesting the IP reservation in.
-	Metro    *string `json:"metro,omitempty"`
-	Quantity int32   `json:"quantity"`
-	Type     string  `json:"type"`
+	Metro    *string  `json:"metro,omitempty"`
+	Quantity int32    `json:"quantity"`
+	Tags     []string `json:"tags,omitempty"`
+	Type     string   `json:"type"`
 }
 
 // NewIPReservationRequestInput instantiates a new IPReservationRequestInput object
@@ -46,38 +46,6 @@ func NewIPReservationRequestInput(quantity int32, type_ string) *IPReservationRe
 func NewIPReservationRequestInputWithDefaults() *IPReservationRequestInput {
 	this := IPReservationRequestInput{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *IPReservationRequestInput) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IPReservationRequestInput) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *IPReservationRequestInput) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *IPReservationRequestInput) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetComments returns the Comments field value if set, zero value otherwise.
@@ -296,6 +264,38 @@ func (o *IPReservationRequestInput) SetQuantity(v int32) {
 	o.Quantity = v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *IPReservationRequestInput) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IPReservationRequestInput) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *IPReservationRequestInput) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *IPReservationRequestInput) SetTags(v []string) {
+	o.Tags = v
+}
+
 // GetType returns the Type field value
 func (o *IPReservationRequestInput) GetType() string {
 	if o == nil {
@@ -322,9 +322,6 @@ func (o *IPReservationRequestInput) SetType(v string) {
 
 func (o IPReservationRequestInput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.Comments != nil {
 		toSerialize["comments"] = o.Comments
 	}
@@ -345,6 +342,9 @@ func (o IPReservationRequestInput) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["quantity"] = o.Quantity
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	if true {
 		toSerialize["type"] = o.Type

@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Tags** | Pointer to **[]string** |  | [optional] 
 **AlwaysPxe** | Pointer to **bool** |  | [optional] 
 **BillingCycle** | Pointer to **string** |  | [optional] 
 **Customdata** | Pointer to **map[string]interface{}** |  | [optional] 
@@ -20,6 +19,7 @@ Name | Type | Description | Notes
 **OperatingSystem** | Pointer to **string** |  | [optional] 
 **Plan** | Pointer to **string** |  | [optional] 
 **ProjectSshKeys** | Pointer to **[]string** |  | [optional] 
+**Tags** | Pointer to **[]string** |  | [optional] 
 **TerminationTime** | Pointer to **time.Time** |  | [optional] 
 **UserSshKeys** | Pointer to **[]string** | The UUIDs of users whose SSH keys should be included on the provisioned device. | [optional] 
 **Userdata** | Pointer to **string** |  | [optional] 
@@ -42,31 +42,6 @@ will change when the set of required properties is changed
 NewCreateDeviceBatchRequestBatchesInnerWithDefaults instantiates a new CreateDeviceBatchRequestBatchesInner object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetTags
-
-`func (o *CreateDeviceBatchRequestBatchesInner) GetTags() []string`
-
-GetTags returns the Tags field if non-nil, zero value otherwise.
-
-### GetTagsOk
-
-`func (o *CreateDeviceBatchRequestBatchesInner) GetTagsOk() (*[]string, bool)`
-
-GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTags
-
-`func (o *CreateDeviceBatchRequestBatchesInner) SetTags(v []string)`
-
-SetTags sets Tags field to given value.
-
-### HasTags
-
-`func (o *CreateDeviceBatchRequestBatchesInner) HasTags() bool`
-
-HasTags returns a boolean if a field has been set.
 
 ### GetAlwaysPxe
 
@@ -442,6 +417,31 @@ SetProjectSshKeys sets ProjectSshKeys field to given value.
 `func (o *CreateDeviceBatchRequestBatchesInner) HasProjectSshKeys() bool`
 
 HasProjectSshKeys returns a boolean if a field has been set.
+
+### GetTags
+
+`func (o *CreateDeviceBatchRequestBatchesInner) GetTags() []string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *CreateDeviceBatchRequestBatchesInner) GetTagsOk() (*[]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *CreateDeviceBatchRequestBatchesInner) SetTags(v []string)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *CreateDeviceBatchRequestBatchesInner) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
 
 ### GetTerminationTime
 

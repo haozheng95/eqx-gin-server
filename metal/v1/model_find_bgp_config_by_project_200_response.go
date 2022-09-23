@@ -47,6 +47,8 @@ type FindBgpConfigByProject200Response struct {
 // will change when the set of required properties is changed
 func NewFindBgpConfigByProject200Response() *FindBgpConfigByProject200Response {
 	this := FindBgpConfigByProject200Response{}
+	var maxPrefix int32 = 10
+	this.MaxPrefix = &maxPrefix
 	return &this
 }
 
@@ -55,6 +57,8 @@ func NewFindBgpConfigByProject200Response() *FindBgpConfigByProject200Response {
 // but it doesn't guarantee that properties required by API are set
 func NewFindBgpConfigByProject200ResponseWithDefaults() *FindBgpConfigByProject200Response {
 	this := FindBgpConfigByProject200Response{}
+	var maxPrefix int32 = 10
+	this.MaxPrefix = &maxPrefix
 	return &this
 }
 

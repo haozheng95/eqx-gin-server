@@ -23,382 +23,6 @@ import (
 // EventsApiService EventsApi service
 type EventsApiService service
 
-type ApiFindConnectionEventsRequest struct {
-	ctx          context.Context
-	ApiService   *EventsApiService
-	connectionId string
-	include      *[]string
-	exclude      *[]string
-	page         *int32
-	perPage      *int32
-}
-
-// Nested attributes to include. Included objects will return their full attributes. Attribute names can be dotted (up to 3 levels) to included deeply nested objects.
-func (r ApiFindConnectionEventsRequest) Include(include []string) ApiFindConnectionEventsRequest {
-	r.include = &include
-	return r
-}
-
-// Nested attributes to exclude. Excluded objects will return only the href attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply nested objects.
-func (r ApiFindConnectionEventsRequest) Exclude(exclude []string) ApiFindConnectionEventsRequest {
-	r.exclude = &exclude
-	return r
-}
-
-// Page to return
-func (r ApiFindConnectionEventsRequest) Page(page int32) ApiFindConnectionEventsRequest {
-	r.page = &page
-	return r
-}
-
-// Items returned per page
-func (r ApiFindConnectionEventsRequest) PerPage(perPage int32) ApiFindConnectionEventsRequest {
-	r.perPage = &perPage
-	return r
-}
-
-func (r ApiFindConnectionEventsRequest) Execute() (*FindConnectionEvents200Response, *http.Response, error) {
-	return r.ApiService.FindConnectionEventsExecute(r)
-}
-
-/*
-FindConnectionEvents Retrieve connection events
-
-Returns a list of the connection events
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param connectionId Connection UUID
- @return ApiFindConnectionEventsRequest
-*/
-func (a *EventsApiService) FindConnectionEvents(ctx context.Context, connectionId string) ApiFindConnectionEventsRequest {
-	return ApiFindConnectionEventsRequest{
-		ApiService:   a,
-		ctx:          ctx,
-		connectionId: connectionId,
-	}
-}
-
-// Execute executes the request
-//  @return FindConnectionEvents200Response
-func (a *EventsApiService) FindConnectionEventsExecute(r ApiFindConnectionEventsRequest) (*FindConnectionEvents200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FindConnectionEvents200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.FindConnectionEvents")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/connections/{connection_id}/events"
-	localVarPath = strings.Replace(localVarPath, "{"+"connection_id"+"}", url.PathEscape(parameterToString(r.connectionId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.include != nil {
-		localVarQueryParams.Add("include", parameterToString(*r.include, "csv"))
-	}
-	if r.exclude != nil {
-		localVarQueryParams.Add("exclude", parameterToString(*r.exclude, "csv"))
-	}
-	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
-	}
-	if r.perPage != nil {
-		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["x_auth_token"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v DeleteAPIKey401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v DeleteAPIKey401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v DeleteAPIKey401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiFindConnectionPortEventsRequest struct {
-	ctx          context.Context
-	ApiService   *EventsApiService
-	connectionId string
-	id           string
-	include      *[]string
-	exclude      *[]string
-	page         *int32
-	perPage      *int32
-}
-
-// Nested attributes to include. Included objects will return their full attributes. Attribute names can be dotted (up to 3 levels) to included deeply nested objects.
-func (r ApiFindConnectionPortEventsRequest) Include(include []string) ApiFindConnectionPortEventsRequest {
-	r.include = &include
-	return r
-}
-
-// Nested attributes to exclude. Excluded objects will return only the href attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply nested objects.
-func (r ApiFindConnectionPortEventsRequest) Exclude(exclude []string) ApiFindConnectionPortEventsRequest {
-	r.exclude = &exclude
-	return r
-}
-
-// Page to return
-func (r ApiFindConnectionPortEventsRequest) Page(page int32) ApiFindConnectionPortEventsRequest {
-	r.page = &page
-	return r
-}
-
-// Items returned per page
-func (r ApiFindConnectionPortEventsRequest) PerPage(perPage int32) ApiFindConnectionPortEventsRequest {
-	r.perPage = &perPage
-	return r
-}
-
-func (r ApiFindConnectionPortEventsRequest) Execute() (*FindConnectionEvents200Response, *http.Response, error) {
-	return r.ApiService.FindConnectionPortEventsExecute(r)
-}
-
-/*
-FindConnectionPortEvents Retrieve connection port events
-
-Returns a list of the connection port events
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param connectionId Connection UUID
- @param id Connection Port UUID
- @return ApiFindConnectionPortEventsRequest
-*/
-func (a *EventsApiService) FindConnectionPortEvents(ctx context.Context, connectionId string, id string) ApiFindConnectionPortEventsRequest {
-	return ApiFindConnectionPortEventsRequest{
-		ApiService:   a,
-		ctx:          ctx,
-		connectionId: connectionId,
-		id:           id,
-	}
-}
-
-// Execute executes the request
-//  @return FindConnectionEvents200Response
-func (a *EventsApiService) FindConnectionPortEventsExecute(r ApiFindConnectionPortEventsRequest) (*FindConnectionEvents200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FindConnectionEvents200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.FindConnectionPortEvents")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/connections/{connection_id}/ports/{id}/events"
-	localVarPath = strings.Replace(localVarPath, "{"+"connection_id"+"}", url.PathEscape(parameterToString(r.connectionId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.include != nil {
-		localVarQueryParams.Add("include", parameterToString(*r.include, "csv"))
-	}
-	if r.exclude != nil {
-		localVarQueryParams.Add("exclude", parameterToString(*r.exclude, "csv"))
-	}
-	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
-	}
-	if r.perPage != nil {
-		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["x_auth_token"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v DeleteAPIKey401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v DeleteAPIKey401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v DeleteAPIKey401Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiFindDeviceEventsRequest struct {
 	ctx        context.Context
 	ApiService *EventsApiService
@@ -442,9 +66,9 @@ FindDeviceEvents Retrieve device's events
 
 Returns a list of events pertaining to a specific device
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Device UUID
- @return ApiFindDeviceEventsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Device UUID
+	@return ApiFindDeviceEventsRequest
 */
 func (a *EventsApiService) FindDeviceEvents(ctx context.Context, id string) ApiFindDeviceEventsRequest {
 	return ApiFindDeviceEventsRequest{
@@ -455,7 +79,8 @@ func (a *EventsApiService) FindDeviceEvents(ctx context.Context, id string) ApiF
 }
 
 // Execute executes the request
-//  @return FindDeviceEvents200Response
+//
+//	@return FindDeviceEvents200Response
 func (a *EventsApiService) FindDeviceEventsExecute(r ApiFindDeviceEventsRequest) (*FindDeviceEvents200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -605,7 +230,7 @@ func (r ApiFindEventByIdRequest) Exclude(exclude []string) ApiFindEventByIdReque
 	return r
 }
 
-func (r ApiFindEventByIdRequest) Execute() (*FindConnectionEvents200Response, *http.Response, error) {
+func (r ApiFindEventByIdRequest) Execute() (*FindInterconnectionEvents200Response, *http.Response, error) {
 	return r.ApiService.FindEventByIdExecute(r)
 }
 
@@ -614,9 +239,9 @@ FindEventById Retrieve an event
 
 Returns a single event if the user has access
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Event UUID
- @return ApiFindEventByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Event UUID
+	@return ApiFindEventByIdRequest
 */
 func (a *EventsApiService) FindEventById(ctx context.Context, id string) ApiFindEventByIdRequest {
 	return ApiFindEventByIdRequest{
@@ -627,13 +252,14 @@ func (a *EventsApiService) FindEventById(ctx context.Context, id string) ApiFind
 }
 
 // Execute executes the request
-//  @return FindConnectionEvents200Response
-func (a *EventsApiService) FindEventByIdExecute(r ApiFindEventByIdRequest) (*FindConnectionEvents200Response, *http.Response, error) {
+//
+//	@return FindInterconnectionEvents200Response
+func (a *EventsApiService) FindEventByIdExecute(r ApiFindEventByIdRequest) (*FindInterconnectionEvents200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindConnectionEvents200Response
+		localVarReturnValue *FindInterconnectionEvents200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.FindEventById")
@@ -793,8 +419,8 @@ FindEvents Retrieve current user's events
 
 Returns a list of the current user’s events
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindEventsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindEventsRequest
 */
 func (a *EventsApiService) FindEvents(ctx context.Context) ApiFindEventsRequest {
 	return ApiFindEventsRequest{
@@ -804,7 +430,8 @@ func (a *EventsApiService) FindEvents(ctx context.Context) ApiFindEventsRequest 
 }
 
 // Execute executes the request
-//  @return FindDeviceEvents200Response
+//
+//	@return FindDeviceEvents200Response
 func (a *EventsApiService) FindEventsExecute(r ApiFindEventsRequest) (*FindDeviceEvents200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -913,6 +540,384 @@ func (a *EventsApiService) FindEventsExecute(r ApiFindEventsRequest) (*FindDevic
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiFindInterconnectionEventsRequest struct {
+	ctx          context.Context
+	ApiService   *EventsApiService
+	connectionId string
+	include      *[]string
+	exclude      *[]string
+	page         *int32
+	perPage      *int32
+}
+
+// Nested attributes to include. Included objects will return their full attributes. Attribute names can be dotted (up to 3 levels) to included deeply nested objects.
+func (r ApiFindInterconnectionEventsRequest) Include(include []string) ApiFindInterconnectionEventsRequest {
+	r.include = &include
+	return r
+}
+
+// Nested attributes to exclude. Excluded objects will return only the href attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply nested objects.
+func (r ApiFindInterconnectionEventsRequest) Exclude(exclude []string) ApiFindInterconnectionEventsRequest {
+	r.exclude = &exclude
+	return r
+}
+
+// Page to return
+func (r ApiFindInterconnectionEventsRequest) Page(page int32) ApiFindInterconnectionEventsRequest {
+	r.page = &page
+	return r
+}
+
+// Items returned per page
+func (r ApiFindInterconnectionEventsRequest) PerPage(perPage int32) ApiFindInterconnectionEventsRequest {
+	r.perPage = &perPage
+	return r
+}
+
+func (r ApiFindInterconnectionEventsRequest) Execute() (*FindInterconnectionEvents200Response, *http.Response, error) {
+	return r.ApiService.FindInterconnectionEventsExecute(r)
+}
+
+/*
+FindInterconnectionEvents Retrieve interconnection events
+
+Returns a list of the interconnection events
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param connectionId Interconnection UUID
+	@return ApiFindInterconnectionEventsRequest
+*/
+func (a *EventsApiService) FindInterconnectionEvents(ctx context.Context, connectionId string) ApiFindInterconnectionEventsRequest {
+	return ApiFindInterconnectionEventsRequest{
+		ApiService:   a,
+		ctx:          ctx,
+		connectionId: connectionId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return FindInterconnectionEvents200Response
+func (a *EventsApiService) FindInterconnectionEventsExecute(r ApiFindInterconnectionEventsRequest) (*FindInterconnectionEvents200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindInterconnectionEvents200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.FindInterconnectionEvents")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/connections/{connection_id}/events"
+	localVarPath = strings.Replace(localVarPath, "{"+"connection_id"+"}", url.PathEscape(parameterToString(r.connectionId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.include != nil {
+		localVarQueryParams.Add("include", parameterToString(*r.include, "csv"))
+	}
+	if r.exclude != nil {
+		localVarQueryParams.Add("exclude", parameterToString(*r.exclude, "csv"))
+	}
+	if r.page != nil {
+		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+	}
+	if r.perPage != nil {
+		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["x_auth_token"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiFindInterconnectionPortEventsRequest struct {
+	ctx          context.Context
+	ApiService   *EventsApiService
+	connectionId string
+	id           string
+	include      *[]string
+	exclude      *[]string
+	page         *int32
+	perPage      *int32
+}
+
+// Nested attributes to include. Included objects will return their full attributes. Attribute names can be dotted (up to 3 levels) to included deeply nested objects.
+func (r ApiFindInterconnectionPortEventsRequest) Include(include []string) ApiFindInterconnectionPortEventsRequest {
+	r.include = &include
+	return r
+}
+
+// Nested attributes to exclude. Excluded objects will return only the href attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply nested objects.
+func (r ApiFindInterconnectionPortEventsRequest) Exclude(exclude []string) ApiFindInterconnectionPortEventsRequest {
+	r.exclude = &exclude
+	return r
+}
+
+// Page to return
+func (r ApiFindInterconnectionPortEventsRequest) Page(page int32) ApiFindInterconnectionPortEventsRequest {
+	r.page = &page
+	return r
+}
+
+// Items returned per page
+func (r ApiFindInterconnectionPortEventsRequest) PerPage(perPage int32) ApiFindInterconnectionPortEventsRequest {
+	r.perPage = &perPage
+	return r
+}
+
+func (r ApiFindInterconnectionPortEventsRequest) Execute() (*FindInterconnectionEvents200Response, *http.Response, error) {
+	return r.ApiService.FindInterconnectionPortEventsExecute(r)
+}
+
+/*
+FindInterconnectionPortEvents Retrieve interconnection port events
+
+Returns a list of the interconnection port events
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param connectionId Interconnection UUID
+	@param id Interconnection Port UUID
+	@return ApiFindInterconnectionPortEventsRequest
+*/
+func (a *EventsApiService) FindInterconnectionPortEvents(ctx context.Context, connectionId string, id string) ApiFindInterconnectionPortEventsRequest {
+	return ApiFindInterconnectionPortEventsRequest{
+		ApiService:   a,
+		ctx:          ctx,
+		connectionId: connectionId,
+		id:           id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return FindInterconnectionEvents200Response
+func (a *EventsApiService) FindInterconnectionPortEventsExecute(r ApiFindInterconnectionPortEventsRequest) (*FindInterconnectionEvents200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindInterconnectionEvents200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.FindInterconnectionPortEvents")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/connections/{connection_id}/ports/{id}/events"
+	localVarPath = strings.Replace(localVarPath, "{"+"connection_id"+"}", url.PathEscape(parameterToString(r.connectionId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.include != nil {
+		localVarQueryParams.Add("include", parameterToString(*r.include, "csv"))
+	}
+	if r.exclude != nil {
+		localVarQueryParams.Add("exclude", parameterToString(*r.exclude, "csv"))
+	}
+	if r.page != nil {
+		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+	}
+	if r.perPage != nil {
+		localVarQueryParams.Add("per_page", parameterToString(*r.perPage, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["x_auth_token"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v DeleteAPIKey401Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiFindOrganizationEventsRequest struct {
 	ctx        context.Context
 	ApiService *EventsApiService
@@ -956,9 +961,9 @@ FindOrganizationEvents Retrieve organization's events
 
 Returns a list of events for a single organization
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Organization UUID
- @return ApiFindOrganizationEventsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Organization UUID
+	@return ApiFindOrganizationEventsRequest
 */
 func (a *EventsApiService) FindOrganizationEvents(ctx context.Context, id string) ApiFindOrganizationEventsRequest {
 	return ApiFindOrganizationEventsRequest{
@@ -969,7 +974,8 @@ func (a *EventsApiService) FindOrganizationEvents(ctx context.Context, id string
 }
 
 // Execute executes the request
-//  @return FindDeviceEvents200Response
+//
+//	@return FindDeviceEvents200Response
 func (a *EventsApiService) FindOrganizationEventsExecute(r ApiFindOrganizationEventsRequest) (*FindDeviceEvents200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1142,9 +1148,9 @@ FindProjectEvents Retrieve project's events
 
 Returns a list of events for a single project
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Project UUID
- @return ApiFindProjectEventsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Project UUID
+	@return ApiFindProjectEventsRequest
 */
 func (a *EventsApiService) FindProjectEvents(ctx context.Context, id string) ApiFindProjectEventsRequest {
 	return ApiFindProjectEventsRequest{
@@ -1155,7 +1161,8 @@ func (a *EventsApiService) FindProjectEvents(ctx context.Context, id string) Api
 }
 
 // Execute executes the request
-//  @return FindDeviceEvents200Response
+//
+//	@return FindDeviceEvents200Response
 func (a *EventsApiService) FindProjectEventsExecute(r ApiFindProjectEventsRequest) (*FindDeviceEvents200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1319,18 +1326,18 @@ func (r ApiFindVirtualCircuitEventsRequest) PerPage(perPage int32) ApiFindVirtua
 	return r
 }
 
-func (r ApiFindVirtualCircuitEventsRequest) Execute() (*FindConnectionEvents200Response, *http.Response, error) {
+func (r ApiFindVirtualCircuitEventsRequest) Execute() (*FindInterconnectionEvents200Response, *http.Response, error) {
 	return r.ApiService.FindVirtualCircuitEventsExecute(r)
 }
 
 /*
-FindVirtualCircuitEvents Retrieve connection events
+FindVirtualCircuitEvents Retrieve interconnection events
 
 Returns a list of the virtual circuit events
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Virtual Circuit UUID
- @return ApiFindVirtualCircuitEventsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Virtual Circuit UUID
+	@return ApiFindVirtualCircuitEventsRequest
 */
 func (a *EventsApiService) FindVirtualCircuitEvents(ctx context.Context, id string) ApiFindVirtualCircuitEventsRequest {
 	return ApiFindVirtualCircuitEventsRequest{
@@ -1341,13 +1348,14 @@ func (a *EventsApiService) FindVirtualCircuitEvents(ctx context.Context, id stri
 }
 
 // Execute executes the request
-//  @return FindConnectionEvents200Response
-func (a *EventsApiService) FindVirtualCircuitEventsExecute(r ApiFindVirtualCircuitEventsRequest) (*FindConnectionEvents200Response, *http.Response, error) {
+//
+//	@return FindInterconnectionEvents200Response
+func (a *EventsApiService) FindVirtualCircuitEventsExecute(r ApiFindVirtualCircuitEventsRequest) (*FindInterconnectionEvents200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindConnectionEvents200Response
+		localVarReturnValue *FindInterconnectionEvents200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.FindVirtualCircuitEvents")

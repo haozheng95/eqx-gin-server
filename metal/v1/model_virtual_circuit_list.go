@@ -17,7 +17,7 @@ import (
 
 // VirtualCircuitList struct for VirtualCircuitList
 type VirtualCircuitList struct {
-	VirtualCircuits []map[string]interface{} `json:"virtual_circuits,omitempty"`
+	VirtualCircuits []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner `json:"virtual_circuits,omitempty"`
 }
 
 // NewVirtualCircuitList instantiates a new VirtualCircuitList object
@@ -38,9 +38,9 @@ func NewVirtualCircuitListWithDefaults() *VirtualCircuitList {
 }
 
 // GetVirtualCircuits returns the VirtualCircuits field value if set, zero value otherwise.
-func (o *VirtualCircuitList) GetVirtualCircuits() []map[string]interface{} {
+func (o *VirtualCircuitList) GetVirtualCircuits() []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner {
 	if o == nil || o.VirtualCircuits == nil {
-		var ret []map[string]interface{}
+		var ret []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner
 		return ret
 	}
 	return o.VirtualCircuits
@@ -48,7 +48,7 @@ func (o *VirtualCircuitList) GetVirtualCircuits() []map[string]interface{} {
 
 // GetVirtualCircuitsOk returns a tuple with the VirtualCircuits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VirtualCircuitList) GetVirtualCircuitsOk() ([]map[string]interface{}, bool) {
+func (o *VirtualCircuitList) GetVirtualCircuitsOk() ([]GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner, bool) {
 	if o == nil || o.VirtualCircuits == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *VirtualCircuitList) HasVirtualCircuits() bool {
 	return false
 }
 
-// SetVirtualCircuits gets a reference to the given []map[string]interface{} and assigns it to the VirtualCircuits field.
-func (o *VirtualCircuitList) SetVirtualCircuits(v []map[string]interface{}) {
+// SetVirtualCircuits gets a reference to the given []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner and assigns it to the VirtualCircuits field.
+func (o *VirtualCircuitList) SetVirtualCircuits(v []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInner) {
 	o.VirtualCircuits = v
 }
 

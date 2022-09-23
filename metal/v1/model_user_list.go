@@ -17,8 +17,8 @@ import (
 
 // UserList struct for UserList
 type UserList struct {
-	Meta  *FindDeviceEvents200ResponseMeta                     `json:"meta,omitempty"`
-	Users []FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf `json:"users,omitempty"`
+	Meta  *FindDeviceEvents200ResponseMeta                                                               `json:"meta,omitempty"`
+	Users []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy `json:"users,omitempty"`
 }
 
 // NewUserList instantiates a new UserList object
@@ -71,9 +71,9 @@ func (o *UserList) SetMeta(v FindDeviceEvents200ResponseMeta) {
 }
 
 // GetUsers returns the Users field value if set, zero value otherwise.
-func (o *UserList) GetUsers() []FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf {
+func (o *UserList) GetUsers() []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy {
 	if o == nil || o.Users == nil {
-		var ret []FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf
+		var ret []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy
 		return ret
 	}
 	return o.Users
@@ -81,7 +81,7 @@ func (o *UserList) GetUsers() []FindProjectAPIKeys200ResponseApiKeysInnerUserAll
 
 // GetUsersOk returns a tuple with the Users field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UserList) GetUsersOk() ([]FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf, bool) {
+func (o *UserList) GetUsersOk() ([]GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy, bool) {
 	if o == nil || o.Users == nil {
 		return nil, false
 	}
@@ -97,8 +97,8 @@ func (o *UserList) HasUsers() bool {
 	return false
 }
 
-// SetUsers gets a reference to the given []FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf and assigns it to the Users field.
-func (o *UserList) SetUsers(v []FindProjectAPIKeys200ResponseApiKeysInnerUserAllOf) {
+// SetUsers gets a reference to the given []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy and assigns it to the Users field.
+func (o *UserList) SetUsers(v []GetInterconnection200ResponsePortsInnerVirtualCircuitsVirtualCircuitsInnerAnyOf1VrfCreatedBy) {
 	o.Users = v
 }
 

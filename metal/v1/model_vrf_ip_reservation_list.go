@@ -17,7 +17,7 @@ import (
 
 // VrfIpReservationList struct for VrfIpReservationList
 type VrfIpReservationList struct {
-	IpAddresses []FindVrfIpReservations200ResponseIpAddressesInner `json:"ip_addresses,omitempty"`
+	IpAddresses []FindIPAddressById200ResponseOneOf1 `json:"ip_addresses,omitempty"`
 }
 
 // NewVrfIpReservationList instantiates a new VrfIpReservationList object
@@ -38,9 +38,9 @@ func NewVrfIpReservationListWithDefaults() *VrfIpReservationList {
 }
 
 // GetIpAddresses returns the IpAddresses field value if set, zero value otherwise.
-func (o *VrfIpReservationList) GetIpAddresses() []FindVrfIpReservations200ResponseIpAddressesInner {
+func (o *VrfIpReservationList) GetIpAddresses() []FindIPAddressById200ResponseOneOf1 {
 	if o == nil || o.IpAddresses == nil {
-		var ret []FindVrfIpReservations200ResponseIpAddressesInner
+		var ret []FindIPAddressById200ResponseOneOf1
 		return ret
 	}
 	return o.IpAddresses
@@ -48,7 +48,7 @@ func (o *VrfIpReservationList) GetIpAddresses() []FindVrfIpReservations200Respon
 
 // GetIpAddressesOk returns a tuple with the IpAddresses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VrfIpReservationList) GetIpAddressesOk() ([]FindVrfIpReservations200ResponseIpAddressesInner, bool) {
+func (o *VrfIpReservationList) GetIpAddressesOk() ([]FindIPAddressById200ResponseOneOf1, bool) {
 	if o == nil || o.IpAddresses == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *VrfIpReservationList) HasIpAddresses() bool {
 	return false
 }
 
-// SetIpAddresses gets a reference to the given []FindVrfIpReservations200ResponseIpAddressesInner and assigns it to the IpAddresses field.
-func (o *VrfIpReservationList) SetIpAddresses(v []FindVrfIpReservations200ResponseIpAddressesInner) {
+// SetIpAddresses gets a reference to the given []FindIPAddressById200ResponseOneOf1 and assigns it to the IpAddresses field.
+func (o *VrfIpReservationList) SetIpAddresses(v []FindIPAddressById200ResponseOneOf1) {
 	o.IpAddresses = v
 }
 

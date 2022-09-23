@@ -18,7 +18,6 @@ import (
 
 // CreateDeviceBatchRequestBatchesInner struct for CreateDeviceBatchRequestBatchesInner
 type CreateDeviceBatchRequestBatchesInner struct {
-	Tags         []string               `json:"tags,omitempty"`
 	AlwaysPxe    *bool                  `json:"always_pxe,omitempty"`
 	BillingCycle *string                `json:"billing_cycle,omitempty"`
 	Customdata   map[string]interface{} `json:"customdata,omitempty"`
@@ -36,6 +35,7 @@ type CreateDeviceBatchRequestBatchesInner struct {
 	OperatingSystem *string    `json:"operating_system,omitempty"`
 	Plan            *string    `json:"plan,omitempty"`
 	ProjectSshKeys  []string   `json:"project_ssh_keys,omitempty"`
+	Tags            []string   `json:"tags,omitempty"`
 	TerminationTime *time.Time `json:"termination_time,omitempty"`
 	// The UUIDs of users whose SSH keys should be included on the provisioned device.
 	UserSshKeys []string `json:"user_ssh_keys,omitempty"`
@@ -57,38 +57,6 @@ func NewCreateDeviceBatchRequestBatchesInner() *CreateDeviceBatchRequestBatchesI
 func NewCreateDeviceBatchRequestBatchesInnerWithDefaults() *CreateDeviceBatchRequestBatchesInner {
 	this := CreateDeviceBatchRequestBatchesInner{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *CreateDeviceBatchRequestBatchesInner) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateDeviceBatchRequestBatchesInner) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *CreateDeviceBatchRequestBatchesInner) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *CreateDeviceBatchRequestBatchesInner) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetAlwaysPxe returns the AlwaysPxe field value if set, zero value otherwise.
@@ -571,6 +539,38 @@ func (o *CreateDeviceBatchRequestBatchesInner) SetProjectSshKeys(v []string) {
 	o.ProjectSshKeys = v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *CreateDeviceBatchRequestBatchesInner) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDeviceBatchRequestBatchesInner) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *CreateDeviceBatchRequestBatchesInner) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *CreateDeviceBatchRequestBatchesInner) SetTags(v []string) {
+	o.Tags = v
+}
+
 // GetTerminationTime returns the TerminationTime field value if set, zero value otherwise.
 func (o *CreateDeviceBatchRequestBatchesInner) GetTerminationTime() time.Time {
 	if o == nil || o.TerminationTime == nil {
@@ -669,9 +669,6 @@ func (o *CreateDeviceBatchRequestBatchesInner) SetUserdata(v string) {
 
 func (o CreateDeviceBatchRequestBatchesInner) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.AlwaysPxe != nil {
 		toSerialize["always_pxe"] = o.AlwaysPxe
 	}
@@ -716,6 +713,9 @@ func (o CreateDeviceBatchRequestBatchesInner) MarshalJSON() ([]byte, error) {
 	}
 	if o.ProjectSshKeys != nil {
 		toSerialize["project_ssh_keys"] = o.ProjectSshKeys
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	if o.TerminationTime != nil {
 		toSerialize["termination_time"] = o.TerminationTime

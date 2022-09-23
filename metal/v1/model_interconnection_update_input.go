@@ -17,14 +17,14 @@ import (
 
 // InterconnectionUpdateInput struct for InterconnectionUpdateInput
 type InterconnectionUpdateInput struct {
-	Tags         []string `json:"tags,omitempty"`
-	ContactEmail *string  `json:"contact_email,omitempty"`
-	Description  *string  `json:"description,omitempty"`
-	// The mode of the connection (only relevant to dedicated connections). Shared connections won't have this field. Can be either 'standard' or 'tunnel'.   The default mode of a dedicated connection is 'standard'. The mode can only be changed when there are no associated virtual circuits on the connection.   In tunnel mode, an 802.1q tunnel is added to a port to send/receive double tagged packets from server instances.
+	ContactEmail *string `json:"contact_email,omitempty"`
+	Description  *string `json:"description,omitempty"`
+	// The mode of the interconnection (only relevant to Dedicated Ports). Shared connections won't have this field. Can be either 'standard' or 'tunnel'.   The default mode of an interconnection on a Dedicated Port is 'standard'. The mode can only be changed when there are no associated virtual circuits on the interconnection.   In tunnel mode, an 802.1q tunnel is added to a port to send/receive double tagged packets from server instances.
 	Mode *string `json:"mode,omitempty"`
 	Name *string `json:"name,omitempty"`
 	// Updating from 'redundant' to 'primary' will remove a secondary port, while updating from 'primary' to 'redundant' will add one.
-	Redundancy *string `json:"redundancy,omitempty"`
+	Redundancy *string  `json:"redundancy,omitempty"`
+	Tags       []string `json:"tags,omitempty"`
 }
 
 // NewInterconnectionUpdateInput instantiates a new InterconnectionUpdateInput object
@@ -42,38 +42,6 @@ func NewInterconnectionUpdateInput() *InterconnectionUpdateInput {
 func NewInterconnectionUpdateInputWithDefaults() *InterconnectionUpdateInput {
 	this := InterconnectionUpdateInput{}
 	return &this
-}
-
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *InterconnectionUpdateInput) GetTags() []string {
-	if o == nil || o.Tags == nil {
-		var ret []string
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InterconnectionUpdateInput) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *InterconnectionUpdateInput) HasTags() bool {
-	if o != nil && o.Tags != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *InterconnectionUpdateInput) SetTags(v []string) {
-	o.Tags = v
 }
 
 // GetContactEmail returns the ContactEmail field value if set, zero value otherwise.
@@ -236,11 +204,40 @@ func (o *InterconnectionUpdateInput) SetRedundancy(v string) {
 	o.Redundancy = &v
 }
 
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *InterconnectionUpdateInput) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InterconnectionUpdateInput) GetTagsOk() ([]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *InterconnectionUpdateInput) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *InterconnectionUpdateInput) SetTags(v []string) {
+	o.Tags = v
+}
+
 func (o InterconnectionUpdateInput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
 	if o.ContactEmail != nil {
 		toSerialize["contact_email"] = o.ContactEmail
 	}
@@ -255,6 +252,9 @@ func (o InterconnectionUpdateInput) MarshalJSON() ([]byte, error) {
 	}
 	if o.Redundancy != nil {
 		toSerialize["redundancy"] = o.Redundancy
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	return json.Marshal(toSerialize)
 }

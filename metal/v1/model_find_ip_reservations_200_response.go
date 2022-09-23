@@ -17,7 +17,7 @@ import (
 
 // FindIPReservations200Response struct for FindIPReservations200Response
 type FindIPReservations200Response struct {
-	IpAddresses []map[string]interface{} `json:"ip_addresses,omitempty"`
+	IpAddresses []FindIPReservations200ResponseIpAddressesInner `json:"ip_addresses,omitempty"`
 }
 
 // NewFindIPReservations200Response instantiates a new FindIPReservations200Response object
@@ -38,9 +38,9 @@ func NewFindIPReservations200ResponseWithDefaults() *FindIPReservations200Respon
 }
 
 // GetIpAddresses returns the IpAddresses field value if set, zero value otherwise.
-func (o *FindIPReservations200Response) GetIpAddresses() []map[string]interface{} {
+func (o *FindIPReservations200Response) GetIpAddresses() []FindIPReservations200ResponseIpAddressesInner {
 	if o == nil || o.IpAddresses == nil {
-		var ret []map[string]interface{}
+		var ret []FindIPReservations200ResponseIpAddressesInner
 		return ret
 	}
 	return o.IpAddresses
@@ -48,7 +48,7 @@ func (o *FindIPReservations200Response) GetIpAddresses() []map[string]interface{
 
 // GetIpAddressesOk returns a tuple with the IpAddresses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FindIPReservations200Response) GetIpAddressesOk() ([]map[string]interface{}, bool) {
+func (o *FindIPReservations200Response) GetIpAddressesOk() ([]FindIPReservations200ResponseIpAddressesInner, bool) {
 	if o == nil || o.IpAddresses == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *FindIPReservations200Response) HasIpAddresses() bool {
 	return false
 }
 
-// SetIpAddresses gets a reference to the given []map[string]interface{} and assigns it to the IpAddresses field.
-func (o *FindIPReservations200Response) SetIpAddresses(v []map[string]interface{}) {
+// SetIpAddresses gets a reference to the given []FindIPReservations200ResponseIpAddressesInner and assigns it to the IpAddresses field.
+func (o *FindIPReservations200Response) SetIpAddresses(v []FindIPReservations200ResponseIpAddressesInner) {
 	o.IpAddresses = v
 }
 

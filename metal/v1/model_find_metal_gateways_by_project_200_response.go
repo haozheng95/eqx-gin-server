@@ -17,7 +17,7 @@ import (
 
 // FindMetalGatewaysByProject200Response struct for FindMetalGatewaysByProject200Response
 type FindMetalGatewaysByProject200Response struct {
-	MetalGateways []map[string]interface{} `json:"MetalGateways,omitempty"`
+	MetalGateways []FindMetalGatewaysByProject200ResponseMetalGatewaysInner `json:"MetalGateways,omitempty"`
 }
 
 // NewFindMetalGatewaysByProject200Response instantiates a new FindMetalGatewaysByProject200Response object
@@ -38,9 +38,9 @@ func NewFindMetalGatewaysByProject200ResponseWithDefaults() *FindMetalGatewaysBy
 }
 
 // GetMetalGateways returns the MetalGateways field value if set, zero value otherwise.
-func (o *FindMetalGatewaysByProject200Response) GetMetalGateways() []map[string]interface{} {
+func (o *FindMetalGatewaysByProject200Response) GetMetalGateways() []FindMetalGatewaysByProject200ResponseMetalGatewaysInner {
 	if o == nil || o.MetalGateways == nil {
-		var ret []map[string]interface{}
+		var ret []FindMetalGatewaysByProject200ResponseMetalGatewaysInner
 		return ret
 	}
 	return o.MetalGateways
@@ -48,7 +48,7 @@ func (o *FindMetalGatewaysByProject200Response) GetMetalGateways() []map[string]
 
 // GetMetalGatewaysOk returns a tuple with the MetalGateways field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FindMetalGatewaysByProject200Response) GetMetalGatewaysOk() ([]map[string]interface{}, bool) {
+func (o *FindMetalGatewaysByProject200Response) GetMetalGatewaysOk() ([]FindMetalGatewaysByProject200ResponseMetalGatewaysInner, bool) {
 	if o == nil || o.MetalGateways == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *FindMetalGatewaysByProject200Response) HasMetalGateways() bool {
 	return false
 }
 
-// SetMetalGateways gets a reference to the given []map[string]interface{} and assigns it to the MetalGateways field.
-func (o *FindMetalGatewaysByProject200Response) SetMetalGateways(v []map[string]interface{}) {
+// SetMetalGateways gets a reference to the given []FindMetalGatewaysByProject200ResponseMetalGatewaysInner and assigns it to the MetalGateways field.
+func (o *FindMetalGatewaysByProject200Response) SetMetalGateways(v []FindMetalGatewaysByProject200ResponseMetalGatewaysInner) {
 	o.MetalGateways = v
 }
 
