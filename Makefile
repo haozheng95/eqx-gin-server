@@ -74,7 +74,7 @@ validate:
 
 mod:
 	rm -f go.mod go.sum ${PACKAGE_PREFIX}/${PACKAGE_MAJOR}/go.mod ${PACKAGE_PREFIX}/${PACKAGE_MAJOR}/go.sum
-	go mod init github.com/${GIT_ORG}/${GIT_REPO}
+	go mod init github.com/haozheng95/eqx-gin-server
 	go mod tidy
 
 test:

@@ -8,7 +8,7 @@ RUN git clone https://github.com/haozheng95/eqx-gin-server.git
 WORKDIR /go/src
 
 ENV CGO_ENABLED=0
-RUN go mod init github.com/haozheng95/eqx-gin-server/gin-server
+RUN go mod init github.com/haozheng95/eqx-gin-server/my-gin-server
 RUN go mod tidy
 
 RUN go build -a -installsuffix cgo -o startapi .
