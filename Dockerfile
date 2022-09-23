@@ -1,6 +1,6 @@
 FROM golang:1.19 AS build
 WORKDIR /go/src
-COPY . ../../metal-go
+
 COPY gin-server/go ./go
 COPY gin-server/go.mod ./go.mod
 COPY gin-server/main.go .
