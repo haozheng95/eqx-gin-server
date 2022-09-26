@@ -6,7 +6,7 @@ COPY gin-server/main.go .
 ENV CGO_ENABLED=0
 RUN go mod tidy
 
-RUN go build -a -installsuffix cgo -o startapi .
+RUN go build -o startapi .
 
 FROM scratch AS runtime
 ENV GIN_MODE=release
