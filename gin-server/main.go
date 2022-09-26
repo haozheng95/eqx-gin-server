@@ -12,7 +12,6 @@ package main
 
 import (
 	"log"
-
 	// WARNING!
 	// Change this to a fully-qualified import path
 	// once you place this file into your project.

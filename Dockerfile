@@ -1,14 +1,9 @@
 FROM golang:1.19 AS build
 WORKDIR /go/src
-
-COPY gin-server/go ./go
+COPY gin-server/go.mod go.mod
 COPY gin-server/main.go .
-WORKDIR /go/src/github.com/haozheng95/eqx-gin-server/
-RUN git clone https://github.com/haozheng95/eqx-gin-server.git
-WORKDIR /go/src
 
 ENV CGO_ENABLED=0
-RUN go mod init github.com/haozheng95/eqx-gin-server/gin-server
 RUN go mod tidy
 
 RUN go build -a -installsuffix cgo -o startapi .
