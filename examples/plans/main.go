@@ -2,11 +2,13 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
+	"net/http"
 	"os"
 	"sigs.k8s.io/yaml"
 
-	metal "github.com/equinix-labs/metal-go/metal/v1"
+	metal "github.com/haozheng95/eqx-gin-server/metal/v1"
 )
 
 func main() {
@@ -20,6 +22,12 @@ func main() {
 	configuration.Debug = true
 	//configuration.AddDefaultHeader("X-Auth-Token", os.Getenv("METAL_AUTH_TOKEN"))
 	configuration.AddDefaultHeader("X-Auth-Token", "h9FYNNnc3sbdcSr3PUyptriEyRQPqwhg")
+	client := &http.Client{Transport: &http.Transport{
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: true,
+		}}}
+	configuration.HTTPClient = client
+
 	api_client := metal.NewAPIClient(configuration)
 	//resp, r, err := api_client.PlansApi.FindPlans(context.Background()).Include(include).Exclude(exclude).Execute()
 	resp, r, err := api_client.DevicesApi.FindProjectDevices(context.Background(), "42207fc3-dda2-471e-8c84-179908f64f7b").Include(include).Exclude(exclude).Execute()

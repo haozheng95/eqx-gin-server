@@ -3,7 +3,6 @@ module github.com/haozheng95/eqx-gin-server
 go 1.19
 
 require (
-	github.com/equinix-labs/metal-go v0.2.0
 	golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1
 	sigs.k8s.io/yaml v1.3.0
 )

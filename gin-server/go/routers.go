@@ -11,6 +11,7 @@
 package startapi
 
 import (
+	"crypto/tls"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	metal "github.com/haozheng95/eqx-gin-server/metal/v1"
@@ -1472,6 +1473,11 @@ var exclude = []string{"available_in"}
 
 func init() {
 	configuration = metal.NewConfiguration()
+	client := &http.Client{Transport: &http.Transport{
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: true,
+		}}}
+	configuration.HTTPClient = client
 	configuration.Debug = true
 	configuration.AddDefaultHeader("X-Auth-Token", "h9FYNNnc3sbdcSr3PUyptriEyRQPqwhg")
 	apiClient = metal.NewAPIClient(configuration)
