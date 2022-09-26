@@ -9,6 +9,6 @@ RUN go build -a -installsuffix cgo -o startapi .
 
 FROM scratch AS runtime
 ENV GIN_MODE=release
-COPY --from=build /go/src/startapi ./
+COPY --from=build /go/src/eqx-gin-server/gin-server/startapi ./
 EXPOSE 8080/tcp
 ENTRYPOINT ["./startapi"]
