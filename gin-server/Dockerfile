@@ -1,12 +1,9 @@
 FROM golang:1.19 AS build
 WORKDIR /go/src
-COPY /Users/yhaozheng/go/src/github.com/equinix-labs/metal-go ../../metal-go
-COPY go ./go
-COPY go.mod ./go.mod
-COPY main.go .
-
+RUN git clone https://github.com/haozheng95/eqx-gin-server.git
+WORKDIR /go/src/eqx-gin-server/gin-server
 ENV CGO_ENABLED=0
-RUN go get -d -v ./...
+RUN go mod tidy
 
 RUN go build -a -installsuffix cgo -o startapi .
 
