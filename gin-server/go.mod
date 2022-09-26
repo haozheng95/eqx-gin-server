@@ -1,12 +1,10 @@
-module test
+module github.com/haozheng95/eqx-gin-server/gin-server
 
 go 1.19
 
-replace github.com/equinix-labs/metal-go/gin-server => github.com/haozheng95/eqx-gin-server/gin-server v0.2.5
-
 require (
 	github.com/gin-gonic/gin v1.8.1
-	github.com/haozheng95/eqx-gin-server v0.2.5
+	github.com/haozheng95/eqx-gin-server v0.2.6
 )
 
 require (
