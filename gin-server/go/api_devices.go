@@ -14,6 +14,7 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	metal "github.com/haozheng95/eqx-gin-server/metal/v1"
+	"log"
 	"net/http"
 )
 
@@ -25,16 +26,40 @@ func CreateBgpSession(c *gin.Context) {
 // CreateDevice - Create a device
 func CreateDevice(c *gin.Context) {
 	id := c.Param("id")
-	//var privateIpv4SubnetSize float32 = 28
-	//this.PrivateIpv4SubnetSize = &privateIpv4SubnetSize
-	//var publicIpv4SubnetSize float32 = 31
-	//this.PublicIpv4SubnetSize = &publicIpv4SubnetSize
 	var body *metal.CreateDeviceRequestOneOf
 	if err := c.BindJSON(&body); err != nil {
 		if !ErrorCheck(err, nil, c) {
 			return
 		}
 	}
+	//var privateIpv4SubnetSize float32 = 28
+	//this.PrivateIpv4SubnetSize = &privateIpv4SubnetSize
+	//var publicIpv4SubnetSize float32 = 31
+	//this.PublicIpv4SubnetSize = &publicIpv4SubnetSize
+	respDevice, r, err := apiClient.DevicesApi.FindProjectDevices(context.Background(), id).Execute()
+	if !ErrorCheck(err, r, c) {
+		return
+	}
+	if len(respDevice.Devices) >= 3 {
+		hostIPs := make([]string, 3)
+		for i, device := range respDevice.Devices {
+			log.Println("i=", i)
+			for j, ip := range device.IpAddresses {
+				log.Println("j=", j)
+				log.Println("ip.Address=", ip.GetAddress())
+				log.Println("ip.GetPublic=", ip.GetPublic())
+				if ip.GetPublic() && IsIPv4(ip.GetAddress()) {
+					addAuthorizedKeys(ip.GetAddress(), body)
+					hostIPs = append(hostIPs, ip.GetAddress())
+					continue
+				}
+			}
+		}
+
+		c.JSON(http.StatusOK, gin.H{"msg": "The number of created instances reached the upper limit. Procedure"})
+		return
+	}
+
 	resp, r, err := apiClient.DevicesApi.CreateDevice(context.Background(), id).CreateDeviceRequest(metal.CreateDeviceRequestOneOfAsCreateDeviceRequest(body)).Execute()
 	if !ErrorCheck(err, r, c) {
 		return
