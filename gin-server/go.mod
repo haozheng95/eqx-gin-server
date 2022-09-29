@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/gin-gonic/gin v1.8.1
-	github.com/haozheng95/eqx-gin-server v0.2.6
+	github.com/haozheng95/eqx-gin-server v0.2.7
 	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97
 )
 
