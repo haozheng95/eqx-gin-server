@@ -12,4 +12,4 @@ FROM scratch AS runtime
 ENV GIN_MODE=release
 COPY --from=build /go/src/eqx-gin-server/gin-server/sw ./
 EXPOSE 8080/tcp
-ENTRYPOINT ["./startapi"]
+ENTRYPOINT ["./sw"]
