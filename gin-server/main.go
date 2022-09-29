@@ -17,7 +17,7 @@ import (
 	// once you place this file into your project.
 	// For example,
 	//
-	sw "github.com/haozheng95/eqx-gin-server/gin-server/go"
+	sw "github.com/haozheng95/eqx-gin-server/gin-server/startapi"
 	//
 )
 
