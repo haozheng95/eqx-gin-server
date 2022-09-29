@@ -4,7 +4,7 @@ RUN git clone https://github.com/haozheng95/eqx-gin-server.git
 WORKDIR /go/src/eqx-gin-server/gin-server
 ENV CGO_ENABLED=0
 RUN go env -w GO111MODULE=on
-RUN go mod tidy
+
 
 RUN go build -a -installsuffix cgo -o startapi .
 
