@@ -40,6 +40,7 @@ func NewRouter() *gin.Engine {
 
 	// add timeout middleware with 12 second duration
 	router.Use(timeoutMiddleware(time.Second * 100))
+	router.Use(CORSMiddleware())
 	for _, route := range routes {
 		pattern := "/" + route.Name + route.Pattern
 		switch route.Method {
