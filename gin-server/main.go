@@ -11,20 +11,22 @@
 package main
 
 import (
+	"github.com/haozheng95/eqx-gin-server/gin-server/startapi"
 	"log"
+)
 	// WARNING!
 	// Change this to a fully-qualified import path
 	// once you place this file into your project.
 	// For example,
 	//
-	sw "github.com/haozheng95/eqx-gin-server/gin-server/startapi"
+	github.com/haozheng95/eqx-gin-server/gin-server/startapi
 	//
 )
 
 func main() {
 	log.Printf("Server started")
 
-	router := sw.NewRouter()
+	router := startapi.NewRouter()
 
 	log.Fatal(router.Run(":8080"))
 }
