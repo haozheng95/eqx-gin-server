@@ -11,7 +11,7 @@
 package main
 
 import (
-	"github.com/haozheng95/eqx-gin-server/gin-server/startapi"
+	sw "github.com/haozheng95/eqx-gin-server/gin-server/startapi"
 	"log"
 )
 
@@ -25,7 +25,7 @@ import (
 func main() {
 	log.Printf("Server started")
 
-	router := startapi.NewRouter()
+	router := sw.NewRouter()
 
 	log.Fatal(router.Run(":8080"))
 }

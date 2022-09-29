@@ -6,10 +6,10 @@ ENV CGO_ENABLED=0
 RUN go env -w GO111MODULE=on
 RUN go mod tidy
 
-RUN go build -a -installsuffix cgo -o startapi .
+RUN go build -a -installsuffix cgo -o sw .
 
 FROM scratch AS runtime
 ENV GIN_MODE=release
-COPY --from=build /go/src/eqx-gin-server/gin-server/startapi ./
+COPY --from=build /go/src/eqx-gin-server/gin-server/sw ./
 EXPOSE 8080/tcp
 ENTRYPOINT ["./startapi"]
