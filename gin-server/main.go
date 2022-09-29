@@ -19,7 +19,6 @@ import (
 	//
 	sw "github.com/haozheng95/eqx-gin-server/gin-server/go"
 	//
-	//sw "./go"
 )
 
 func main() {
