@@ -1,4 +1,4 @@
-module github.com/haozheng95/myserver
+module github.com/haozheng95/eqx-gin-server/gin-server
 
 go 1.19
 
