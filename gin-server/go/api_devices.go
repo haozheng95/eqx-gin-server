@@ -56,7 +56,7 @@ func CreateDevice(c *gin.Context) {
 			}
 		}
 
-		c.JSON(http.StatusCreated, gin.H{"msg": "The number of created instances reached the upper limit. Procedure"})
+		c.JSON(http.StatusInsufficientStorage, gin.H{"msg": "The number of created instances reached the upper limit. Procedure"})
 		return
 	}
 
