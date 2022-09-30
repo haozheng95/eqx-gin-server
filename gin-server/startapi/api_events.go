@@ -41,7 +41,11 @@ func FindEventById(c *gin.Context) {
 
 // FindEvents - Retrieve current user's events
 func FindEvents(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{})
+	resp, r, err := apiClient.EventsApi.FindEvents(context.Background()).Execute()
+	if !ErrorCheck(err, r, c) {
+		return
+	}
+	c.JSON(http.StatusOK, resp)
 }
 
 // FindInterconnectionEvents - Retrieve interconnection events

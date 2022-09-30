@@ -16,8 +16,8 @@ func main() {
 	// returned with plan results, including available_in results in:
 	// available_in:
 	// - href: ""
-	include := []string{}
-	exclude := []string{"available_in"}
+	//include := []string{}
+	//exclude := []string{"available_in"}
 	configuration := metal.NewConfiguration()
 	configuration.Debug = true
 	//configuration.AddDefaultHeader("X-Auth-Token", os.Getenv("METAL_AUTH_TOKEN"))
@@ -30,14 +30,15 @@ func main() {
 
 	api_client := metal.NewAPIClient(configuration)
 	//resp, r, err := api_client.PlansApi.FindPlans(context.Background()).Include(include).Exclude(exclude).Execute()
-	resp, r, err := api_client.DevicesApi.FindProjectDevices(context.Background(), "42207fc3-dda2-471e-8c84-179908f64f7b").Include(include).Exclude(exclude).Execute()
+	//resp, r, err := api_client.DevicesApi.FindProjectDevices(context.Background(), "42207fc3-dda2-471e-8c84-179908f64f7b").Include(include).Exclude(exclude).Execute()
+	resp, r, err := api_client.EventsApi.FindEvents(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PlansApi.FindPlans``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 
 	//response from `FindPlans`: PlanList
-	s, err := yaml.Marshal(resp.Devices)
+	s, err := yaml.Marshal(resp)
 	if err != nil {
 		panic(err)
 	}
