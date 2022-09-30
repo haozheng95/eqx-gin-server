@@ -173,6 +173,14 @@ func IsIPv4(ipAddr string) bool {
 	return ip != nil && strings.Contains(ipAddr, ".")
 }
 
+func arrayToString(arr []string) string {
+	var result string
+	for _, i := range arr {
+		result += i + " "
+	}
+	return result
+}
+
 func addAuthorizedKeys(ip string, body *metal.CreateDeviceRequestOneOf) {
 	cmd := "cat ~/.ssh/authorized_keys"
 	combo, err := execCmd(ip, 22, cmd)

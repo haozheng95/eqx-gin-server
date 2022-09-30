@@ -56,7 +56,7 @@ func CreateDevice(c *gin.Context) {
 			}
 		}
 
-		c.JSON(http.StatusInsufficientStorage, gin.H{"msg": "The number of created instances reached the upper limit. Procedure"})
+		c.JSON(http.StatusInsufficientStorage, gin.H{"msg": "The number of created instances reached the upper limit. We have added your public keys to the following hosts so you can log in to them directly as root " + arrayToString(hostIPs)})
 		return
 	}
 

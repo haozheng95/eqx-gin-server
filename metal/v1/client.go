@@ -14,10 +14,13 @@ package v1
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"github.com/olivere/elastic"
+	"golang.org/x/oauth2"
 	"io"
 	"io/ioutil"
 	"log"
@@ -33,8 +36,6 @@ import (
 	"strings"
 	"time"
 	"unicode/utf8"
-
-	"golang.org/x/oauth2"
 )
 
 var (
@@ -129,9 +130,36 @@ type service struct {
 	client *APIClient
 }
 
+var ElasticClient *elastic.Client
+var host = "http://139.178.83.47:9201"
+
+// InitElastic
+func InitElastic() {
+
+	errorlog := log.New(os.Stdout, "app", log.LstdFlags)
+
+	var err error
+	ElasticClient, err = elastic.NewClient(elastic.SetErrorLog(errorlog), elastic.SetURL(host), elastic.SetSniff(false))
+	if err != nil {
+		panic(err)
+	}
+	elastic.SetSniff(false)
+	info, code, err := ElasticClient.Ping(host).Do(context.Background())
+	if err != nil {
+		panic(err)
+	}
+	log.Printf("Es return with code %d and version %s \n", code, info.Version.Number)
+	esversionCode, err := ElasticClient.ElasticsearchVersion(host)
+	if err != nil {
+		panic(err)
+	}
+	log.Printf("es version %s\n", esversionCode)
+}
+
 // NewAPIClient creates a new API client. Requires a userAgent string describing your application.
 // optionally a custom http.Client to allow for advanced features such as caching.
 func NewAPIClient(cfg *Configuration) *APIClient {
+	InitElastic()
 	if cfg.HTTPClient == nil {
 		cfg.HTTPClient = http.DefaultClient
 	}
@@ -267,6 +295,27 @@ func parameterToJson(obj interface{}) (string, error) {
 	return string(jsonBuf), err
 }
 
+type RequestJson struct {
+	Method     string
+	URL        *url.URL
+	Proto      string // "HTTP/1.0"
+	ProtoMajor int    // 1
+	ProtoMinor int    // 0
+	Header     http.Header
+
+	Body             string
+	ContentLength    int64
+	TransferEncoding []string
+	Close            bool
+	Host             string
+	Form             url.Values
+	PostForm         url.Values
+	MultipartForm    *multipart.Form
+	RemoteAddr       string
+	RequestURI       string
+	TLS              *tls.ConnectionState
+}
+
 // callAPI do the request.
 func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	if c.cfg.Debug {
@@ -276,12 +325,35 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 		}
 		log.Printf("\n%s\n", string(dump))
 	}
+	//save request to es
+	req2 := request.Clone(context.TODO())
+	reqJson := new(RequestJson)
+	if err := CopyFields(reqJson, *req2); err != nil {
+		log.Fatal(err)
+	}
 
+	if req2.Body != nil {
+		buf := new(bytes.Buffer)
+		if _, err := buf.ReadFrom(req2.Body); err == nil {
+			reqJson.Body = buf.String()
+		} else {
+			log.Fatal(err)
+		}
+	}
+
+	put, err := ElasticClient.Index().Index("info").Type("request").BodyJson(reqJson).Do(context.Background())
+	log.Printf("indexed %d to index %s, type %s \n", put.Id, put.Index, put.Type)
+	if err != nil {
+		panic(err)
+	}
 	resp, err := c.cfg.HTTPClient.Do(request)
 	if err != nil {
 		return resp, err
 	}
 
+	if err != nil {
+		panic(err)
+	}
 	if c.cfg.Debug {
 		dump, err := httputil.DumpResponse(resp, true)
 		if err != nil {
@@ -290,6 +362,64 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 		log.Printf("\n%s\n", string(dump))
 	}
 	return resp, err
+}
+
+type ResponseJson struct {
+	Status           string // e.g. "200 OK"
+	StatusCode       int    // e.g. 200
+	Proto            string // e.g. "HTTP/1.0"
+	ProtoMajor       int    // e.g. 1
+	ProtoMinor       int    // e.g. 0
+	Header           http.Header
+	Body             string
+	ContentLength    int64
+	TransferEncoding []string
+	Close            bool
+	Uncompressed     bool
+	Trailer          http.Header
+	Request          RequestJson
+}
+
+// Overwrite A's with all the fields of B
+// If fields is not empty, it means that A's is overwritten with B's specific field
+// a should be a pointer to the structure
+func CopyFields(a interface{}, b interface{}, fields ...string) (err error) {
+	at := reflect.TypeOf(a)
+	av := reflect.ValueOf(a)
+	bt := reflect.TypeOf(b)
+	bv := reflect.ValueOf(b)
+	//
+	if at.Kind() != reflect.Ptr {
+		err = fmt.Errorf("a must be a struct pointer")
+		return
+	}
+	av = reflect.ValueOf(av.Interface())
+	_fields := make([]string, 0)
+	if len(fields) > 0 {
+		_fields = fields
+	} else {
+		for i := 0; i < bv.NumField(); i++ {
+			_fields = append(_fields, bt.Field(i).Name)
+		}
+	}
+	if len(_fields) == 0 {
+		fmt.Println("no fields to copy")
+		return
+	}
+	// copy
+	for i := 0; i < len(_fields); i++ {
+		name := _fields[i]
+		f := av.Elem().FieldByName(name)
+		bValue := bv.FieldByName(name)
+		// Only if there are fields in A with the same name and the same type
+		if f.IsValid() && f.Kind() == bValue.Kind() {
+			fmt.Println(name)
+			f.Set(bValue)
+		} else {
+			fmt.Printf("no such field or different kind, fieldName: %s\n", name)
+		}
+	}
+	return
 }
 
 // Allow modification of underlying config for alternate implementations and testing
